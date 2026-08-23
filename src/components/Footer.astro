@@ -1,0 +1,66 @@
+---
+const sections = [
+  {
+    title: 'Tekmax',
+    links: [
+      { label: 'O nama', href: '/o-nama' },
+      { label: 'Kontakt', href: '/kontakt' },
+      { label: 'RSS', href: '/rss.xml' },
+    ],
+  },
+  {
+    title: 'Kategorije',
+    links: [
+      { label: 'AI', href: '/kategorija/ai' },
+      { label: 'Tehnologije', href: '/kategorija/tehnologije' },
+      { label: 'Mobilni', href: '/kategorija/mobilni' },
+      { label: 'Gedžeti', href: '/kategorija/gedzeti' },
+      { label: 'Biznis', href: '/kategorija/biznis' },
+      { label: 'Gaming', href: '/kategorija/gaming' },
+      { label: 'Nauka', href: '/kategorija/nauka' },
+    ],
+  },
+  {
+    title: 'Resursi',
+    links: [
+      { label: 'Newsletter', href: '/newsletter' },
+      { label: 'Top 10', href: '/top-10' },
+      { label: 'Arhiva', href: '/arhiva' },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-line-subtle bg-bg-primary py-12 mt-16">
+  <div class="container-page">
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+      <div>
+        <a href="/" class="text-xl font-extrabold tracking-tight">
+          <span class="text-accent">tek</span>max
+        </a>
+        <p class="mt-3 text-body-sm text-ink-tertiary">
+          Srpski AI & Tech portal.
+        </p>
+      </div>
+      {sections.map((section) => (
+        <div>
+          <h4 class="mb-3 text-caption font-semibold uppercase tracking-wide text-ink-tertiary">
+            {section.title}
+          </h4>
+          <ul class="space-y-2">
+            {section.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-body-sm text-ink-secondary link-hover">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="mt-12 border-t border-line-subtle pt-6 text-caption text-ink-tertiary">
+      © 2026 Tekmax. Sva prava zadržana.
+    </div>
+  </div>
+</footer>

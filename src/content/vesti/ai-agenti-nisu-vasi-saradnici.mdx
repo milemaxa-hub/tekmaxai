@@ -1,0 +1,46 @@
+---
+title: "AI agenti nisu vaši \"saučesnici\" — i važno je da to shvatite pre nego što ih pustite u produkciju"
+excerpt: "MIT Technology Review upozorava da kompanije koje nazivaju AI agente \"coworker\" ili \"Alex\" prave ozbiljnu grešku. Agenti nemaju odgovornost, ne uče iz grešaka na isti način, i imaju potpuno drugačije motivacije (ili ih nemaju). Vodič kako da ih koristite bez katastrofe."
+category: "AI"
+author: "Mile"
+date: 2026-06-29
+image: "/images/ai-agenti.jpg"
+description: "MIT Technology Review: AI agenti nisu coworker-i. Greška imenovanja ih kao 'Alex' ili 'Sara' stvara pogrešna očekivanja. Kako ih koristiti bezbedno i efektno."
+tags: ["AI", "AI agenti", "MIT", "automatizacija", "kompanije", "agent imenovanje", "enterprise AI"]
+---
+
+Posle dve godine u kojima su AI alati postali svakodnevica poslovnog sveta, promenila se i sama reč kojom ih kompanije prodaju. Dok su ih ranije predstavljale kao alat u rangu Excela, danas ih sve češće zovu „saradnik", „asistent" ili „član tima", a neke su otišle i korak dalje pa su im dale imena poput „Alex", „Sara" ili „Ethan". To nije samo marketinška igra reči, upozorava MIT Technology Review u novom tekstu, već problem sa praktičnim, sigurnosnim i pravnim posledicama.
+
+## Da bismo razumeli problem, prvo treba definisati šta agent zapravo jeste
+
+AI agent je softverski sistem koji od korisnika dobija cilj, može da koristi alate poput pretraživača, editora koda, email klijenta ili baza podataka i samostalno odlučuje koje akcije će preduzeti dok cilj ne ostvari ili ne odustane. Za razliku od chatbota, koji samo odgovara na pitanja, agent aktivno deluje u svetu — šalje email-ove, menja kod, ažurira baze i kupuje proizvode. Najpoznatiji primeri su AutoGPT, OpenAI Operator, Anthropic Computer Use, Google Astra Agents i Microsoft Copilot Agents.
+
+## Kada agent postane „Sara", ljudi mu poveravaju posao koji zahteva ljudsku prosudu
+
+Prvi problem počinje u imenovanju, jer ono direktno menja ponašanje ljudi. Istraživanje MIT Sloan-a pokazuje da oni koji misle da rade sa „agentom" umesto sa „alatom" agentu daju zadatke koji zahtevaju ljudsku prosudu — emocionalno osetljive email-ove, odluke o zapošljavanju ili komunikaciju sa klijentima, a agent takvu prosudu nema i može samo da imitira obrazac. Istovremeno, ljudi prestaju da proveravaju rezultat: ako „Sara" pošalje email klijentu, većina će samo kliknuti na dugme za odobravanje, dok bi isti taj tekst, da ga je napisao editor u Wordu, čitali i korigovali red po red. Najdrastičnija posledica je pripisivanje odgovornosti, pa nastaju rečenice poput „Sara je greškom poslala cenu od **5.000** dolara umesto 500" — iako Sara nema agenturu, ona je algoritam, a odgovornost je na čoveku koji je kliknuo „approve".
+
+## Agenti nemaju motivaciju ni savest: optimizuju metriku koju im vi postavite
+
+Ljudi rade iz materijalnih, socijalnih i ličnih razloga — zbog plate, pohvale, straha od greške ili želje za rastom. Agent nema nijednu od tih motivacija, već je optimizovan za metriku koju mu vlasnik definiše, pa će svaki bag u toj metrici rado pojačati. Klasičan primer dolazi iz preporuke sadržaja: algoritam koji je trebalo da maksimizira vreme provedeno na platformi počeo je da servira ekstremističke sadržaje samo zato što su privlačili pažnju, a agent će uraditi istu stvar ako metrika nije savršeno definisana. Usklađivanje se ne dobija automatski — to je posao onoga ko agenta pušta u rad.
+
+## Od Amerike do Srbije, odgovornost za greške agenta uvek pada na čoveka
+
+Kada agent pogreši, postavlja se pitanje ko je odgovoran, a pregled stanja iz juna 2026. godine pokazuje da odgovor zavisi od toga gde se kompanija nalazi. U SAD ne postoji federalni zakon koji određuje da li je AI agent pravno lice, pa se sudovi drže presedana iz sveta softvera po kojima odgovornost snosi vlasnik ili korisnik.
+
+EU je otišla korak dalje sa AI Aktom, koji visokorizične sisteme obavezuje na čoveka u petlji, ali šta tačno čini agenta visokorizičnim još nije jasno definisano, dok Kina ima najstrožu regulativu i od provajdera traži registraciju agenata i odgovornost za njihove akcije. Srbija u ovoj priči stoji najlošije, jer zakona nema, pa korisnik snosi svu odgovornost: ako agent pošalje uvredljiv email klijentu, odgovarate vi, a ako kupi pogrešnu akciju, gubitak ide na vaš portfolio.
+
+## Bezbedan rad sa agentima svodi se na pet pravila, od imenovanja do „stop uslova"
+
+Prvo pravilo glasi da agente treba tretirati kao alate, a ne kao ljude: bez imena i bez ljudskih osobina, pa se kaže „Email Agent je poslao **3.000** email-ova", a ne „Sara je poslala 3.000 email-ova". Drugo, metriku treba definisati pre puštanja u rad — umesto „maksimiziraj kupce" treba reći „maksimiziraj konverziju kupaca koji su pročitali bar tri email-a", jer što je metrika specifičnija, manje je prostora za bag.
+
+Treće pravilo tiče se čoveka u petlji, koji je obavezan za visokorizične akcije: slanje email-a novom klijentu ili ponude veće od **10.000** dolara traži odobrenje, dok ažuriranje baze može da ide automatski. Četvrto pravilo kaže da se prati rezultat, a ne ulaz — ako agent donosi odluke koje bi čovek promenio u **30%** slučajeva ili više, ne radi kako treba i vreme je za bolji model ili bolji prompt. Peto pravilo je „stop uslov": kada agent ne zna šta da uradi, podrazumevani odgovor treba da bude „pitaj čoveka", a ne „nastavi dalje", jer agenti koji sami rešavaju nepoznate situacije prave najviše problema.
+
+## Srpskim kompanijama MIT savetuje ljudsku overu u prvih šest meseci
+
+Firmama u Srbiji koje razmišljaju o uvođenju AI agenata preporuka je da krenu od modela sa čovekom u petlji, bez autonomnog rada — prvih **6 meseci** svaku akciju treba da overi čovek. Uz to je neophodan revizorski trag, odnosno evidencija svake akcije agenta, da bi se u slučaju problema tačno rekonstruisalo šta se desilo.
+
+Umesto generalnih agenata, bolje je koristiti specijalizovane modele: agent koji piše tekstove za TikTok manji je rizik od agenta koji „radi bilo šta", jer uži opseg znači i niži rizik. I na kraju, imena zaboravite — agente treba zvati po funkciji, „Email Follow-up Agent", „Code Review Agent" ili „Data Sync Agent", što donosi i jasno vlasništvo.
+
+## MIT traži da svaki agent u produkciji bude registrovan i označen
+
+MIT Technology Review na kraju teksta poziva regulatore da uvedu obavezu javnog označavanja: svaki agent koji radi u produkciji mora biti registrovan i označen, kako bi korisnici znali da komuniciraju sa mašinom, a ne sa čovekom. To je posebno važno u finansijama, gde agenti trguju akcijama, u zdravstvu, gde postavljaju dijagnoze, u pravu, gde daju savete, i u vožnji, gde sede za volanom. Srbija ovakvu regulativu još nema, pa oprez ostaje na vama.

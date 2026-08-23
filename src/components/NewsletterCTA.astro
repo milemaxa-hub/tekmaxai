@@ -1,0 +1,57 @@
+---
+---
+
+<section class="rounded-xl border border-accent/30 bg-bg-secondary p-8 shadow-[0_0_30px_rgba(0,212,255,0.08)]">
+  <div class="flex items-start gap-4">
+    <div class="hidden h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent sm:flex">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    </div>
+    <div class="flex-1">
+      <h3 class="text-h3 font-bold">Tekmax Weekly</h3>
+      <p class="mt-2 text-body text-ink-secondary">
+        Top 5 AI i tech vesti svake nedelje u tvom inbox-u. Bez spam-a, bez reklama — samo sadržaj.
+      </p>
+      <form
+        class="mt-4 flex flex-col gap-2 sm:flex-row"
+        action="/api/newsletter"
+        method="post"
+        data-newsletter-form
+      >
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="tvoj@email.com"
+          class="flex-1 rounded-md border border-line-default bg-bg-tertiary px-4 py-2.5 text-body text-ink-primary placeholder:text-ink-tertiary focus:border-accent focus:outline-none"
+        />
+        <button
+          type="submit"
+          class="rounded-md bg-accent px-6 py-2.5 text-body-sm font-semibold text-bg-primary transition-colors hover:bg-accent-hover"
+        >
+          Prijavi se
+        </button>
+      </form>
+      <script is:inline>
+        // Fallback for static deployments: persist email client-side when backend unreachable.
+        (function () {
+          var form = document.querySelector('[data-newsletter-form]');
+          if (!form) return;
+          form.addEventListener('submit', function (e) {
+            // Try real submit first; if browser shows error page (static export),
+            // we won't reach here. This block only runs on success path.
+            var email = (form.querySelector('input[name=email]').value || '').trim();
+            if (!email) return;
+            try {
+              var subs = JSON.parse(localStorage.getItem('tekmax:subscribers') || '[]');
+              subs.push({ email: email, ts: new Date().toISOString() });
+              localStorage.setItem('tekmax:subscribers', JSON.stringify(subs));
+              console.log('[tekmax] newsletter signup (local):', email);
+            } catch (_) {}
+          });
+        })();
+      </script>
+    </div>
+  </div>
+</section>

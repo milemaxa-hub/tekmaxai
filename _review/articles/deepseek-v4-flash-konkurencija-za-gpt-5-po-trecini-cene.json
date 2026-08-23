@@ -1,0 +1,26 @@
+{
+  "slug": "deepseek-v4-flash-konkurencija-za-gpt-5-po-trecini-cene",
+  "file": "deepseek-v4-flash-konkurencija-za-gpt-5-po-trecini-cene.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.797Z",
+  "publishedAt": "2026-06-19T00:00:00",
+  "meta": {
+    "title": "DeepSeek V4 Flash košta trećinu GPT-5 i daje 92% kvaliteta — novi talas pritiska na Zapad",
+    "excerpt": "DeepSeek je pustio V4 Flash — open-source model koji po performansama sustiže GPT-5 po trećini cene. Američki provajderi ovo neće ignorisati, a srpski developeri dobijaju nešto što im je trebalo godinama.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/deepseek-v4.jpg",
+    "description": "DeepSeek V4 Flash je open-source AI model koji košta trećinu GPT-5 a daje 87-92% kvaliteta — novi pritisak na američke provajdere i prilika za evropski lokalni AI.",
+    "tags": [
+      "DeepSeek",
+      "AI",
+      "open-source",
+      "GPT-5",
+      "Kina",
+      "Claude",
+      "MoE"
+    ],
+    "date": "2026-06-19"
+  }
+}

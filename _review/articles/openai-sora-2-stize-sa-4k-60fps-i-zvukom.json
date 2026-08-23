@@ -1,0 +1,25 @@
+{
+  "slug": "openai-sora-2-stize-sa-4k-60fps-i-zvukom",
+  "file": "openai-sora-2-stize-sa-4k-60fps-i-zvukom.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.802Z",
+  "publishedAt": "2026-06-17T00:00:00",
+  "meta": {
+    "title": "OpenAI Sora 2 konačno pravi sinhronizovan zvuk — i to u 4K na 60fps",
+    "excerpt": "OpenAI je na zatvorenom demo-u pokazao Sora 2: generativni video model koji konačno proizvodi 4K na 60fps sa zvukom. Demo klipovi su nerazlučivi od stvarnog snimka — stručnjaci su uspeli da ih identifikuju kao AI samo u 41% slučajeva.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/sora-2.jpg",
+    "description": "OpenAI Sora 2 generiše 4K video na 60fps sa sinhronizovanim zvukom. Demo klipovi su nerazlučivi od stvarnog snimka. Stiže u oktobru 2026.",
+    "tags": [
+      "OpenAI",
+      "Sora",
+      "generativni video",
+      "AI",
+      "deepfake",
+      "video produkcija"
+    ],
+    "date": "2026-06-17"
+  }
+}

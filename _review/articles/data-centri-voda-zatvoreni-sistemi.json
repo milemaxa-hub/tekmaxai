@@ -1,0 +1,26 @@
+{
+  "slug": "data-centri-voda-zatvoreni-sistemi",
+  "file": "data-centri-voda-zatvoreni-sistemi.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.797Z",
+  "publishedAt": "2026-08-09T13:45:00T00:00:00",
+  "meta": {
+    "title": "Zašto data centri troše toliko sveže vode — i da li ih zatvoreni sistemi mogu spasiti",
+    "excerpt": "Američki data centri su 2023. direktno potrošili 64 milijarde litara vode za hlađenje, a obuka GPT-3 sama je 'popila' 700.000 litara. Zatvoreni sistemi postoje — pitanje je čime plaćamo hlađenje.",
+    "category": "Tehnologije",
+    "author": "Mile",
+    "image": "/images/data-centri-voda.jpg",
+    "description": "Data centri su 2023. potrošili 64 milijarde litara sveže vode samo za hlađenje. Objašnjavamo zašto evaporacija dominira i da li je zatvoreni krug realno rešenje.",
+    "tags": [
+      "data centri",
+      "voda",
+      "hlađenje",
+      "AI",
+      "energija",
+      "održivost",
+      "Microsoft"
+    ],
+    "date": "2026-08-09T13:45:00"
+  }
+}

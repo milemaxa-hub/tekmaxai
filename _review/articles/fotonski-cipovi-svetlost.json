@@ -1,0 +1,27 @@
+{
+  "slug": "fotonski-cipovi-svetlost",
+  "file": "fotonski-cipovi-svetlost.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-17T17:13:44.670Z",
+  "publishedAt": "2026-08-16T11:30:00T00:00:00",
+  "meta": {
+    "title": "Fotonski čipovi stižu: fizičari usporili svetlost, a prve komponente već idu u proizvodnju",
+    "excerpt": "Korejski fizičari napravili optički čip koji usporava svetlost po potrebi. Interkonekti troše 30% snage AI klastera, a TSMC, Broadcom i NVIDIA već šalju fotonske komponente.",
+    "category": "Nauka",
+    "author": "Mile",
+    "image": "/images/fotonski-cipovi-svetlost.jpg",
+    "description": "Optički čip koji usporava svetlost: Seoul National University, Advanced Science. Fotonsko računarstvo: TSMC COUPE u proizvodnji 2026, Broadcom 102.4 Tb/s, NVIDIA Quantum-X, 70% manja snaga interkonekta.",
+    "tags": [
+      "fotonski čipovi",
+      "optika",
+      "data centri",
+      "AI",
+      "energija",
+      "TSMC",
+      "NVIDIA"
+    ],
+    "date": "2026-08-16T11:30:00"
+  },
+  "scheduledAt": null
+}

@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSplit from '../components/HeroSplit.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Card from '../components/Card.astro';
+import NewsletterCTA from '../components/NewsletterCTA.astro';
+import { getCollection } from 'astro:content';
+
+// Read all published articles, sorted by date desc
+const allArticles = (await getCollection('vesti'))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Map content collection entry → component prop shape
+const toCard = (entry: any) => ({
+  title: entry.data.title,
+  excerpt: entry.data.excerpt,
+  category: entry.data.category,
+  author: entry.data.author,
+  date: entry.data.date.toISOString().split('T')[0],  // YYYY-MM-DD
+  image: entry.data.image,
+  slug: entry.id.replace(/\.mdx?$/, ''),  // remove .mdx extension
+});
+
+// Hero: top 3 by date
+const [heroMainEntry, ...rest] = allArticles;
+const heroSecondary = rest.slice(0, 2).map(toCard);
+const heroMain = heroMainEntry ? toCard(heroMainEntry) : null;
+
+// Latest: next 4
+const latest = allArticles.slice(3, 7).map(toCard);
+
+// AI category: top 3 with category === 'AI', excluding hero and latest picks
+const shownSlugs = new Set(allArticles.slice(0, 7).map((e) => e.id));
+const aiCategory = allArticles
+  .filter((a) => a.data.category === 'AI' && !shownSlugs.has(a.id))
+  .slice(0, 3)
+  .map(toCard);
+---
+
+<Layout>
+  {heroMain ? (
+    <HeroSplit main={heroMain} secondary={heroSecondary} />
+  ) : (
+    <section class="container-page py-20 text-center">
+      <h1 class="text-hero font-extrabold">Tekmax</h1>
+      <p class="mt-4 text-ink-secondary">Nema članaka. Dodaj prvi MDX u <code class="text-accent">src/content/vesti/</code></p>
+    </section>
+  )}
+
+  {latest.length > 0 && (
+    <section class="container-page py-10">
+      <SectionHeader title="Najnovije vesti" href="/najnovije" />
+      <p class="mb-6 -mt-2 max-w-2xl text-body text-ink-secondary">
+        Najvažnije AI i tech priče ovog meseca — ručno biramo, ne prepuštamo algoritmu.
+      </p>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {latest.map((article) => (
+          <Card {...article} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {aiCategory.length > 0 && (
+    <section class="container-page py-10">
+      <SectionHeader title="AI" href="/kategorija/ai" />
+      <p class="mb-6 -mt-2 max-w-2xl text-body text-ink-secondary">
+        Modeli, benchmarkovi i sudovi — šta se zapravo dešava u svetu veštačke inteligencije.
+      </p>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {aiCategory.map((article) => (
+          <Card {...article} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="container-page py-10">
+    <NewsletterCTA />
+  </section>
+</Layout>

@@ -1,0 +1,36 @@
+{
+  "slug": "spacex-cursor-60-milijardi",
+  "file": "spacex-cursor-60-milijardi.mdx",
+  "status": "approved",
+  "comments": [
+    {
+      "id": 1786812065697,
+      "author": "mile",
+      "type": "general",
+      "text": "Objavi dana u 19h",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T16:41:05.697Z"
+    }
+  ],
+  "createdAt": "2026-08-15T16:35:47.874Z",
+  "publishedAt": "2026-08-15T15:00:00T00:00:00",
+  "meta": {
+    "title": "SpaceX kupio Cursor za 60 milijardi dolara",
+    "excerpt": "SpaceX je kompletirao akviziciju Cursor-a za 60 milijardi dolara. Cursor dobija pristup najvećoj floti grafičkih procesora na svetu radi jačih i jeftinijih AI modela.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/spacex-cursor-60-milijardi.jpg",
+    "description": "SpaceX je kupio Cursor, AI programerski alat, za 60 milijardi dolara. Cursor dobija pristup najvećoj floti GPU-jeva na svetu, a Grok 4.6 je prvi zajednički rezultat.",
+    "tags": [
+      "SpaceX",
+      "Cursor",
+      "AI programiranje",
+      "Ilon Mask",
+      "akvizicija",
+      "Grok"
+    ],
+    "date": "2026-08-15T15:00:00"
+  },
+  "scheduledAt": "2026-08-15T19:00"
+}

@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: #0a0a0a;
+    color: #f5f5f5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  ::selection {
+    background: #00d4ff;
+    color: #0a0a0a;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto max-w-container px-6 lg:px-8;
+  }
+  .pill {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-caption font-semibold uppercase tracking-wide;
+  }
+  .link-hover {
+    @apply transition-colors duration-200 hover:text-ink-primary;
+  }
+}

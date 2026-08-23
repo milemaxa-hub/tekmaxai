@@ -1,0 +1,116 @@
+---
+// SearchBox sa autocomplete-om
+// Koristi se u header-u i na /pretraga
+
+import CategoryPill from './CategoryPill.astro';
+
+interface Props {
+  variant?: 'compact' | 'full'; // compact = u headeru, full = na /pretraga
+  autoFocus?: boolean;
+  placeholder?: string;
+  showHelp?: boolean;
+}
+
+const {
+  variant = 'compact',
+  autoFocus = false,
+  placeholder = 'Pretraži članke...',
+  showHelp = false,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'search-container relative w-full',
+    variant === 'compact' ? 'max-w-md' : 'max-w-2xl',
+  ]}
+  data-search-box
+  data-variant={variant}
+>
+  <form
+    action="/pretraga"
+    method="get"
+    class="relative"
+    role="search"
+    autocomplete="off"
+    data-search-form
+  >
+    <div class="relative">
+      <svg
+        class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-tertiary"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+        />
+      </svg>
+      <input
+        type="search"
+        name="q"
+        value={Astro.url?.searchParams?.get('q') || '_'}
+        placeholder={placeholder}
+        autocomplete="off"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        aria-label="Pretraga članaka"
+        data-search-input
+        {autoFocus ? 'autofocus' : ''}
+        class:list={[
+          'w-full rounded-md border border-line-subtle bg-bg-secondary pl-10 pr-10 text-ink-primary placeholder-ink-tertiary outline-none transition-all focus:border-accent focus:shadow-[0_0_0_3px_rgba(0,212,255,0.15)]',
+          variant === 'compact' ? 'h-9 w-40 text-body-sm focus:w-60 lg:w-72' : 'h-12 text-body',
+        ]}
+      />
+      <kbd
+        class:list={[
+          'absolute right-2 top-1/2 -translate-y-1/2 rounded border border-line-subtle bg-bg-tertiary px-1.5 py-0.5 font-mono text-caption text-ink-tertiary',
+          'hidden sm:inline-block',
+        ]}
+        aria-hidden="true"
+      >
+        ⌘K
+      </kbd>
+    </div>
+
+    {/* Autocomplete dropdown — sakriven dok se ne koristi */}
+    <div
+      class="search-dropdown absolute left-0 right-0 top-full z-50 mt-2 hidden overflow-hidden rounded-lg border border-line-subtle bg-bg-elevated shadow-2xl"
+      data-search-dropdown
+      role="listbox"
+    >
+      <div class="search-dropdown-content" data-search-dropdown-content></div>
+    </div>
+  </form>
+
+  {showHelp && (
+    <div class="mt-4 text-caption text-ink-tertiary">
+      <strong class="text-ink-secondary">Saveti za pretragu:</strong> koristite
+      cele reči, ignorišite dijakritiku (dj umesto đ), pokušajte manje specifične
+      termine ako nema rezultata.
+    </div>
+  )}
+</div>
+
+<style is:global>
+  .search-mark {
+    background-color: rgba(0, 212, 255, 0.18);
+    color: #00d4ff;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .search-result-card {
+    transition: background-color 0.15s;
+  }
+  .search-result-card:hover,
+  .search-result-card.active {
+    background-color: rgba(0, 212, 255, 0.08);
+  }
+</style>

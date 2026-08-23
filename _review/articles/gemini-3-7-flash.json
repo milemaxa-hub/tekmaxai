@@ -1,0 +1,126 @@
+{
+  "slug": "gemini-3-7-flash",
+  "file": "gemini-3-7-flash.mdx",
+  "status": "approved",
+  "comments": [
+    {
+      "id": 1786804539032,
+      "author": "mile",
+      "type": "image",
+      "text": "Promeni sliku stavi krupno server i napiši preko toga tekst Gemini 3.7 Flash",
+      "parentId": null,
+      "status": "done",
+      "createdAt": "2026-08-15T14:35:39.032Z"
+    },
+    {
+      "id": 1786804593539,
+      "author": "mile",
+      "type": "text",
+      "text": "Malo skrati Tekst",
+      "parentId": null,
+      "status": "done",
+      "createdAt": "2026-08-15T14:36:33.539Z"
+    },
+    {
+      "id": 1786805701767,
+      "author": "claw",
+      "type": "image",
+      "text": "Primljeno — menjam sliku: krupni plan servera + tekst Gemini 3.7 Flash preko. Krećem.",
+      "parentId": 1786804539032,
+      "status": "new",
+      "createdAt": "2026-08-15T14:55:01.767Z"
+    },
+    {
+      "id": 1786805701774,
+      "author": "claw",
+      "type": "text",
+      "text": "Primljeno — skraćujem tekst.",
+      "parentId": 1786804593539,
+      "status": "new",
+      "createdAt": "2026-08-15T14:55:01.774Z"
+    },
+    {
+      "id": 1786806101672,
+      "author": "claw",
+      "type": "image",
+      "text": "Slika zamenjena: krupni plan servera + tekst Gemini 3.7 Flash. Tekst skraćen ~24%. Pogledaj u panelu.",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T15:01:41.672Z"
+    },
+    {
+      "id": 1786806178067,
+      "author": "mile",
+      "type": "general",
+      "text": "Objavi sutra u 13h",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T15:02:58.067Z"
+    },
+    {
+      "id": 1786806405997,
+      "author": "mile",
+      "type": "image",
+      "text": "Loše izgleda tekst na slici koristi drugi model koji je bolji za tekst",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T15:06:45.997Z"
+    },
+    {
+      "id": 1786807245717,
+      "author": "claw",
+      "type": "general",
+      "text": "Zakazano: objava sutra 16.08. u 13:00. Vidi se u kalendaru ⏰.",
+      "parentId": 1786806178067,
+      "status": "new",
+      "createdAt": "2026-08-15T15:20:45.717Z"
+    },
+    {
+      "id": 1786807245724,
+      "author": "claw",
+      "type": "image",
+      "text": "Primljeno — tražim bolji model za tekst na slici (Qwen-Image), radim novu.",
+      "parentId": 1786806405997,
+      "status": "new",
+      "createdAt": "2026-08-15T15:20:45.724Z"
+    },
+    {
+      "id": 1786807862946,
+      "author": "claw",
+      "type": "image",
+      "text": "Nova slika: FLUX, tekst Gemini 3.7 Flash — vizuelno provereno, tačan spelling.",
+      "parentId": 1786806405997,
+      "status": "new",
+      "createdAt": "2026-08-15T15:31:02.946Z"
+    },
+    {
+      "id": 1786808796542,
+      "author": "mile",
+      "type": "general",
+      "text": "Pomeri ga za 17 ti u 13 h",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T15:46:36.542Z"
+    }
+  ],
+  "createdAt": "2026-08-15T12:59:04.629Z",
+  "publishedAt": "2026-08-15T10:00:00T00:00:00",
+  "meta": {
+    "title": "Gemini 3.7 Flash stiže tri nedelje posle prethodnika — i košta upola manje",
+    "excerpt": "Google je objavio Gemini 3.7 Flash samo tri nedelje posle 3.6 Flash: bolji u kodiranju, web razvoju i poslovnim workflow-ovima, uz upola nižu cenu po tokenu. Uvodna cena 0,75 USD po milion input tokena.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/gemini-3-7-flash.jpg",
+    "description": "Gemini 3.7 Flash — Google objavio novi model za kodiranje i agente tri nedelje posle 3.6 Flash. FrontierCode 43,6%, DeepSWE 65,3%, uvodna cena 0,75 USD/milion input tokena. Pokreće Gemini Spark za AI Pro i Ultra pretplatnike.",
+    "tags": [
+      "Google",
+      "Gemini",
+      "AI",
+      "modeli",
+      "kodiranje",
+      "agenti"
+    ],
+    "date": "2026-08-15T10:00:00"
+  },
+  "scheduledAt": "2026-08-17T13:00:00"
+}

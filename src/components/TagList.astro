@@ -1,0 +1,54 @@
+---
+// TagList — prikazuje listu tagova kao linkove ka /tag/[tag]
+// Koristi se i kao inline lista na članku (sa prefiksom "#") i kao "tag cloud" na drugim stranicama.
+
+interface Props {
+  tags: string[];
+  variant?: 'inline' | 'cloud'; // inline = male sa #, cloud = veće kartice
+  maxDisplay?: number;
+}
+
+const { tags, variant = 'inline', maxDisplay } = Astro.props;
+const display = maxDisplay ? tags.slice(0, maxDisplay) : tags;
+const hidden = maxDisplay && tags.length > maxDisplay ? tags.length - maxDisplay : 0;
+
+function tagSlug(tag: string): string {
+  return tag
+    .toLowerCase()
+    .replace(/č/g, 'c')
+    .replace(/ć/g, 'c')
+    .replace(/š/g, 's')
+    .replace(/ž/g, 'z')
+    .replace(/đ/g, 'dj')
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]/g, '');
+}
+---
+
+{variant === 'inline' ? (
+  <div class="flex flex-wrap items-center gap-2">
+    {display.map((tag) => (
+      <a
+        href={`/tag/${tagSlug(tag)}`}
+        class="inline-flex items-center rounded-md border border-line-subtle bg-bg-secondary px-2.5 py-1 text-caption font-medium text-ink-secondary transition-colors hover:border-accent hover:text-accent"
+      >
+        #{tag}
+      </a>
+    ))}
+    {hidden > 0 && (
+      <span class="text-caption text-ink-tertiary">+{hidden} više</span>
+    )}
+  </div>
+) : (
+  <div class="flex flex-wrap gap-3">
+    {display.map((tag) => (
+      <a
+        href={`/tag/${tagSlug(tag)}`}
+        class="group flex items-center gap-2 rounded-lg border border-line-subtle bg-bg-secondary px-4 py-2.5 transition-all hover:border-accent"
+      >
+        <span class="font-bold text-ink-primary group-hover:text-accent">#{tag}</span>
+        <span class="text-caption text-ink-tertiary">tag</span>
+      </a>
+    ))}
+  </div>
+)}

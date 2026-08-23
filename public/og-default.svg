@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0b"/>
+      <stop offset="100%" stop-color="#1a1a20"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0099cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="200" cy="200" r="120" fill="#00d4ff" opacity="0.08"/>
+  <circle cx="1050" cy="450" r="180" fill="#00d4ff" opacity="0.06"/>
+  <text x="80" y="320" font-family="Inter, sans-serif" font-weight="800" font-size="84" fill="#ffffff" letter-spacing="-2">
+    <tspan fill="url(#accent)">T</tspan>ekmax
+  </text>
+  <text x="80" y="380" font-family="Inter, sans-serif" font-weight="500" font-size="32" fill="#a0a0a8" letter-spacing="0">
+    Srpski AI &amp; Tech portal
+  </text>
+  <line x1="80" y1="450" x2="280" y2="450" stroke="#00d4ff" stroke-width="4"/>
+  <text x="80" y="500" font-family="Inter, sans-serif" font-weight="400" font-size="22" fill="#6a6a72">
+    Najnovije vesti iz sveta veštačke inteligencije, hardvera i startup-a.
+  </text>
+</svg>

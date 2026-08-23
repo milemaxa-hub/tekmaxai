@@ -1,0 +1,50 @@
+---
+title: "Qwen 3.8 Max: Alibaba lansira model sa 2,4 triliona parametara koji košta duplo manje od konkurencije"
+excerpt: "Alibaba tvrdi da je Qwen 3.8 Max 'drugi samo iza Fable 5'. Jeftiniji je od Kimi K3 za 60% na izlazu, najavljuje otvorene težine i dolazi kroz Apple uređaje u Kini."
+category: "AI"
+author: "Mile"
+date: 2026-08-16T10:30:00
+image: "/images/qwen-3-8-max-alibaba.jpg"
+description: "Qwen 3.8 Max: 2,4 triliona parametara, 1M tokena konteksta, multimodalni. Cena $2/$6 po milion tokena — 60% jeftiniji izlaz od Kimi K3. Benchmark: Terminal-Bench 86,6, ispred Claude Fable 5, iza GPT-5.6 Sol."
+tags: ["Qwen", "Alibaba", "AI modeli", "Kina", "LLM", "cene", "open source"]
+draft: false
+---
+
+U nedelju uveče, 19. jula, jedan grafikon je počeo da kruži po kineskim AI forumima brže nego što ga je iko stigao pročitati do kraja. Alibaba je na svom blogu, bez uobičajenog spektakla, objavila tabelu sa rezultatima novog modela koji se po većini metrika smestio odmah ispod Fable 5 — najboljeg modela na svetu po prosečnim rezultatima. Tvrdnja da je Qwen 3.8 Max „drugi samo iza Fable 5“ zvučala je hrabro. Pitanje je bilo da li će preživeti prvi nezavisni test.[^1]
+
+## Šta je Qwen 3.8 Max
+
+Qwen 3.8 Max je model sa 2,4 triliona parametara u MoE arhitekturi (mešavina eksperata), što ga čini drugim najvećim javno poznatim modelom na svetu — veći je samo Kimi K3 od Moonshot-a sa 2,8 triliona. Kontekst od milion tokena i multimodalni ulaz, koji pokriva tekst, slike, video i dokumente sa tekstualnim izlazom, čine ga prvim Alibabinim multimodalnim modelom sa više od bilion parametara. Naslednik je Qwen 3.7-Max, lansiran je 19. jula kao probna verzija, a široku dostupnost dobio je 3. avgusta.[^2]
+
+## Kvalitet
+
+Alibaba je objavila tabelu sa prosečnim rezultatima za 2026. godinu, a brojke deluju impresivno na prvi pogled. Na Terminal-Bench 2.1 model beleži 86,6 poena — ispred Claude Opus 4.8 i Fable 5 koji stoje na 84,6, ali iza GPT-5.6 Sol sa 88,8. Na GPQA Diamond rezultat je 92,6, što je tek neznatan napredak u odnosu na 92,4 koliko je imao prethodnik.[^3]
+
+Ovde, međutim, počinju ograde. Na SWE-bench Pro Qwen 3.8 Max ima 67,7 naspram Fable 5 sa 80,0, a na FrontierSWE 73,5 naspram 88,8. Najveći skokovi nisu u rezonovanju, nego u multimodalnim i agentskim zadacima — PaperBench 93,0, OSWorld-Verified 86,1, Parametric CAD Bench 91,5 i OmniDocBench 92,1.[^3]
+
+Druga ograda je metodološka. Alibaba nije na startu objavila nezavisnu verifikaciju, pa je tvrdnja o drugom mestu iza Fable 5 dugo ostala nepotvrđena. Uz to, tabela poredi novi multimodalni model sa Qwen 3.7-Plus, a ne sa Max verzijom — poređenje koje laska generacijskom skoku više nego što zaslužuje. Za referencu, prethodnik Qwen 3.7-Max imao je 92,4 na GPQA Diamond, 80,4 na SWE-bench Verified i 69,7 na Terminal-Bench 2.0.[^3]
+
+## Cena u odnosu na konkurente
+
+Cene su mesto gde Alibaba igra agresivno. API košta 2 dolara po milion ulaznih tokena, 6 dolara po milion izlaznih, a keširani ulaz 0,25 dolara. Poređenje sa Kimi K3 od Moonshot-a, koji naplaćuje 3 dolara za ulaz, 15 za izlaz i 0,30 za keš, kaže da je Qwen jeftiniji 33 posto na ulazu i 60 posto na izlazu.[^4]
+
+Tokom probnog perioda cena pada na 10 posto kroz Token Plan — Lite paket od 6 dolara donosi 2.500 kredita nedeljno, a Pro od 68 dolara 40.000 kredita uz 6 do 8 konkurentnih agenata. API je kompatibilan sa OpenAI i DashScope formatom, što praktično znači promenu osnovnog URL-a i identifikatora modela. Ugrađeno je pet alata (code_interpreter, web_search, web_extractor, t2i_search i i2i_search), uz limit od 2 miliona tokena i 15 hiljada zahteva u minuti, maksimalni izlaz od 131 hiljade tokena i implicitni keš koji je osam puta jeftiniji od svežeg ulaza.[^5]
+
+Najzanimljivije poređenje, međutim, je sa onim modelom koji se pominje u Alibabinoj tvrdnji. Fable 5, Anthropic-ov flagship model, košta 10 dolara po milion ulaznih tokena i čak 50 dolara po milion izlaznih.[^8] To znači da je Qwen 3.8 Max pet puta jeftiniji na ulazu i više od osam puta na izlazu — razlika koja se pri velikim obimima meri u hiljadama dolara dnevno. Ako Alibaba stvarno uspe da održi kvalitet blizu Fable 5 po ovoj ceni, pritisak na zapadne provajdere će biti ogroman.
+
+## Otvorene težine i strategija
+
+Alibaba je obećala otvorene težine — i za Qwen3.8-Max i za manji Qwen3.8-27B. To je prekretnica, jer su modeli iz Max klase do sada bili zatvoreni. Treba, međutim, razdvojiti dve stvari: model od 2,4 triliona parametara je artefakt za data-centar koji traži više čvorova, dok je 27B verzija ona koja zaista može da radi na običnom hardveru.[^6]
+
+Strategija je šira od samog modela. Alibaba drži 36 posto udela u Moonshot-u, pa je istovremeno najveći konkurent i najveći investitor Kimi K3.[^4] Uz to je i partner Apple Intelligence u Kini.[^7] Sve se ovo dešava u jeku rata parametara kineskih laboratorija — Moonshot sa Kimi K3, Zhipu sa GLM 5.2 — gde veličina modela ponovo postaje marketinško oružje.
+
+Jeftiniji ulaz od konkurencije, najava otvorenih težina i distribucija kroz Apple uređaje u Kini čine jasnu Alibabinu strategiju: da se pozicionira kao pristupačna alternativa koja ne mora da bude najbolja u svemu. Ostaje pitanje koje se ne rešava saopštenjima — da li će tvrdnje o kvalitetu preživeti kontakt sa nezavisnim testovima. Dok ne stignu, tabela sa bloga vredi tačno onoliko koliko i reč proizvođača.
+
+[^1]: [Alibaba predstavlja Qwen3.8-Max — Alibaba Group, jul 2026](https://www.alibabagroup.com/document-2021044032125272064)
+[^2]: [Qwen3.8-Max široko dostupan, otvorene težine stižu — MarkTechPost, 3. avgust 2026](https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/)
+[^3]: [Qwen 3.8: 2,4 triliona parametara, tvrdnje o frontier performansama — MLQ.ai, 19. jul 2026](https://mlq.ai/news/alibaba-launches-qwen-38-with-24-trillion-parameters-claims-near-frontier-performance/)
+[^4]: [Kimi K3 cene: $3/$15 po milion tokena — Kie.ai, 2026](https://kie.ai/blog/kimi-k3-pricing)
+[^5]: [Qwen3.8-Max model stranica i cene — Qwen Cloud](https://www.qwencloud.com/models/qwen3.8-max)
+[^6]: [Qwen3.8-Max i Qwen3.8-27B — otvorene težine — MarkTechPost, 3. avgust 2026](https://www.marktechpost.com/2026/08/03/alibaba-qwen-releases-qwen3-8-max/)
+[^7]: [Alibaba i Apple Intelligence partnerstvo u Kini — MLQ.ai, jul 2026](https://mlq.ai/news/alibaba-launches-qwen-38-with-24-trillion-parameters-claims-near-frontier-performance/)
+[^8]: [Claude Fable 5 cene: $10/$50 po milion tokena — Claude Platform Docs, 2026](https://platform.claude.com/docs/en/about-claude/pricing)

@@ -1,0 +1,36 @@
+{
+  "slug": "deepseek-harness-agenti",
+  "file": "deepseek-harness-agenti.mdx",
+  "status": "approved",
+  "comments": [
+    {
+      "id": 1786812354880,
+      "author": "mile",
+      "type": "general",
+      "text": "Objavi večeras uveče u 20h",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T16:45:54.880Z"
+    }
+  ],
+  "createdAt": "2026-08-15T16:35:47.868Z",
+  "publishedAt": "2026-08-15T12:00:00T00:00:00",
+  "meta": {
+    "title": "DeepSeek lansira Harness — otvoreni kod koji pokreće agente, uz cene koje više nisu fiksne",
+    "excerpt": "DeepSeek više nije samo proizvođač modela. Uz open-source agent harness i V4-Pro 0813 ulazi u sloj koji kontroliše agente, a cene po prvi put postaju zavisne od doba dana.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/deepseek-harness-agenti.jpg",
+    "description": "DeepSeek Harness je open-source agent harness kao rival Claude Code-u. Uz njega stiže V4-Pro 0813 i prelazak na peak/off-peak cene API-ja od 16. avgusta.",
+    "tags": [
+      "DeepSeek",
+      "AI agenti",
+      "open source",
+      "Claude Code",
+      "programiranje",
+      "API"
+    ],
+    "date": "2026-08-15T12:00:00"
+  },
+  "scheduledAt": "2026-08-15T20:00"
+}

@@ -1,0 +1,51 @@
+---
+title: "Open source agenti su pregazili zatvorene — OpenClaw, Hermes i ostali, ko je za šta"
+excerpt: "Dok Claude Code i dalje traži pretplatu, open source agenti su eksplodirali: OpenClaw je stigao do 385.000 zvezdica, a njegovog tvorca je zaposlio OpenAI. Ko je bolji — OpenClaw, Hermes ili neki treći?"
+category: "AI"
+author: "Mile"
+date: 2026-08-08T12:00:00
+image: "/images/open-source-agenti.jpg"
+description: "OpenClaw 385.613 zvezdica na GitHubu, Hermes 227.684 — open source AI agenti su pregazili zatvorene. Poređenje arhitekture, memorije, alata i preporuka ko je za koga: Telegram asistent, duboka automatizacija ili enterprise MCP."
+tags: ["AI", "open source", "agenti", "OpenClaw", "Hermes", "Goose"]
+draft: false
+---
+
+Dok je Anthropicov Claude Code i dalje simbol vrhunskog iskustva — sjajan, ali iza pretplate — otvoreni kod je u međuvremenu pregazio tržište AI agenata. OpenClaw je za par meseci postao jedan od najzvezdanijih projekata u istoriji GitHuba: **385.613 zvezdica** prema GitHub API-ju iz avgusta 2026[^1], a njegovog tvorca je na kraju zaposlio sam OpenAI.
+
+Ali OpenClaw nije jedini igrač. Hermes agent iz Nous Researcha, Goose iz Blocka, OpenHands, Cline i Aider dele isti prostor na potpuno različite načine — od asistenta u Telegramu, preko korporativnih alata za kodiranje, do ekstenzije u VS Code-u. Pitanje više nije da li su open source agenti dorasli zatvorenim, nego koji je za koga.
+
+## OpenClaw — jastog koji je pregazio GitHub
+
+Priča je počela kao ClawdBot, pa se projekat preko moltbot-a preimenovao u OpenClaw — po jastogu koji je postao logo, uz opis "Your own personal AI assistant. Any OS. Any Platform. The lobster way". Kreator je Peter Steinberger, developer koji je iz penzije izašao da bi ga napravio, a MIT licenca i prelazak koda na nezavisnu fondaciju garantuju da ostaje slobodan.
+
+Ono što ga izdvaja jeste arhitektura, kako je pokazala analiza All Things Open iz marta[^2]. OpenClaw radi potpuno lokalno — razgovori, memorija i konfiguracija su obični Markdown i YAML fajlovi na tvom disku. Interfejs nije nova aplikacija ni web dashboard, već aplikacije za poruke: Telegram, WhatsApp, Signal, Discord, Slack, iMessage. Potpuno je model-agnostic: sam biraš API ključ ili lokalni model, od Claudea i GPT-a do DeepSeeka i Olame, bez pretplate i bez vezivanja za jednog dobavljača.
+
+Ponovljivi radni tokovi definišu se kao "skills" — uputstva u Markdownu ili TypeScriptu koja agent može i sam da kreira — a zajednički registar ClawHub služi kao tržište za njihovo deljenje. Opcioni "heartbeat" demon budi agenta u zadatim intervalima da sam obavi posao, bez pitanja. Instalacija je jedna komanda koja radi na Windowsu, macOS-u i Linuxu, a podešavanje za početnika traje jedan do tri sata. Slaba tačka ostaje prompt injection, jer agent sa neograničenim pristupom celom digitalnom životu nosi i veći rizik.
+
+## Hermes — agent koji raste sa tobom
+
+Hermes agent iz Nous Researcha, Python projekat sa MIT licencom nastao u julu 2025, danas broji **227.684 zvezdice**[^3]. Slogan "The agent that grows with you" nije puka reklama: prema zvaničnoj dokumentaciji, Hermes ima trajnu memoriju kroz sesije i pretragu starih razgovora (session_search), pa se agent seća i onoga što je radio pre nedelju dana.
+
+Najveća razlika u odnosu na ostale jeste dubina automatizacije. Glavni agent šalje poslove pod-agenima (delegate_task), zakazani zadaci izvršavaju se preko cron poslova sa dostavom rezultata, a tu su i automatizacija pregledača, glas, sistem veština i MCP integracije — Model Context Protocol, otvoreni standard za povezivanje alata. Rad nije vezan za jednu mašinu: pozadinski terminali uključuju Docker, SSH, Singularity, Modal, Daytona i Vercel Sandbox. Tu je i integracija sa Home Assistantom, a dopisivanje ide preko Telegrama, Signala i Discorda.
+
+## Šta nude ostali
+
+Goose, projekat Blocka, firme Džeka Dorzija, sa 52,6 hiljade zvezdica i Apache 2.0 licencom, najbolji je izbor za MCP-first tokove posla: lakši je i ekstenzibilniji, uz audit logove i podršku za Claude, Gemini i lokalnu Olamu. OpenHands iz All-Hands-AI ima najduži staž i najstabilniju produkcijsku primenu među open source agentima, kako je u maju primetio RunLocalAI — idealan je za samostalno hostovanje na privatnom kodu. Cline živi unutar VS Code-a i, posle gašenja Roo Code projekta u maju, preuzeo je njegove korisnike — sada je vodeći izbor za autonomne zadatke u IDE okruženju. Aider je zreo git-integrisani CLI editor za precizne izmene: svaka sesija je jedan fokusiran commit, što developerima ostavlja punu kontrolu.
+
+## Ko je za koga
+
+Izbor se svodi na to gde radiš i šta tražiš. OpenClaw je za one koji žele ličnog asistenta u Telegramu ili WhatsAppu, sa lokalnim skladištenjem i slobodom izbora modela. Hermes je za one koji žele duboku automatizaciju — memoriju, pod-agente, zakazane zadatke i rad na udaljenim mašinama. Goose je za korporativne timove sa arhitekturom zasnovanom na MCP protokolu. Cline je za developere koji ne izlaze iz editora, a Aider za one koji žele agenta pod kontrolom, izmenu po izmenu. Claude Code ostaje zatvoreni zastavni brod sa najvišim plafonom mogućnosti, ali uz pretplatu i bez mogućnosti da ga sam pokreneš.
+
+Kako je u maju primetio StackBrief, prvo pitanje nije "Claude Code ili Goose?", nego "terminal ili aplikacija za dopisivanje?"[^4]. OpenClaw i Hermes menjaju pravila igre time što te ne teraju ni na jedno.
+
+Modeli se komoditizuju: ono što je juče bila prednost, danas je roba. Prava vrednost je u "harnessu" — omotaču koji spaja arhitekturu, memoriju i alate. I tu je open source pobedio, jer ti daje vlasništvo: tvoji podaci, tvoja konfiguracija, tvoj izbor modela. Zatvoreni agenti nude vrhunske performanse, ali ti ništa ne pripada — ni podaci ni sam alat.
+
+Zato nema jednog "najboljeg" agenta — ima najboljeg za tvoj način rada. Razlika je u tome da li agentu pišeš poruke ili mu daješ terminal, a open source se pobrinuo da oba puta budu otvorena.
+
+[^1]: [GitHub API — repozitorijum openclaw/openclaw, avgust 2026](https://github.com/openclaw/openclaw)
+
+[^2]: [All Things Open, "OpenClaw: Anatomy of a viral open source AI agent", mart 2026](https://allthingsopen.org/articles/openclaw-viral-open-source-ai-agent-architecture)
+
+[^3]: [GitHub API — repozitorijum NousResearch/hermes-agent, avgust 2026](https://github.com/NousResearch/hermes-agent)
+
+[^4]: [StackBrief, "OpenClaw vs Claude Code vs Goose: Which AI Agent Wins?", maj 2026](https://stackbrief.dev/article/openclaw-vs-claude-code-vs-goose)

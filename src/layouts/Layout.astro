@@ -1,0 +1,205 @@
+---
+import '../styles/global.css';
+import '../styles/mdx.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  article?: boolean;
+  publishedTime?: string;
+  author?: string;
+  tags?: string[];
+  category?: string;
+}
+
+const {
+  title = 'Tekmax — Srpski AI & Tech portal',
+  description = 'Najnovije vesti iz sveta AI, kompjutera, telefona i gedžeta. Dnevni update na srpskom.',
+  image = '/og-default.svg',
+  article = false,
+  publishedTime,
+  author = 'Mile',
+  tags = [],
+  category,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://latest-editorial-role-open.trycloudflare.com').toString();
+const ogImageURL = new URL(image, Astro.site ?? 'https://latest-editorial-role-open.trycloudflare.com').toString();
+---
+
+<!doctype html>
+<html lang="sr" data-theme="auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    {tags.length > 0 && <meta name="keywords" content={tags.join(', ')} />}
+    {category && <meta name="article:section" content={category} />}
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:locale" content="sr_RS" />
+    <meta property="og:site_name" content="Tekmax" />
+    {article && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {article && <meta property="article:author" content={author} />}
+    {article && tags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Theme color za browser chrome (Safari, Chrome Android) -->
+    <meta name="theme-color" content="#0a0a0b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+
+    <!-- Inline init: postavi data-theme pre render da nema FOUC -->
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('tekmax:theme');
+          var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = saved || (sysDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+
+          // Slušaj promene sistemske teme ako korisnik nije eksplicitno izabrao
+          if (!saved) {
+            var mq = window.matchMedia('(prefers-color-scheme: dark)');
+            mq.addEventListener('change', function (e) {
+              document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            });
+          }
+        } catch (_) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-bg-primary text-ink-primary">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Scroll-to-top dugme (vidi se tek posle scrolla 400px) -->
+    <button
+      id="scroll-top"
+      type="button"
+      aria-label="Nazad na vrh"
+      class="fixed bottom-6 right-6 z-40 hidden h-11 w-11 items-center justify-center rounded-full border border-line-subtle bg-bg-secondary/90 text-ink-secondary shadow-lg backdrop-blur transition-all hover:border-accent hover:text-accent"
+    >
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+
+    <!-- Search engine (skripte za fuzzy search) -->
+    <script>
+      // Učitaj search.js kao ES module
+      import '../scripts/search.js';
+      // search-ui.js se automatski učitava na DOMContentLoaded
+    </script>
+    <script>
+      import '../scripts/search-ui.js';
+    </script>
+
+    <!-- Inline JS za scroll-to-top -->
+    <script is:inline>
+      (function () {
+        var btn = document.getElementById('scroll-top');
+        if (!btn) return;
+        var scrollThreshold = 400;
+        var update = function () {
+          if (window.scrollY > scrollThreshold) {
+            btn.classList.remove('hidden');
+            btn.classList.add('flex');
+          } else {
+            btn.classList.add('hidden');
+            btn.classList.remove('flex');
+          }
+        };
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+        btn.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* === CSS VARIJABLE ZA TEMU === */
+  /* Default: dark. Light override ispod. */
+  :root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #15151a;
+    --bg-tertiary: #1f1f25;
+    --bg-elevated: #1a1a20;
+    --ink-primary: #f5f5f7;
+    --ink-secondary: #c5c5cc;
+    --ink-tertiary: #8a8a92;
+    --line-subtle: #2a2a32;
+    --line-strong: #4a4a52;
+    --accent: #00d4ff;
+  }
+
+  /* === LIGHT THEME OVERRIDES === */
+  [data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f7;
+    --bg-tertiary: #e8e8eb;
+    --bg-elevated: #ffffff;
+    --ink-primary: #0a0a0b;
+    --ink-secondary: #4a4a52;
+    --ink-tertiary: #6a6a72;
+    --line-subtle: #e5e5ea;
+    --line-strong: #c5c5cc;
+    --accent: #0099cc;
+  }
+
+  /* Body — primenjuje temu preko CSS varijabli */
+  body {
+    background: var(--bg-primary);
+    color: var(--ink-primary);
+  }
+
+  /* Legacy Tailwind utility klase — bridge ka CSS varijablama
+     (mnogo komponenti koristi .bg-bg-primary, .text-ink-primary, itd.) */
+  .bg-bg-primary { background: var(--bg-primary); }
+  .bg-bg-secondary { background: var(--bg-secondary); }
+  .bg-bg-tertiary { background: var(--bg-tertiary); }
+  .bg-bg-elevated { background: var(--bg-elevated); }
+  .text-ink-primary { color: var(--ink-primary); }
+  .text-ink-secondary { color: var(--ink-secondary); }
+  .text-ink-tertiary { color: var(--ink-tertiary); }
+  .border-line-subtle { border-color: var(--line-subtle); }
+  .border-line-strong { border-color: var(--line-strong); }
+  .text-accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .border-accent { border-color: var(--accent); }
+
+  /* Light mode override — aliasing za klase koje nisu bridge-ovane */
+  [data-theme="light"] header.bg-bg-primary\/80 {
+    background: rgba(255, 255, 255, 0.85);
+  }
+</style>

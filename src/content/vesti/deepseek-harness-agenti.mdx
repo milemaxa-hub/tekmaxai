@@ -1,0 +1,46 @@
+---
+title: "DeepSeek lansira Harness — otvoreni kod koji pokreće agente, uz cene koje više nisu fiksne"
+excerpt: "DeepSeek više nije samo proizvođač modela. Uz open-source agent harness i V4-Pro 0813 ulazi u sloj koji kontroliše agente, a cene po prvi put postaju zavisne od doba dana."
+category: "AI"
+author: "Mile"
+date: 2026-08-15T12:00:00
+image: "/images/deepseek-harness-agenti.jpg"
+description: "DeepSeek Harness je open-source agent harness kao rival Claude Code-u. Uz njega stiže V4-Pro 0813 i prelazak na peak/off-peak cene API-ja od 16. avgusta."
+tags: ["DeepSeek", "AI agenti", "open source", "Claude Code", "programiranje", "API"]
+draft: true
+---
+
+Kada se DeepSeek spomene, većina ljudi i dalje pomisli na modele — jeftine, otvorene i sve sposobnije. Četvrtak, 14. avgust 2026, promenio je tu sliku. Kompanija je objavila DeepSeek Harness, softver koji ne generiše odgovore, nego pokreće agente, i tako se prvi put ozbiljno upustila u borbu za sloj koji su do sada čvrsto držali Anthropic sa svojim Claude Code-om i OpenAI sa Codex-om.
+
+## Softver koji se pokreće jednom komandom
+
+DeepSeek Harness, poznat i kao „dsh", objavljen je u verziji 0.1 pod MIT licencom na GitHub-u [^3]. Pokreće se komandom `npx @deepseek-ai/dsh web`, koja otvara lokalni veb interfejs za pokretanje AI agenata. VentureBeat ga opisuje kao rivalski otvoreni projekat Claude Code-u, dok ga TechNode vidi i kao odgovor na Anthropic-ov Claude Cowork [^1] [^4].
+
+Centralna ideja nosi slogan „Everything is a plugin" — praktično svaki deo agentskog okruženja može da se zameni: modeli, alati, veštine, sesije, izolovana okruženja, fajl sistemi, petlje, orkestracija, pa čak i korisnički interfejs. Sve to počiva na Cordis arhitekturi. U standardnom režimu Harness već ume da pregleda repozitorijume, menja fajlove, izvršava komande, pretražuje fajlove i veb, održava planove, poziva veštine i delegira posao podagentima, uz politike odobravanja.
+
+Upozorenje u samom repozitorijumu, međutim, otkriva u kojoj je fazi projekat: reč je o developer preview izdanju, uz napomenu da će biti „promena koje narušavaju kompatibilnost". Posebno je zanimljivo koliko brzo je privukao pažnju — na dan lansiranja repo je imao oko 27.500 zvezdica i 2.000 račvanja [^3].
+
+## Model podešen za rad sa agentima
+
+Uz Harness je stigao i DeepSeek-V4-Pro-0813, sada zvanično u GA verziji nakon što je neko vreme bio dostupan samo kao preview. Fokus je na agentskim sposobnostima, uz nativnu podršku za OpenAI Responses API i integraciju sa Codex-om, a dostupan je na vebu, mobilnoj aplikaciji i API-ju.
+
+Kompanijski rezultati deluju ambiciozno: Terminal Bench 2.1 na 87,9, Toolathlon-Verified na 74,1, DSBench-FullStack na 71,1 i DSBench-Hard na 67,2. Radi poređenja, Fable 5 beleži 77,9 na Toolathlon-Verified i 77,2 na DSBench-FullStack. Međutim, vredi napomenuti da su neki od tih rezultata mereni sa modelom unutar Harness-a u takozvanom minimal mode-u — dakle, mere model u agentskom okruženju, a ne model sam po sebi. Drugim rečima, brojke govore o tome koliko dobro sistem odrađuje posao, a ne samo koliko je jezgro inteligentno. Količina uloženog razmišljanja pritom postaje eksplicitan kontrolni mehanizam, kroz tri nivoa: Non-think, Think High i Think Max.
+
+## Cene koje više nisu fiksne
+
+Upravo zbog toga najveće iznenađenje stiže iz cenovnika. Od 16. avgusta u 16 časova po UTC-u DeepSeek prelazi na naplatu po principu špica i vanšpičnih termina. Viša tarifa važi u dva pojasa — od 1 do 4 i od 6 do 10 časova po UTC-u — dok je van špica cena upola niža.
+
+Skokovi nisu simbolični. Reuters navodi da poskupljenja idu od 50 odsto do više od 1.100 odsto, u zavisnosti od modela, vrste tokena i doba dana. Konkretan primer: milion cache-miss ulaznih i milion izlaznih tokena na V4-Pro danas košta 1,305 dolara. Posle promene to će biti 2,64 dolara van špica, odnosno 5,28 dolara u špicu — više nego četvorostruko. Cache hit ostaje dramatično jeftiniji, što sugeriše da DeepSeek zapravo usmerava saobraćaj ka ponovnoj upotrebi konteksta. Nova struktura, međutim, prvi put uvodi vremensku dimenziju u naplatu modela i time priznaje da je računska snaga za agente ograničen resurs koji treba rasporediti.
+
+## Borba za sloj koji kontroliše agente
+
+SCMP u potezu vidi strateški zaokret DeepSeek-a ka autonomnoj agentskoj veštačkoj inteligenciji [^2]. To je možda i najpreciznija ocena onoga što se zapravo dogodilo. DeepSeek više ne konkurše samo inteligencijom modela i cenom tokena — sada ulazi u sloj koji određuje kako modeli koriste alate, menjaju fajlove, održavaju sesije i izvršavaju dugotrajne agentske zadatke.
+
+A upravo taj sloj može da bude važniji od samog modela. Modeli se menjaju iza standardizovanih interfejsa i postaju zamenjivi, dok je harness koji kontroliše agenta, njegove sesije i tokove rada znatno teže izbaciti. Otvoren kod pod MIT licencom ovde nije puki gest, već poluga — način da se developeri vežu za infrastrukturu koja sutra može da pokreće bilo koji model, uključujući i tuđe.
+
+Da li će Harness zaista ugroziti Claude Code i Codex, rano je reći. Developer preview sa upozorenjem o narušenoj kompatibilnosti nije proizvod na koji se velike organizacije oslanjaju preko noći. Ali smer je jasan: DeepSeek više ne želi da bude samo motor, nego i komandna tabla koja njime upravlja.
+
+[^1]: [VentureBeat — DeepSeek Harness launches as open source rival to Claude Code, 13/14. avgust 2026](https://venturebeat.com/technology/deepseek-harness-launches-as-open-source-rival-to-claude-code-alongside-v4-pro-on-api-with-higher-prices)
+[^2]: [SCMP — Launch of DeepSeek's Harness marks its strategic pivot towards autonomous agentic AI, 14. avgust 2026](https://www.scmp.com/tech/big-tech/article/3364082/launch-deepseeks-harness-marks-its-strategic-pivot-towards-autonomous-agentic-ai)
+[^3]: [GitHub — deepseek-ai/deepseek-harness](https://github.com/deepseek-ai/deepseek-harness)
+[^4]: [TechNode — Against Claude Cowork, DeepSeek opens its open-source Harness to developers, 14. avgust 2026](https://technode.com/2026/08/14/against-claude-cowork-deepseek-opens-its-open-source-harness-to-developers/)

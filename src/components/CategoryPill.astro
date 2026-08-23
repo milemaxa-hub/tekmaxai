@@ -1,0 +1,25 @@
+---
+interface Props {
+  category: string;
+}
+
+const { category } = Astro.props;
+const key = category.toLowerCase();
+const colors: Record<string, string> = {
+  ai: '#ff6b9d',
+  tehnologije: '#00d4ff',
+  mobilni: '#ffd60a',
+  gedzeti: '#a78bfa',
+  biznis: '#10b981',
+  gaming: '#f97316',
+  nauka: '#06b6d4',
+};
+const color = colors[key] ?? '#a0a0a0';
+---
+
+<span
+  class="pill"
+  style={`background: ${color}26; color: ${color};`}
+>
+  {category}
+</span>

@@ -1,0 +1,217 @@
+---
+/**
+ * MoreMenu — padajući meni (3 crte u headeru)
+ *
+ * Sadrži:
+ *   - Tema (auto / svetla / tamna) — radio buttons
+ *   - Pismo (latinica / ćirilica) — radio buttons
+ *
+ * Atribut data-transliterate-target="auto" na parent <html> označava
+ * da se ceo sadržaj transliteriše (ne samo logo).
+ */
+
+const themeOptions = [
+  { value: 'auto',  label: 'Auto',     hint: 'prati sistem' },
+  { value: 'light', label: 'Svetla',   hint: 'uvek' },
+  { value: 'dark',  label: 'Tamna',    hint: 'uvek' },
+];
+
+const scriptOptions = [
+  { value: 'latin',    label: 'Latinica', hint: 'sr-Latn' },
+  { value: 'cyrillic', label: 'Ćirilica', hint: 'sr-Cyrl' },
+];
+---
+
+<div class="more-menu-root relative">
+  <button
+    id="more-menu-trigger"
+    type="button"
+    class="text-ink-secondary transition-colors hover:text-accent"
+    aria-label="Više opcija"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+
+  <div
+    id="more-menu-panel"
+    class="more-menu-panel absolute right-0 top-full mt-2 w-64 rounded-lg border border-line-subtle bg-bg-secondary p-2 shadow-xl opacity-0 invisible scale-95 transition-all"
+    role="menu"
+  >
+    {/* === TEMA SEKCIJA === */}
+    <div class="px-3 pt-2 pb-1 text-xs font-bold uppercase tracking-wider text-ink-tertiary">
+      Tema
+    </div>
+    {themeOptions.map((opt) => (
+      <button
+        type="button"
+        class="theme-option flex w-full items-center justify-between rounded px-3 py-2 text-body-sm text-ink-primary hover:bg-bg-tertiary"
+        data-theme-value={opt.value}
+        role="menuitemradio"
+      >
+        <span class="font-medium">{opt.label}</span>
+        <span class="text-xs text-ink-tertiary">{opt.hint}</span>
+      </button>
+    ))}
+
+    <div class="my-1 border-t border-line-subtle"></div>
+
+    {/* === PISMO SEKCIJA === */}
+    <div class="px-3 pt-2 pb-1 text-xs font-bold uppercase tracking-wider text-ink-tertiary">
+      Pismo
+    </div>
+    {scriptOptions.map((opt) => (
+      <button
+        type="button"
+        class="script-option flex w-full items-center justify-between rounded px-3 py-2 text-body-sm text-ink-primary hover:bg-bg-tertiary"
+        data-script-value={opt.value}
+        role="menuitemradio"
+      >
+        <span class="font-medium">{opt.label}</span>
+        <span class="text-xs text-ink-tertiary">{opt.hint}</span>
+      </button>
+    ))}
+
+    <div class="my-1 border-t border-line-subtle"></div>
+
+    {/* === OSTALO === */}
+    <a
+      href="/newsletter"
+      class="block rounded px-3 py-2 text-body-sm text-ink-primary hover:bg-bg-tertiary"
+      role="menuitem"
+    >
+      Newsletter
+    </a>
+  </div>
+</div>
+
+<style>
+  .more-menu-panel[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  /* Active state za opcije */
+  .theme-option[data-active="true"],
+  .script-option[data-active="true"] {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+  }
+  .theme-option[data-active="true"] .text-ink-tertiary,
+  .script-option[data-active="true"] .text-ink-tertiary {
+    color: #00d4ff;
+    opacity: 0.7;
+  }
+</style>
+
+<script>
+  import '../scripts/transliterate.js';
+
+  const trigger = document.getElementById('more-menu-trigger');
+  const panel = document.getElementById('more-menu-panel');
+  if (trigger && panel) {
+    // Toggle open/close
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = panel.getAttribute('data-open') === 'true';
+      if (isOpen) {
+        panel.removeAttribute('data-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        panel.setAttribute('data-open', 'true');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // Click outside zatvori
+    document.addEventListener('click', (e) => {
+      if (!panel.contains(e.target as Node) && e.target !== trigger) {
+        panel.removeAttribute('data-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // ESC zatvori
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        panel.removeAttribute('data-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // === TEMA OPCIJE ===
+  const themeButtons = document.querySelectorAll('.theme-option');
+  function updateActiveTheme() {
+    const current = (localStorage.getItem('tekmax:theme') as 'auto' | 'light' | 'dark' | null) || 'auto';
+    themeButtons.forEach((btn) => {
+      const value = btn.getAttribute('data-theme-value');
+      btn.setAttribute('data-active', value === current ? 'true' : 'false');
+    });
+  }
+  updateActiveTheme();
+
+  themeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const value = btn.getAttribute('data-theme-value') as 'auto' | 'light' | 'dark';
+      if (value === 'auto') {
+        localStorage.removeItem('tekmax:theme');
+        const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', sysDark ? 'dark' : 'light');
+      } else {
+        localStorage.setItem('tekmax:theme', value);
+        document.documentElement.setAttribute('data-theme', value);
+      }
+      updateActiveTheme();
+    });
+  });
+
+  // === PISMO OPCIJE — koristi globalnu transliterateAll() ===
+  const scriptButtons = document.querySelectorAll('.script-option');
+  function updateActiveScript() {
+    const current = (localStorage.getItem('tekmax:script') as 'auto' | 'latin' | 'cyrillic' | null) || 'auto';
+    let active: string;
+    if (current === 'auto') {
+      // Auto-detect
+      const lib = (window as any).tekmaxScriptLib;
+      const langs = navigator.languages || [navigator.language || 'sr-Latn'];
+      const isCyr = langs.some((l: string) => l.toLowerCase().includes('cyrl'));
+      active = isCyr ? 'cyrillic' : 'latin';
+    } else {
+      active = current;
+    }
+    scriptButtons.forEach((btn) => {
+      const value = btn.getAttribute('data-script-value');
+      btn.setAttribute('data-active', value === active ? 'true' : 'false');
+    });
+  }
+  updateActiveScript();
+
+  scriptButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const value = btn.getAttribute('data-script-value') as 'latin' | 'cyrillic';
+      localStorage.setItem('tekmax:script', value);
+      const lib = (window as any).tekmaxScriptLib;
+      if (lib) {
+        lib.transliterateAll(value);
+        document.documentElement.setAttribute('data-script', value);
+      }
+      updateActiveScript();
+    });
+  });
+
+  // Init: ako korisnik već izabrao, primeni transliteraciju na load
+  const savedScript = localStorage.getItem('tekmax:script') as 'latin' | 'cyrillic' | null;
+  if (savedScript && savedScript !== 'auto') {
+    const lib = (window as any).tekmaxScriptLib;
+    if (lib) {
+      // Sačekaj DOM ready
+      setTimeout(() => lib.transliterateAll(savedScript), 0);
+      document.documentElement.setAttribute('data-script', savedScript);
+    }
+  }
+</script>

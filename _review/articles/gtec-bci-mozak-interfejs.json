@@ -1,0 +1,26 @@
+{
+  "slug": "gtec-bci-mozak-interfejs",
+  "file": "gtec-bci-mozak-interfejs.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.798Z",
+  "publishedAt": "2026-08-11T16:00:00T00:00:00",
+  "meta": {
+    "title": "g.tec: austrijska kompanija koja je naučila mašine da čitaju misli",
+    "excerpt": "EEG kape, 1.024 kanala, suve elektrode i komunikacija za potpuno paralizovane — g.tec već 25 godina prevodi moždane signale u komande i vraća glas onima koji su ga izgubili.",
+    "category": "Tehnologije",
+    "author": "Mile",
+    "image": "/images/gtec-bci-lab.jpg",
+    "description": "g.tec pravi brain-computer interface sisteme: EEG kape, 1.024 kanala i suve elektrode. Priča o kompaniji koja 25 godina prevodi moždane signale u komande.",
+    "tags": [
+      "g.tec",
+      "BCI",
+      "neurotehnologija",
+      "EEG",
+      "mozak",
+      "rehabilitacija",
+      "veštačka inteligencija"
+    ],
+    "date": "2026-08-11T16:00:00"
+  }
+}

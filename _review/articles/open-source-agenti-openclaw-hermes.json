@@ -1,0 +1,25 @@
+{
+  "slug": "open-source-agenti-openclaw-hermes",
+  "file": "open-source-agenti-openclaw-hermes.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.801Z",
+  "publishedAt": "2026-08-08T12:00:00T00:00:00",
+  "meta": {
+    "title": "Open source agenti su pregazili zatvorene — OpenClaw, Hermes i ostali, ko je za šta",
+    "excerpt": "Dok Claude Code i dalje traži pretplatu, open source agenti su eksplodirali: OpenClaw je stigao do 385.000 zvezdica, a njegovog tvorca je zaposlio OpenAI. Ko je bolji — OpenClaw, Hermes ili neki treći?",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/open-source-agenti.jpg",
+    "description": "OpenClaw 385.613 zvezdica na GitHubu, Hermes 227.684 — open source AI agenti su pregazili zatvorene. Poređenje arhitekture, memorije, alata i preporuka ko je za koga: Telegram asistent, duboka automatizacija ili enterprise MCP.",
+    "tags": [
+      "AI",
+      "open source",
+      "agenti",
+      "OpenClaw",
+      "Hermes",
+      "Goose"
+    ],
+    "date": "2026-08-08T12:00:00"
+  }
+}

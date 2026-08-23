@@ -1,0 +1,53 @@
+---
+title: "OpenClaw, Claude Code ili Goose — pitanje nije koji je najbolji, nego gde želiš da ti agent živi"
+excerpt: "Tri najpopularnija open source agenta odgovaraju na tri različita pitanja. Poređenje StackBrief-a: prvo odluči da li ti agent treba u chatu ili u terminalu, pa tek onda biraj — uz konkretne brojke o troškovima."
+category: "AI"
+author: "Mile"
+date: 2026-08-08T14:30:00
+image: "/images/openclaw-goose.jpg"
+description: "OpenClaw (370.000+ zvezdica) živi u Telegramu, Claude Code u terminalu, Goose je jeftina alternativa — 0$ sa Gemini free tier. Poređenje troškova, podešavanja i preporuka: ko je za koga, i zašto prvo pitanje nije koji je najbolji."
+tags: ["AI", "OpenClaw", "Claude Code", "Goose", "agenti", "open source"]
+draft: false
+---
+
+Dok se o "AI agentima" priča kao o jednoj stvari — programu koji sam obavlja zadatke umesto tebe — tri najpopularnija open source agenta odgovaraju na tri različita pitanja. U raspravama se OpenClaw, Claude Code i Goose pominju u istom dahu, pa se lako pomisli da su direktni konkurenti među kojima treba izabrati jednog. Poređenje koje je objavio portal StackBrief pokazuje da je stvar jednostavnija: prvo pitanje nije "koji je najbolji", nego gde želiš da ti agent živi.[^1]
+
+Praktično, na raspolaganju su dva mesta: chat aplikacija ili terminal.
+
+## Tri agenta, tri različita posla
+
+OpenClaw je samostalno pokrenut (self-host) AI "gateway" — ulazna kapija koja se kači na aplikacije za razmenu poruka poput Telegrama, Slacka i Discord-a. Umesto da otvaraš terminal, agentu šalješ poruku u chatu, a on iza scene obavlja posao. MIT licenca, radi na sopstvenoj mašini ili VPS-u, a sa preko **370.000 zvezdica** na GitHub-u jedan je od najzvezdanijih open source AI projekata uopšte.[^2]
+
+Claude Code je, s druge strane, Anthropic-ov terminal agent za kod — alat za komandnu liniju koji radi direktno na tvom kodu. Daš mu zadatak običnim jezikom, recimo "dodaj autentifikaciju u ovu Express aplikaciju", a on čita fajlove, pravi izmene i pokreće komande. Radi isključivo na Claude modelima: rani pristup novostima, ali i zaključanost u cenovni model.
+
+Goose je open source terminal agent iz Block-a, firme Džeka Dorzija, pod Apache 2.0 licencom.[^3] Ne vezuje se za jedan model — sam biraš: Claude, Gemini, lokalni Ollama ili bilo šta sa API endpoint-om. Sa free tier modelom je besplatan, a sa lokalnim potpuno privatan.
+
+## Prvo pitanje — terminal ili chat aplikacija
+
+Teza StackBrief-a je da pravo pitanje nije "Claude Code ili Goose?", nego "terminal ili chat aplikacija?".[^1] OpenClaw živi u chat aplikacijama, a druga dva u terminalu, i to nije sitnica — menja ceo način korišćenja. U chatu je agent dostupan iz alata u kojima ionako provodiš vreme, i to sa telefona; u terminalu radi direktno na kodu.
+
+## Koliko košta i koliko je teško pokrenuti
+
+OpenClaw zahteva najviše posla — self-host, API ključ i konfiguraciju platforme za razmenu poruka. Telegram je najdokumentovaniji, ali webhook znači da instanca mora biti dostupna sa interneta, pa početniku treba jedan do tri sata. Claude Code je najbrži: jedna komanda za instalaciju, Claude Pro/Max/Team pretplata ili API krediti, pa za 15-30 minuta stižeš do prvog zadatka — ako ti terminal ne smeta. Goose je između: 20-40 minuta, plus 20-30 ako ideš lokalni model preko Ollame.
+
+Troškovi za lagano korišćenje: OpenClaw ili Goose sa Gemini free tier-om iznose oko **0 dolara mesečno**, a sa Claude API-jem 5-15 dolara. Claude Code sa Pro pretplatom je **20 dolara mesečno** fiksno, dok Max plan ide do 100 dolara za 5x, a 200 za 20x korišćenja. Budžetski nastrojenima je put jasan: Goose ili OpenClaw sa besplatnim modelom.
+
+## Ko je najbolji za šta
+
+OpenClaw je najbolji za orkestraciju više aplikacija i automatizacije koje rade u pozadini — iz Telegrama sa telefona pokreneš istraživački zadatak, a odgovor ti stigne u Slack. Ali nije coding agent: reč je o gateway-ju koji se za izmene koda oslanja na model u chat odgovoru, bez namenskih alata za fajlove, git ili terminal komande. Pogrešan izbor ako primarno pišeš kod; pravi ako želiš agenta u Telegramu ili Slacku.
+
+Claude Code je najsposobniji čisti coding agent: čita ceo projekat, razume kontekst kroz fajlove i najbolji je u složenim refaktorima, otklanjanju grešaka i zadacima sa više koraka. Slabosti: 20 dolara mesečno je ok dok ne udariš Pro limit, pa plaćaš po tokenu, a model ne menjaš. Biraj ga ako pišeš i edituješ kod i želiš najsposobnijeg agenta.
+
+Goose je najbolji za samostalne terminal zadatke i lokalnu privatnost, jer jedini podržava lokalni model — tvoj kod ne napušta mašinu. Fleksibilnost "bring your own model" znači da menjaš modele bez menjanja alata. Ipak, na složenim izmenama preko više fajlova i dugim lancima zaključivanja Claude Code pravi manje grešaka; za jednostavne izmene su ekvivalentni. Ako želiš iskustvo kao sa Claude Code-om na 0 dolara, upari Goose sa Gemini free tier-om.
+
+## Možeš li koristiti više od jednog
+
+Možeš, i često ima smisla. Najčešća kombinacija je, prema StackBrief-u, Claude Code za ozbiljan kod plus OpenClaw za Telegram/Slack automatizacije, jer pokrivaju različite potrebe.[^1] Goose i Claude Code se, s druge strane, preklapaju — držati oba znači dupliranje posla.
+
+Na kraju se sve svodi na to gde ti se posao odvija. Ako su ti radni alati chat aplikacije, OpenClaw je tvoj agent; ako je radni alat kod, biraš između Claude Code-a i Goosea. Samo zapamti: self-hosting za OpenClaw jeste prava frikcija, a Claude Code traži komfor u terminalu.
+
+Alat, na kraju, nije ni usko grlo. Razlike među ova tri agenta su realne, ali je znanje šta tačno tražiš od agenta — i gde želiš da živi — veći deo posla. Počni sa jednim, nauči njegove granice, pa dodaj drugi ako zatreba.
+
+[^1]: [StackBrief — OpenClaw vs Claude Code vs Goose: Which AI Agent Wins?](https://stackbrief.dev/article/openclaw-vs-claude-code-vs-goose)
+[^2]: [GitHub — OpenClaw](https://github.com/openclaw/openclaw)
+[^3]: [GitHub — Goose](https://github.com/block/goose)

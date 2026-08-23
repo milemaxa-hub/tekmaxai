@@ -1,0 +1,43 @@
+---
+title: "Apple M5 Ultra stiže u oktobru sa 80 GPU jezgra — konkurencija za cloud GPU instance"
+excerpt: "Apple je potvrdio M5 Ultra za Mac Pro i Mac Studio. Sa 32 CPU jezgra i 80 GPU jezgra, i do 192 GB unified memorije, ovaj čip postaje ozbiljna pretnja cloud GPU instancama — barem za ono što radiš lokalno."
+category: "Tehnologije"
+author: "Mile"
+date: 2026-06-19
+image: "/images/apple-m5-ultra.jpg"
+draft: false
+description: "Apple M5 Ultra stiže u oktobru — 32 CPU jezgra, 80 GPU jezgra, 192 GB unified memorije. Konkretna pretnja cloud GPU instancama za lokalni AI rad."
+tags: ["Apple", "M5 Ultra", "Mac Pro", "Mac Studio", "Apple Silicon", "AI"]
+---
+
+Spekulacije o Apple-ovom najjačem čipu trajale su mesecima, a u petak je kompanija konačno stavila tačku na nagađanja — M5 Ultra stiže u oktobru, i to prvo u Mac Pro i Mac Studio. Reč je o procesoru koji je, prema svemu što je Apple pokazao, projektovan s jednim ciljem: da težak AI posao koji se danas obavlja u cloud-u preseli na korisnikov sto.
+
+Za sve koji rade bilo šta sa lokalnom AI inferencijom, ovo je čip koji vredi pratiti od prvog dana. Najava, naime, mnogo više govori o tome kuda ide ceo Apple-ov ekosistem nego o samoj listi specifikacija.
+
+## M5 Ultra donosi 32 CPU i 80 GPU jezgra, a u memoriju staje i 70B model
+
+Nije reč o pukom ubrzanju M4 Ultra, već o drugačijoj arhitekturi koja je od temelja projektovana za AI zadatke. Procesor broji **32 jezgra** (24P + 8E), što je četiri više nego kod prethodnika, dok grafički deo sa **80 jezgara** predstavlja prvi Apple-ov čip koji probija granicu od 70 GPU jedinica.
+
+Neural Engine treće generacije razvija 38 TOPS-a i specijalizovan je za lokalnu inferenciju velikih jezičkih modela, a sve to radi na TSMC-ovom N3P procesu koji troši osam odsto manje energije od N3E korišćenog u M4 generaciji. Najveća prednost ipak leži u **192 GB unified memorije**, jer je to dovoljno da se lokalno pokrene model sa 70 milijardi parametara.
+
+To konkretno znači da će M5 Ultra moći da pokrene Llama 4 70B u kvantizaciji na 4 bita brzinom od oko 15 tokena u sekundi, što je performansa uporediva sa cloud GPU instancom srednje klase — samo što je ovde sve na vašem stolu.
+
+## Ovaj čip menja pravila za video produkciju, programiranje i istraživanje
+
+Naravno, nije za svakoga — ako vam je računar prvenstveno za pregledanje interneta i pisanje poruka, M5 Ultra će biti preterano ulaganje. Ali za tri grupe korisnika ovde se radi o ozbiljnom zaokretu.
+
+U video produkciji, Mac Studio sa M5 Ultra pokreće DaVinci Resolve AI rotoskopiju lokalno, bez slanja frejmova u cloud, a danas ta funkcija traži minimum RTX 4080 u desktop računaru ili skupu cloud pretplatu. Programerima 70B model na sopstvenoj mašini donosi asistenta nivoa GitHub Copilota koji nikada ne šalje kod sa računara, što je velika stvar za kompanije koje rade sa osetljivim izvornim kodom. Istraživačima pak ostaje mogućnost da dodatno obučavaju i evaluiraju modele i pokreću inferenciju bez plaćanja AWS-a ili Google Clouda po satu.
+
+## Najskuplja konfiguracija košta 7.999 dolara, a razlika se vraća za dve godine
+
+Prema procurelim informacijama iz Apple-ovog lanca snabdevanja, cene kreću od 3.999 dolara za Mac Studio sa 60 GPU jezgara i 96 GB memorije. Model sa svih 80 GPU jezgara i 192 GB memorije košta 5.999 dolara, dok Mac Pro sa istom konfiguracijom počinje od 7.999 dolara.
+
+| Model | CPU | GPU | Memorija | Cena |
+|---|---|---|---|---|
+| Mac Studio M5 Ultra | 32 (24P+8E) | 60 | 96 GB | $3.999 |
+| Mac Studio M5 Ultra MAX | 32 (24P+8E) | 80 | 192 GB | $5.999 |
+| Mac Pro M5 Ultra | 32 (24P+8E) | 80 | 192 GB | $7.999+ |
+
+Mac Studio u prodaju stiže u oktobru, a Mac Pro se očekuje u novembru ili decembru. Cena deluje visoko dok se ne uporedi sa godišnjom cloud pretplatom koja radi isti posao — konfiguracija od 5.999 dolara sa 192 GB memorije isplati se za manje od dve godine svima koji danas plaćaju cloud GPU za AI rad.
+
+Pratićemo predstavljanje i čim čip stigne na test, donećemo detaljne rezultate. Do tada je jasno da se priča o Apple-u u AI kontekstu menja.

@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/Card.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import { getCollection } from 'astro:content';
+
+const categoryMap: Record<string, string> = {
+  ai: 'AI',
+  tehnologije: 'Tehnologije',
+  mobilni: 'Mobilni',
+  gedzeti: 'Gedžeti',
+  biznis: 'Biznis',
+  gaming: 'Gaming',
+  nauka: 'Nauka',
+};
+
+export function getStaticPaths() {
+  return [
+    { params: { kategorija: 'ai' } },
+    { params: { kategorija: 'tehnologije' } },
+    { params: { kategorija: 'mobilni' } },
+    { params: { kategorija: 'gedzeti' } },
+    { params: { kategorija: 'biznis' } },
+    { params: { kategorija: 'gaming' } },
+    { params: { kategorija: 'nauka' } },
+  ];
+}
+
+const { kategorija } = Astro.params as { kategorija: string };
+const targetCategory = categoryMap[kategorija];
+
+if (!targetCategory) {
+  return Astro.redirect('/');
+}
+
+const allArticles = (await getCollection('vesti'))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const articles = allArticles.filter((a) => a.data.category === targetCategory);
+
+const toCard = (entry: any) => ({
+  title: entry.data.title,
+  excerpt: entry.data.excerpt,
+  category: entry.data.category,
+  author: entry.data.author,
+  date: entry.data.date.toISOString().split('T')[0],
+  image: entry.data.image,
+  slug: entry.id.replace(/\.mdx?$/, ''),
+});
+
+const cards = articles.map(toCard);
+---
+
+<Layout title={`${targetCategory} — Tekmax`}>
+  <section class="container-page py-10">
+    <SectionHeader title={targetCategory} />
+    {cards.length === 0 ? (
+      <p class="mt-6 text-ink-tertiary">Nema članaka u ovoj kategoriji.</p>
+    ) : (
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((article) => (
+          <Card {...article} />
+        ))}
+      </div>
+    )}
+  </section>
+</Layout>

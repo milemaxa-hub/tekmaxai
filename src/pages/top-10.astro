@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = (await getCollection('vesti'))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const toCard = (entry: any) => ({
+  title: entry.data.title,
+  excerpt: entry.data.excerpt,
+  category: entry.data.category,
+  author: entry.data.author,
+  date: entry.data.date.toISOString().split('T')[0],
+  image: entry.data.image,
+  slug: entry.id.replace(/\.mdx?$/, ''),
+});
+
+// Top 10 = latest 10
+const top10 = allArticles.slice(0, 10).map(toCard);
+---
+<Layout title="Top 10 — Tekmax" description="Deset najvažnijih AI i tech priča ovog meseca na Tekmax-u.">
+  <section class="container-page py-10">
+    <div class="mb-10 rounded-xl border border-accent/30 bg-accent/5 p-8">
+      <h1 class="text-h1 font-extrabold">Top 10</h1>
+      <p class="mt-3 text-body-lg text-ink-secondary">
+        Deset najčitanijih i najvažnijih priča poslednjih 30 dana na Tekmax-u. RANG lista se ažurira svake nedelje.
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      {top10.map((article, idx) => (
+        <article class="flex gap-4 rounded-xl border border-line-subtle bg-bg-secondary p-5 transition-colors hover:border-accent sm:gap-6 sm:p-6">
+          <div class="flex shrink-0 items-start">
+            <span class="text-h1 font-extrabold leading-none text-accent sm:text-hero">
+              {String(idx + 1).padStart(2, '0')}
+            </span>
+          </div>
+          <div class="flex-1">
+            <div class="mb-2 flex flex-wrap items-center gap-2">
+              <span class="inline-block rounded-md bg-accent/10 px-2 py-0.5 text-caption font-semibold uppercase tracking-wide text-accent">
+                {article.category}
+              </span>
+              <span class="text-caption text-ink-tertiary">{article.date}</span>
+              <span class="text-caption text-ink-tertiary">·</span>
+              <span class="text-caption text-ink-tertiary">{article.author}</span>
+            </div>
+            <h2 class="text-h3 font-bold leading-tight">
+              <a href={`/vesti/${article.slug}`} class="link-hover">{article.title}</a>
+            </h2>
+            <p class="mt-2 line-clamp-2 text-body text-ink-secondary">{article.excerpt}</p>
+            <a href={`/vesti/${article.slug}`} class="mt-3 inline-block text-body-sm font-semibold text-accent link-hover">
+              Pročitaj →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="/najnovije" class="inline-block rounded-md border border-line-default bg-bg-secondary px-6 py-2.5 font-semibold text-ink-primary transition-colors hover:border-accent">
+        Vidi sve najnovije vesti →
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,45 @@
+{
+  "slug": "apple-alibaba-kina-ai",
+  "file": "apple-alibaba-kina-ai.mdx",
+  "status": "approved",
+  "comments": [
+    {
+      "id": 1786812198049,
+      "author": "mile",
+      "type": "image",
+      "text": "Dodaj knešto crveno da liči na kinesku zastavu",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T16:43:18.049Z"
+    },
+    {
+      "id": 1786812214549,
+      "author": "mile",
+      "type": "general",
+      "text": "Objavi sutra u 9h",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T16:43:34.549Z"
+    }
+  ],
+  "createdAt": "2026-08-15T16:35:47.865Z",
+  "publishedAt": "2026-08-15T13:00:00T00:00:00",
+  "meta": {
+    "title": "Apple trenirao sopstveni AI model za Kinu uz pomoć Alibabe",
+    "excerpt": "Apple je, uz podršku Alibabe, razvio sopstveni AI model namenjen kineskom tržištu i postao prva američka kompanija kojoj je Peking odobrio da ponudi sopstveni model.",
+    "category": "Tehnologije",
+    "author": "Mile",
+    "image": "/images/apple-alibaba-kina-ai.jpg",
+    "description": "Apple trenira sopstveni AI model za Kinu uz podršku Alibabe — retka prekogranična saradnja koja preseca tenzije Pekinga i Vašingtona. Apple Intelligence stiže u Kinu.",
+    "tags": [
+      "Apple",
+      "Alibaba",
+      "Kina",
+      "AI",
+      "iPhone",
+      "Apple Intelligence"
+    ],
+    "date": "2026-08-15T13:00:00"
+  },
+  "scheduledAt": "2026-08-16T09:00"
+}

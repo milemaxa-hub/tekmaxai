@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Env / secrets — NIKAD u javni repo
+.env
+.env.*
+!.env.example
+
+# Review panel — token u _review/.env, NE sme u git
+_review/.env
+_review/data/
+_review/*.log
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/

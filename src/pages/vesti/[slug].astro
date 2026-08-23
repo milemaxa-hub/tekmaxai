@@ -1,0 +1,157 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
+import TagList from '../../components/TagList.astro';
+import ReadingProgress from '../../components/ReadingProgress.astro';
+import Card from '../../components/Card.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('vesti')).filter((a) => !a.data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toLocaleDateString('sr-Latn', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+});
+
+// SEO description iz frontmatter-a ako postoji, fallback na excerpt
+const seoDescription = post.data.description || post.data.excerpt;
+
+// Reading time procena (200 reči/min na srpskom)
+const wordCount = post.body ? post.body.split(/\s+/).filter(Boolean).length : 0;
+const readingMinutes = Math.max(1, Math.round(wordCount / 200));
+
+// Povezani članci iz iste kategorije (maks 3, isključujući trenutni)
+const allArticles = await getCollection('vesti');
+const related = allArticles
+  .filter(
+    (a) => a.id !== post.id && a.data.category === post.data.category && !a.data.draft
+  )
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3)
+  .map((entry) => ({
+    title: entry.data.title,
+    excerpt: entry.data.excerpt,
+    category: entry.data.category,
+    author: entry.data.author,
+    date: entry.data.date.toISOString().split('T')[0],
+    image: entry.data.image,
+    slug: entry.id.replace(/\.(md|mdx)$/, ''),
+  }));
+---
+
+<Layout
+  title={`${post.data.title} — Tekmax`}
+  description={seoDescription}
+  image={post.data.image}
+  article={true}
+  publishedTime={post.data.date.toISOString()}
+  author={post.data.author}
+  tags={post.data.tags}
+  category={post.data.category}
+>
+  <ReadingProgress />
+
+  <article class="container-page max-w-3xl py-6 sm:py-10 lg:py-14">
+    <a href="/" class="mb-4 inline-flex items-center gap-2 text-body-sm text-ink-secondary link-hover sm:mb-6">
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+      Nazad
+    </a>
+
+    <div class="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 sm:mb-6">
+      <CategoryPill category={post.data.category} />
+      <span class="text-caption text-ink-tertiary">
+        <time datetime={post.data.date.toISOString()}>{date}</time>
+      </span>
+      <span class="text-caption text-ink-tertiary">·</span>
+      <span class="text-caption text-ink-tertiary">
+        <svg class="inline h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {readingMinutes} min čitanja
+      </span>
+    </div>
+
+    <h1 class="mb-4 text-[1.75rem] font-extrabold leading-[1.15] tracking-tight sm:mb-6 sm:text-3xl lg:text-hero">
+      {post.data.title}
+    </h1>
+
+    {post.data.image && (
+      <img
+        src={post.data.image}
+        alt={post.data.title}
+        class="mb-6 aspect-[16/9] w-full rounded-xl object-cover sm:mb-8"
+        loading="eager"
+      />
+    )}
+
+    <div class="mb-6 flex items-center gap-3 text-body-sm text-ink-tertiary sm:mb-8">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full bg-accent/20 font-bold text-accent">
+        {post.data.author.charAt(0)}
+      </div>
+      <div>
+        <div class="font-semibold text-ink-primary">{post.data.author}</div>
+        <div class="text-caption">Autor</div>
+      </div>
+    </div>
+
+    <div class="mdx">
+      <Content />
+
+      <script>
+        // Wrap svih tabela u scrollable container posle render-a
+        document.querySelectorAll('.mdx table').forEach((table) => {
+          if (table.parentElement?.classList.contains('table-wrap')) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'table-wrap';
+          table.parentNode?.insertBefore(wrap, table);
+          wrap.appendChild(table);
+        });
+
+        // Preimenuj "Footnotes" sekciju u "Izvori" (remark-gfm generiše engleski naslov)
+        document.querySelectorAll('.mdx [data-footnotes] h2').forEach((h) => {
+          if (h.textContent.trim() === 'Footnotes') {
+            h.textContent = 'Izvori';
+          }
+        });
+      </script>
+    </div>
+
+    {post.data.tags && post.data.tags.length > 0 && (
+      <div class="mt-10 border-t border-line-subtle pt-6 sm:mt-12 sm:pt-8">
+        <div class="text-caption font-semibold uppercase tracking-wide text-ink-tertiary">
+          Tagovi
+        </div>
+        <div class="mt-3">
+          <TagList tags={post.data.tags} />
+        </div>
+      </div>
+    )}
+
+    {related.length > 0 && (
+      <div class="mt-12 sm:mt-16">
+        <div class="mb-4 border-t border-line-subtle pt-6 sm:mb-6 sm:pt-8">
+          <h2 class="text-h3 font-extrabold sm:text-h2">Povezani članci</h2>
+          <p class="mt-2 text-body-sm text-ink-secondary sm:text-body">
+            Još iz kategorije {post.data.category}
+          </p>
+        </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
+          {related.map((article) => (
+            <Card {...article} />
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</Layout>

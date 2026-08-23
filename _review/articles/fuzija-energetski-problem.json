@@ -1,0 +1,27 @@
+{
+  "slug": "fuzija-energetski-problem",
+  "file": "fuzija-energetski-problem.mdx",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.798Z",
+  "publishedAt": "2026-08-08T09:30:00T00:00:00",
+  "meta": {
+    "title": "Da li će fuzija stići da reši energetski problem — i šta kaže matematika",
+    "excerpt": "Data centri troše 485 TWh godišnje i rastu 26 odsto godišnje. Prva fuzijska elektrana trebalo bi da pusti struju 2028. Da li te dve linije mogu da se sretnu na vreme?",
+    "category": "Tehnologije",
+    "author": "Mile",
+    "image": "/images/fuzija-reactor.jpg",
+    "description": "Data centri troše 485 TWh i rastu 26% godišnje. Fuzija: ITER 6/9 sektora, SPARC prva plazma 2027, Helion elektrana 2028. Zašto fuzija neće stići da reši energetsku krizu.",
+    "tags": [
+      "fuzija",
+      "energija",
+      "ITER",
+      "SPARC",
+      "Helion",
+      "data centri",
+      "AI",
+      "nuklearna energija"
+    ],
+    "date": "2026-08-08T09:30:00"
+  }
+}

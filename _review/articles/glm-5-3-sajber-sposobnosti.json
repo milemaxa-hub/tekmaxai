@@ -1,0 +1,45 @@
+{
+  "slug": "glm-5-3-sajber-sposobnosti",
+  "file": "glm-5-3-sajber-sposobnosti.mdx",
+  "status": "approved",
+  "comments": [
+    {
+      "id": 1786812124008,
+      "author": "mile",
+      "type": "image",
+      "text": "Promeni sliku slična je sa nekim prethodnim vestima",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T16:42:04.008Z"
+    },
+    {
+      "id": 1786812152025,
+      "author": "mile",
+      "type": "general",
+      "text": "I objavi je sutra u 8ham",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-15T16:42:32.025Z"
+    }
+  ],
+  "createdAt": "2026-08-15T16:35:47.869Z",
+  "publishedAt": "2026-08-15T14:00:00T00:00:00",
+  "meta": {
+    "title": "Kineski GLM-5.3 napravio najveći skok baš u sajber sposobnostima",
+    "excerpt": "Z.ai je objavio GLM-5.3 bez ijednog novog parametra, a post-trening je najviše podigao upravo sajber bezbednost. Model je navodno već pronašao potencijalno ozbiljnu ranjivost u Cursor-u.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/glm-5-3-sajber-sposobnosti.jpg",
+    "description": "Kineski GLM-5.3 skočio na CyberGym-u na 84,5 odsto i navodno našao ranjivost u Cursor-u. Isti base model kao GLM-5.2, sva poboljšanja iz post-treninga.",
+    "tags": [
+      "GLM",
+      "Z.ai",
+      "AI bezbednost",
+      "Kina",
+      "sajber",
+      "open source"
+    ],
+    "date": "2026-08-15T14:00:00"
+  },
+  "scheduledAt": "2026-08-16T08:00"
+}

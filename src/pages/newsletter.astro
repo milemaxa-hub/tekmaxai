@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const url = new URL(Astro.request.url);
+const status = url.searchParams.get('status');
+const email = url.searchParams.get('email') || '';
+---
+<Layout title="Newsletter — Tekmax" description="Prijavi se na Tekmax Weekly — Top 5 AI i tech vesti svake nedelje u tvom inbox-u.">
+  <section class="container-page py-16">
+    <div class="mx-auto max-w-2xl text-center">
+      {status === 'success' ? (
+        <>
+          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent/10 text-accent">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 class="mt-6 text-h1 font-extrabold">Uspešno!</h1>
+          <p class="mt-4 text-body-lg text-ink-secondary">
+            <span class="font-semibold text-ink-primary">{email}</span> je dodat na listu.
+            Videćeš <strong>Tekmax Weekly</strong> u svom inbox-u svakog petka u 9 ujutru.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <a href="/" class="rounded-md bg-accent px-6 py-2.5 font-semibold text-bg-primary transition-colors hover:bg-accent-hover">
+              ← Nazad na Tekmax
+            </a>
+            <a href="/najnovije" class="rounded-md border border-line-default bg-bg-secondary px-6 py-2.5 font-semibold text-ink-primary transition-colors hover:border-accent">
+              Čitaj najnovije vesti
+            </a>
+          </div>
+        </>
+      ) : status === 'invalid' ? (
+        <>
+          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-500/10 text-red-400">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M5 19h14a2 2 0 001.84-2.75L13.74 4a2 2 0 00-3.48 0l-7.1 14.25A2 2 0 005 19z" />
+            </svg>
+          </div>
+          <h1 class="mt-6 text-h1 font-extrabold">Neispravan email</h1>
+          <p class="mt-4 text-body-lg text-ink-secondary">
+            <code class="rounded bg-bg-tertiary px-2 py-1 text-accent">{email || '(prazno)'}</code> — proveri format i pokušaj ponovo.
+          </p>
+          <a href="/newsletter" class="mt-8 inline-block rounded-md bg-accent px-6 py-2.5 font-semibold text-bg-primary transition-colors hover:bg-accent-hover">
+            Pokušaj ponovo
+          </a>
+        </>
+      ) : (
+        <>
+          <h1 class="text-hero font-extrabold">Tekmax Weekly</h1>
+          <p class="mt-4 text-body-lg text-ink-secondary">
+            Top 5 AI i tech vesti svake nedelje u tvom inbox-u. Bez spam-a, bez reklama — samo sadržaj.
+          </p>
+          <form
+            class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center"
+            action="mailto:newsletter@tekmax.rs"
+            method="post"
+            enctype="text/plain"
+            data-newsletter-form
+          >
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="tvoj@email.com"
+              class="h-11 flex-1 rounded-md border border-line-default bg-bg-tertiary px-4 text-body text-ink-primary placeholder:text-ink-tertiary focus:border-accent focus:outline-none sm:max-w-xs"
+            />
+            <button
+              type="submit"
+              class="h-11 rounded-md bg-accent px-8 font-semibold text-bg-primary transition-colors hover:bg-accent-hover"
+            >
+              Prijavi se
+            </button>
+          </form>
+          <p class="mt-3 text-caption text-ink-tertiary">
+            Ili nam piši direktno na <a href="mailto:newsletter@tekmax.rs" class="text-accent link-hover">newsletter@tekmax.rs</a>
+          </p>
+          <div class="mt-12 grid grid-cols-1 gap-6 text-left sm:grid-cols-3">
+            <div class="rounded-lg border border-line-subtle bg-bg-secondary p-5">
+              <div class="text-caption font-semibold uppercase tracking-wide text-accent">Petkom</div>
+              <h3 class="mt-2 font-bold">U 9 ujutru</h3>
+              <p class="mt-2 text-body-sm text-ink-secondary">Tačno kada završiš kafu, Tekmax Weekly je u tvom inbox-u.</p>
+            </div>
+            <div class="rounded-lg border border-line-subtle bg-bg-secondary p-5">
+              <div class="text-caption font-semibold uppercase tracking-wide text-accent">5 vesti</div>
+              <h3 class="mt-2 font-bold">Kurirano</h3>
+              <p class="mt-2 text-body-sm text-ink-secondary">Ručno biramo 5 najbitnijih vesti koje su se desile te nedelje.</p>
+            </div>
+            <div class="rounded-lg border border-line-subtle bg-bg-secondary p-5">
+              <div class="text-caption font-semibold uppercase tracking-wide text-accent">Bez šmeka</div>
+              <h3 class="mt-2 font-bold">Bez reklama</h3>
+              <p class="mt-2 text-body-sm text-ink-secondary">Nikad nećemo prodavati tvoj email niti slati affiliate linkove.</p>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</Layout>

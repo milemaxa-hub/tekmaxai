@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEKMAX REVIEW</title>
+<style>
+  :root {
+    --bg: #0e1116; --bg2: #161b22; --bg3: #1c2330;
+    --border: #2a3242; --text: #e6e9ef; --muted: #8b95a7;
+    --accent: #f5b301; --accent2: #ff7a1a;
+    --green: #2ea043; --blue: #388bfd; --red: #f85149; --orange: #d29922; --purple: #a371f7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 15px; }
+  a { color: var(--blue); text-decoration: none; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  header { display: flex; align-items: center; gap: 16px; padding: 16px 20px; background: var(--bg2); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+  header h1 { font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
+  header h1 span { color: var(--accent); }
+  header .spacer { flex: 1; }
+  .btn { background: var(--bg3); color: var(--text); border: 1px solid var(--border); padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all .15s; }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); color: #000; border-color: var(--accent); }
+  .btn.primary:hover { background: #ffc61a; color: #000; }
+  .btn.small { padding: 4px 10px; font-size: 12px; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .tabs { display: flex; gap: 4px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 3px; }
+  .tab { padding: 7px 16px; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 13px; color: var(--muted); }
+  .tab.active { background: var(--bg3); color: var(--text); }
+  .toolbar { display: flex; align-items: center; gap: 12px; margin: 18px 0; flex-wrap: wrap; }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .fchip { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; border: 1px solid var(--border); color: var(--muted); background: transparent; }
+  .fchip.active { color: #000; border-color: transparent; }
+  .fchip[data-s="draft"].active { background: var(--muted); }
+  .fchip[data-s="review"].active { background: var(--blue); }
+  .fchip[data-s="changes"].active { background: var(--orange); }
+  .fchip[data-s="approved"].active { background: var(--green); }
+  .fchip[data-s="published"].active { background: var(--purple); }
+  input.search { background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 7px 12px; border-radius: 8px; font-size: 13px; width: 240px; }
+  input.search:focus { outline: none; border-color: var(--accent); }
+
+  /* kalendar */
+  .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .cal-title { font-size: 18px; font-weight: 800; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .cal-dow { text-align: center; font-size: 11px; color: var(--muted); font-weight: 700; padding: 6px 0; text-transform: uppercase; }
+  .cal-day { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; min-height: 74px; padding: 6px; cursor: pointer; position: relative; transition: border-color .15s; }
+  .cal-day:hover { border-color: var(--accent); }
+  .cal-day.empty { background: transparent; border-color: transparent; cursor: default; }
+  .cal-day.today { border-color: var(--accent); }
+  .cal-day .d { font-size: 13px; font-weight: 700; }
+  .cal-day .items { margin-top: 4px; display: flex; flex-direction: column; gap: 3px; }
+  .cal-day .it { font-size: 10px; line-height: 1.25; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 2px 4px; border-radius: 4px; background: var(--bg3); }
+  .cal-day .it.new { color: var(--accent); }
+  .cal-day .it.sched { color: #ffb347; border: 1px dashed #ffb347; }
+  .cal-day .cnt { position: absolute; top: 4px; right: 6px; font-size: 10px; font-weight: 800; color: var(--accent); }
+
+  /* lista */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform .12s, border-color .12s; }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card .thumb { height: 150px; background: var(--bg3) center/cover no-repeat; position: relative; }
+  .card .thumb .badge { position: absolute; top: 8px; left: 8px; }
+  .card .body { padding: 12px 14px; }
+  .card .title { font-weight: 700; font-size: 14px; line-height: 1.35; margin-bottom: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card .meta { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+  .card .meta .cat { color: var(--accent); font-weight: 700; }
+  .card .cmt { margin-left: auto; }
+
+  .badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .4px; }
+  .badge.draft { background: #3a4250; color: #cfd6e0; }
+  .badge.review { background: #1c3a5e; color: var(--blue); }
+  .badge.changes { background: #3d2f0e; color: var(--orange); }
+  .badge.approved { background: #0f3d22; color: var(--green); }
+  .badge.published { background: #2d2150; color: var(--purple); }
+  .badge.deleted { background: #3a1015; color: var(--red); }
+  .badge.new { background: #4a3806; color: var(--accent); }
+
+  /* detalj */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.72); z-index: 100; display: none; align-items: flex-start; justify-content: center; padding: 30px 16px; overflow-y: auto; }
+  .overlay.open { display: flex; }
+  .detail { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; max-width: 860px; width: 100%; overflow: hidden; }
+  .detail-head { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 14px; }
+  .detail-head .x { margin-left: auto; background: none; border: none; color: var(--muted); font-size: 24px; cursor: pointer; line-height: 1; }
+  .detail-head .x:hover { color: var(--text); }
+  .detail-hero { position: relative; }
+  .detail-hero img { width: 100%; max-height: 380px; object-fit: cover; display: block; }
+  .detail-body { padding: 18px 20px; }
+  .detail h2 { font-size: 19px; line-height: 1.35; margin-bottom: 8px; }
+  .detail .sub { display: flex; gap: 12px; font-size: 12px; color: var(--muted); margin-bottom: 14px; flex-wrap: wrap; }
+  .detail .excerpt { color: #c3c9d4; font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+  .status-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; align-items: center; }
+  .status-row .lbl { font-size: 12px; color: var(--muted); font-weight: 700; margin-right: 4px; }
+
+  .sec { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin: 20px 0 10px; display: flex; align-items: center; gap: 8px; }
+  .sec .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .sec .dot.image { background: var(--purple); }
+  .sec .dot.text { background: var(--green); }
+  .sec .dot.general { background: var(--blue); }
+
+  .cmt { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+  .cmt.reply { margin-left: 34px; }
+  .cmt .top { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .cmt .author { font-weight: 800; font-size: 13px; }
+  .cmt .author.mile { color: var(--accent); }
+  .cmt .author.claw { color: var(--green); }
+  .cmt .when { font-size: 11px; color: var(--muted); }
+  .cmt .ttype { font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 10px; }
+  .cmt .ttype.image { background: #2d2150; color: var(--purple); }
+  .cmt .ttype.text { background: #0f3d22; color: var(--green); }
+  .cmt .ttype.general { background: #1c3a5e; color: var(--blue); }
+  .cmt .txt { font-size: 13.5px; line-height: 1.55; white-space: pre-wrap; }
+  .cmt .acts { display: flex; gap: 8px; margin-top: 6px; }
+  .cmt .acts button { background: none; border: none; color: var(--muted); font-size: 11px; cursor: pointer; padding: 0; }
+  .cmt .acts button:hover { color: var(--accent); }
+  .cmt.newflag { border-color: var(--accent); }
+  .cmt.done { opacity: .55; }
+
+  .fulltext { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; white-space: pre-wrap; word-wrap: break-word; max-height: 520px; overflow-y: auto; color: #cdd3de; }
+  .fulltext strong { color: var(--text); }
+  .fulltext-btn { width: 100%; text-align: left; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 13px; font-weight: 700; color: var(--text); cursor: pointer; margin-bottom: 16px; }
+  .fulltext-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .cform { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-top: 12px; }
+  .cform .row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+  .cform select, .cform textarea { background: var(--bg2); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-size: 13px; padding: 7px 10px; font-family: inherit; }
+  .cform textarea { width: 100%; min-height: 70px; resize: vertical; }
+  .cform select:focus, .cform textarea:focus { outline: none; border-color: var(--accent); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--bg3); border: 1px solid var(--accent); color: var(--text); padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 700; opacity: 0; transition: opacity .25s; z-index: 200; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  .empty { text-align: center; color: var(--muted); padding: 60px 0; }
+  .empty .big { font-size: 40px; margin-bottom: 10px; }
+  .daylist { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .dayitem { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; cursor: pointer; display: flex; gap: 12px; align-items: center; }
+  .dayitem:hover { border-color: var(--accent); }
+  .dayitem img { width: 90px; height: 54px; object-fit: cover; border-radius: 6px; }
+  .dayitem .t { font-weight: 700; font-size: 13.5px; }
+  .dayitem .m { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  @media (max-width: 700px) { .cal-day { min-height: 52px; } .cal-day .it { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>TEKMAX <span>REVIEW</span></h1>
+  <div class="tabs">
+    <div class="tab active" data-view="calendar">📅 Kalendar</div>
+    <div class="tab" data-view="list">📰 Lista</div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn" id="syncBtn">↻ Sync</button>
+</header>
+
+<div class="wrap">
+  <div class="toolbar" id="toolbar" style="display:none">
+    <div class="filters" id="filters"></div>
+    <input class="search" id="search" placeholder="Pretraži naslove...">
+  </div>
+
+  <div id="calendarView"></div>
+  <div id="listView" style="display:none"></div>
+</div>
+
+<div class="overlay" id="overlay"><div class="detail" id="detailBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const TOKEN = new URLSearchParams(location.search).get('token') || '';
+const TOKEN_QS = TOKEN ? '?token=' + encodeURIComponent(TOKEN) : '';
+let INDEX = null;
+let currentMonth = null; // {y, m}
+let statusFilter = null;
+let view = 'calendar';
+let SITE_URL = 'http://localhost:4321';
+const STATUSES = [
+  { id: 'draft', label: 'Draft' },
+  { id: 'review', label: 'Review' },
+  { id: 'changes', label: 'Traži izmenu' },
+  { id: 'approved', label: 'Odobreno' },
+  { id: 'scheduled', label: '⏰ Zakazano' },
+  { id: 'published', label: 'Objavljeno' },
+];
+const STATUS_LABEL = Object.fromEntries(STATUSES.map(s => [s.id, s.label]));
+const TYPE_LABEL = { image: '🖼️ Slika', text: '📝 Tekst', general: '💬 Opšte' };
+
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+async function api(path, opts) {
+  if (TOKEN) path += (path.includes('?') ? '&' : '?') + 'token=' + encodeURIComponent(TOKEN);
+  const r = await fetch(path, opts);
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || r.status);
+  return r.json();
+}
+
+async function loadIndex() {
+  const d = await api('/api/index');
+  INDEX = d.articles;
+  try { const cfg = await api('/api/config'); if (cfg.siteUrl) SITE_URL = cfg.siteUrl; } catch (e) {}
+  buildFilters();
+  render();
+  // auto-refresh svakih 30s
+  clearTimeout(loadIndex._t);
+  loadIndex._t = setTimeout(loadIndex, 30000);
+}
+
+function buildFilters() {
+  const f = $('#filters');
+  f.innerHTML = '<button class="fchip active" data-s="">Sve</button>' +
+    STATUSES.map(s => `<button class="fchip" data-s="${s.id}">${s.label}</button>`).join('') +
+    '<button class="fchip" data-s="new">📌 Novi komentari</button>';
+  f.querySelectorAll('.fchip').forEach(el => {
+    el.onclick = () => {
+      f.querySelectorAll('.fchip').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+      statusFilter = el.dataset.s;
+      render();
+    };
+  });
+}
+
+function fmtDate(d) {
+  if (!d) return '';
+  const dt = new Date(d);
+  return dt.toLocaleDateString('sr-RS', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function fmtTime(iso) {
+  const dt = new Date(iso);
+  return dt.toLocaleString('sr-RS', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+function relTime(iso) {
+  const s = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (s < 60) return 'upravo';
+  if (s < 3600) return Math.floor(s / 60) + ' min';
+  if (s < 86400) return Math.floor(s / 3600) + ' h';
+  return Math.floor(s / 86400) + ' d';
+}
+
+function filteredArticles() {
+  let arr = INDEX.filter(a => a.slug !== 'deleted');
+  if (statusFilter === 'new') arr = arr.filter(a => a.newCommentCount > 0);
+  else if (statusFilter) arr = arr.filter(a => a.status === statusFilter);
+  const q = $('#search').value.trim().toLowerCase();
+  if (q) arr = arr.filter(a => (a.title || '').toLowerCase().includes(q));
+  return arr;
+}
+
+// ---------- KALENDAR ----------
+function articleDateKey(a) {
+  // Ako postoji scheduledAt (zakazano ili odobreno za objavu) — članak se vidi na dan zakazivanja.
+  // Inače na datum objave. scheduledAt se briše tek pri prelasku na published.
+  if (a.scheduledAt) return String(a.scheduledAt).slice(0, 10);
+  return a.date || '';
+}
+function renderCalendar() {
+  const now = new Date();
+  const y = currentMonth ? currentMonth.y : now.getFullYear();
+  const m = currentMonth ? currentMonth.m : now.getMonth();
+  const byDate = {};
+  INDEX.forEach(a => { const k = articleDateKey(a); if (k) { (byDate[k] = byDate[k] || []).push(a); } });
+  const first = new Date(y, m, 1);
+  const startDow = (first.getDay() + 6) % 7; // ponedeljak=0
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar'];
+  const dow = ['Pon','Uto','Sre','Čet','Pet','Sub','Ned'];
+
+  let h = `<div class="cal-head">
+    <button class="btn small" id="prevM">←</button>
+    <div class="cal-title">${months[m]} ${y}</div>
+    <button class="btn small" id="nextM">→</button>
+  </div><div class="cal-grid">`;
+  h += dow.map(d => `<div class="cal-dow">${d}</div>`).join('');
+  for (let i = 0; i < startDow; i++) h += '<div class="cal-day empty"></div>';
+  const todayKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const key = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const items = byDate[key] || [];
+    const isToday = key === todayKey;
+    h += `<div class="cal-day ${isToday?'today':''}" data-date="${key}">
+      <span class="d">${d}</span>
+      ${items.length ? `<span class="cnt">${items.length}</span>` : ''}
+      <div class="items">${items.slice(0,3).map(a => `<div class="it ${a.newCommentCount>0?'new':''} ${a.scheduledAt?'sched':''}">${a.scheduledAt?'⏰ ':''}${a.title}</div>`).join('')}${items.length>3?`<div class="it">+${items.length-3}</div>`:''}</div>
+    </div>`;
+  }
+  h += '</div>';
+  $('#calendarView').innerHTML = h;
+  $('#prevM').onclick = () => { currentMonth = { y: m === 0 ? y-1 : y, m: m === 0 ? 11 : m-1 }; renderCalendar(); };
+  $('#nextM').onclick = () => { currentMonth = { y: m === 11 ? y+1 : y, m: m === 11 ? 0 : m+1 }; renderCalendar(); };
+  $('#calendarView').querySelectorAll('.cal-day[data-date]').forEach(el => {
+    el.onclick = () => showDayList(el.dataset.date);
+  });
+}
+
+function showDayList(date) {
+  const items = INDEX.filter(a => articleDateKey(a) === date);
+  const dt = new Date(date + 'T00:00:00');
+  let h = `<div class="sec">Objave — ${dt.toLocaleDateString('sr-RS',{weekday:'long', day:'numeric', month:'long', year:'numeric'})}</div>`;
+  if (!items.length) { h += '<div class="empty"><div class="big">📭</div>Nema objava</div>'; }
+  else {
+    h += '<div class="daylist">' + items.map(a => {
+      const isSched = !!a.scheduledAt;
+      const schedInfo = isSched ? ` · <span style="color:#ffb347">⏰ ${new Date(a.scheduledAt).toLocaleTimeString('sr-RS',{hour:'2-digit',minute:'2-digit'})}</span>` : '';
+      return `
+      <div class="dayitem" data-slug="${a.slug}">
+        <img src="/img-proxy/${a.slug}${TOKEN_QS}" onerror="this.style.display='none'">
+        <div><div class="t">${isSched?'⏰ ':''}${esc(a.title)}</div><div class="m">${esc(a.category)} · ${STATUS_LABEL[a.status]||a.status}${schedInfo}${a.newCommentCount?` · <span style="color:var(--accent)">📌 ${a.newCommentCount} nova</span>`:''}</div></div>
+      </div>`;
+    }).join('') + '</div>';
+  }
+  const ov = $('#overlay');
+  $('#detailBox').innerHTML = `<div class="detail-head"><div class="sec" style="margin:0">📅 ${dt.toLocaleDateString('sr-RS',{weekday:'long', day:'numeric', month:'long'})}</div><button class="x" onclick="closeOverlay()">✕</button></div><div class="detail-body">${h}</div>`;
+  ov.classList.add('open');
+  ov.querySelectorAll('.dayitem').forEach(el => {
+    el.onclick = () => openArticle(el.dataset.slug);
+  });
+}
+
+// ---------- LISTA ----------
+function renderList() {
+  const arr = filteredArticles();
+  if (!arr.length) {
+    $('#listView').innerHTML = '<div class="empty"><div class="big">🗂️</div>Nema članaka</div>';
+    return;
+  }
+  $('#listView').innerHTML = `<div class="grid">${arr.map(a => `
+    <div class="card" data-slug="${a.slug}">
+      <div class="thumb" style="background-image:url('/img-proxy/${a.slug}${TOKEN_QS}')">
+        <span class="badge ${a.status}">${STATUS_LABEL[a.status]||a.status}</span>
+      </div>
+      <div class="body">
+        <div class="title">${esc(a.title)}</div>
+        <div class="meta">
+          <span class="cat">${esc(a.category)}</span>
+          <span>${fmtDate(a.date)}</span>
+          ${a.newCommentCount ? `<span class="cmt" style="color:var(--accent)">📌 ${a.newCommentCount}</span>` : (a.commentCount ? `<span class="cmt">💬 ${a.commentCount}</span>` : '')}
+        </div>
+      </div>
+    </div>`).join('')}</div>`;
+  $('#listView').querySelectorAll('.card').forEach(el => {
+    el.onclick = () => openArticle(el.dataset.slug);
+  });
+}
+
+// ---------- DETALJ ----------
+async function openArticle(slug) {
+  const art = await api('/api/article/' + slug);
+  const meta = art.meta || {};
+  const hasImg = !!meta.image;
+  let h = `<div class="detail-head">
+      <div>
+        <span class="badge ${art.status}">${STATUS_LABEL[art.status]||art.status}</span>
+        <span style="font-size:12px;color:var(--muted);margin-left:8px">${esc(meta.category)} · ${fmtDate(meta.date)}</span>
+      </div>
+      <button class="x" onclick="closeOverlay()">✕</button>
+    </div>`;
+  if (hasImg) h += `<div class="detail-hero"><img src="/img-proxy/${slug}${TOKEN_QS}"><div style="position:absolute;bottom:8px;right:10px"><span class="badge" style="background:#000a">🖼️ Slika: ${esc((meta.image||'').split('/').pop())}</span></div></div>`;
+  h += `<div class="detail-body">
+    <h2>${esc(meta.title)}</h2>
+    <div class="sub">
+      <span>✍️ ${esc(meta.author||'')}</span>
+      <span>📅 ${fmtDate(meta.date)}</span>
+      <span>${meta.tags && meta.tags.length ? '🏷️ ' + esc(meta.tags.slice(0,3).join(', ')) : ''}</span>
+    </div>
+    ${meta.excerpt ? `<div class="excerpt">${esc(meta.excerpt)}</div>` : ''}
+    <button class="fulltext-btn" id="ftBtn">📖 Ceo tekst — klikni za čitanje</button>
+    <div class="fulltext" id="ftBox" style="display:none">Učitavam...</div>
+    <div class="status-row"><span class="lbl">Status:</span>${STATUSES.map(s => `<button class="btn small ${art.status===s.id?'primary':''}" data-st="${s.id}">${s.label}</button>`).join('')}</div>
+    <div style="margin-bottom:14px"><a href="${SITE_URL}/${slug}" target="_blank" style="font-size:13px">Otvori članak na sajtu →</a></div>
+    <div class="sec"><span class="dot general"></span> Komentari (${art.comments.length})</div>
+    <div id="cmtList"></div>
+    ${commentFormHTML(slug, null)}
+  </div>`;
+  $('#detailBox').innerHTML = h;
+  $('#overlay').classList.add('open');
+
+  $('#detailBox').querySelectorAll('[data-st]').forEach(b => {
+    b.onclick = async () => {
+      let payload = { status: b.dataset.st };
+      if (b.dataset.st === 'scheduled') {
+        const when = prompt('Zakaži objavu — datum i vreme (YYYY-MM-DDTHH:MM):', art.scheduledAt ? String(art.scheduledAt).slice(0, 16) : '');
+        if (!when) return;
+        payload.scheduledAt = when.includes('T') ? when : when + 'T09:00:00';
+      }
+      await api(`/api/article/${slug}/status`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      toast('Status: ' + STATUS_LABEL[b.dataset.st]);
+      renderComments(art, slug);
+      loadIndex();
+    };
+  });
+
+  // Ceo tekst
+  const ftBtn = $('#ftBtn'), ftBox = $('#ftBox');
+  if (ftBtn && ftBox) {
+    let loaded = false;
+    ftBtn.onclick = async () => {
+      if (ftBox.style.display !== 'none') { ftBox.style.display = 'none'; ftBtn.textContent = '📖 Ceo tekst — klikni za čitanje'; return; }
+      ftBox.style.display = '';
+      ftBtn.textContent = '📖 Sakrij tekst';
+      if (!loaded) {
+        try {
+          const d = await api(`/api/article/${slug}/content`);
+          ftBox.innerHTML = mdToReadable(d.content || '');
+          loaded = true;
+        } catch (e) { ftBox.textContent = 'Greška: ' + e.message; }
+      }
+    };
+  }
+  renderComments(art, slug);
+  // Glavna forma za komentar — wireForm se mora pozvati i za nju (ne samo za reply forme)
+  const mainForm = $('#detailBox').querySelector('.cform');
+  if (mainForm) wireForm(mainForm, slug, null);
+}
+
+function commentFormHTML(slug, parentId) {
+  return `<div class="cform">
+    <div class="row">
+      <select id="cfAuthor"><option value="mile">Mile</option><option value="claw">Claw 🤖</option></select>
+      <select id="cfType"><option value="general">💬 Opšte</option><option value="image">🖼️ Slika</option><option value="text">📝 Tekst</option></select>
+      <span style="font-size:11px;color:var(--muted)">${parentId ? '↪ Odgovor na komentar' : ''}</span>
+    </div>
+    <textarea id="cfText" placeholder="${parentId ? 'Odgovor...' : 'Napiši komentar — označi da li se odnosi na sliku ili tekst...'}"></textarea>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+      <button class="btn primary" id="cfSend">Pošalji</button>
+    </div>
+  </div>`;
+}
+
+function renderComments(art, slug) {
+  const list = $('#cmtList');
+  const comments = art.comments || [];
+  if (!comments.length) { list.innerHTML = '<div style="color:var(--muted);font-size:13px">Nema komentara. Dodaj prvi 👇</div>'; return; }
+  const top = comments.filter(c => !c.parentId);
+  const children = (pid) => comments.filter(c => c.parentId === pid);
+  let h = '';
+  for (const c of top) {
+    h += oneComment(c, slug) + children(c.id).map(k => oneComment(k, slug, true)).join('');
+  }
+  list.innerHTML = h;
+  list.querySelectorAll('[data-cmtstatus]').forEach(btn => {
+    btn.onclick = async () => {
+      const [cid, st] = btn.dataset.cmtstatus.split(':');
+      await api(`/api/article/${slug}/comment/${cid}/status`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ status: st }) });
+      loadIndex();
+      openArticle(slug);
+    };
+  });
+  list.querySelectorAll('[data-reply]').forEach(btn => {
+    btn.onclick = () => {
+      const cid = btn.dataset.reply;
+      const existing = $('#detailBox').querySelector('.cform.rep' + cid);
+      if (existing) { existing.remove(); return; }
+      const div = document.createElement('div');
+      div.innerHTML = commentFormHTML(slug, Number(cid));
+      div.querySelector('.cform').classList.add('rep' + cid);
+      btn.closest('.cmt').after(div);
+      wireForm(div.querySelector('.cform'), slug, Number(cid));
+    };
+  });
+}
+
+function oneComment(c, slug, isReply) {
+  const ttype = c.type || 'general';
+  const isNew = c.status === 'new';
+  const done = c.status === 'done';
+  return `<div class="cmt ${isReply?'reply':''} ${isNew?'newflag':''} ${done?'done':''}" id="c${c.id}">
+    <div class="top">
+      <span class="author ${c.author}">${c.author === 'mile' ? '👤 Mile' : '🦞 Claw'}</span>
+      <span class="ttype ${ttype}">${TYPE_LABEL[ttype]}</span>
+      <span class="when">${fmtTime(c.createdAt)} (${relTime(c.createdAt)})</span>
+      ${isNew ? '<span class="badge new">novo</span>' : ''}
+    </div>
+    <div class="txt">${esc(c.text)}</div>
+    <div class="acts">
+      <button data-cmtstatus="${c.id}:read">✓ pročitano</button>
+      <button data-cmtstatus="${c.id}:done">✔ rešeno</button>
+      <button data-reply="${c.id}">↪ odgovori</button>
+    </div>
+  </div>`;
+}
+
+function wireForm(form, slug, parentId) {
+  form.querySelector('#cfSend').onclick = async () => {
+    const text = form.querySelector('#cfText').value.trim();
+    if (!text) { toast('Napiši tekst'); return; }
+    const payload = {
+      author: form.querySelector('#cfAuthor').value,
+      type: form.querySelector('#cfType').value,
+      text,
+      parentId,
+    };
+    try {
+      await api(`/api/article/${slug}/comment`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+      toast('Komentar poslat ✓');
+      loadIndex();
+      openArticle(slug);
+    } catch (e) { toast('Greška: ' + e.message); }
+  };
+}
+
+function closeOverlay() { $('#overlay').classList.remove('open'); }
+
+// ---------- RENDER ----------
+function render() {
+  renderCalendar();
+  renderList();
+}
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// markdown → čitljiv HTML (za ceo tekst u panelu)
+function mdToReadable(md) {
+  let t = md
+    .replace(/\[\^[^\]]*\]/g, '')                    // footnote refs [^n]
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, ' [SLIKA: $1] ') // slike
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')         // linkovi → tekst
+    .replace(/^###+\s+/gm, '## ')                    // ### → ##
+    .replace(/^\s*[-*+]\s+/gm, '• ')                 // liste
+    .replace(/^\s*\d+\.\s+/gm, (m) => m.replace(/\.\s/, '. ')) // numerisane liste (ostavi)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') // bold
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')        // italic
+    .replace(/`([^`]+)`/g, '<code>$1</code>')        // inline code
+    .replace(/^##\s+(.+)$/gm, '\n<strong>■ $1</strong>\n'); // naslovi → bold blok
+  return t;
+}
+
+// ---------- INIT ----------
+document.querySelectorAll('.tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    view = t.dataset.view;
+    $('#calendarView').style.display = view === 'calendar' ? '' : 'none';
+    $('#listView').style.display = view === 'list' ? '' : 'none';
+    $('#toolbar').style.display = view === 'list' ? '' : 'none';
+  };
+});
+$('#syncBtn').onclick = async () => {
+  $('#syncBtn').disabled = true;
+  const r = await api('/api/sync', { method: 'POST' }).catch(e => ({ error: e.message }));
+  $('#syncBtn').disabled = false;
+  toast(r.ok ? 'Sync: ' + r.out : 'Greška: ' + r.error);
+  loadIndex();
+};
+$('#search').oninput = () => renderList();
+$('#overlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeOverlay(); });
+loadIndex();
+</script>
+</body>
+</html>

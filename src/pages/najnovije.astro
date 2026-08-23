@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('vesti'))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const toCard = (entry: any) => ({
+  title: entry.data.title,
+  excerpt: entry.data.excerpt,
+  category: entry.data.category,
+  author: entry.data.author,
+  date: entry.data.date.toISOString().split('T')[0],
+  image: entry.data.image,
+  slug: entry.id.replace(/\.mdx?$/, ''),
+});
+
+const cards = articles.map(toCard);
+---
+
+<Layout title="Najnovije vesti">
+  <section class="container-page py-10">
+    <SectionHeader title="Najnovije vesti" />
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {cards.map((article) => (
+        <Card {...article} />
+      ))}
+    </div>
+  </section>
+</Layout>

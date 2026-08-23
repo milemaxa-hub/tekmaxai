@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = (await getCollection('vesti'))
+  .filter((a) => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const toCard = (entry: any) => ({
+  title: entry.data.title,
+  excerpt: entry.data.excerpt,
+  category: entry.data.category,
+  author: entry.data.author,
+  date: entry.data.date.toISOString().split('T')[0],
+  image: entry.data.image,
+  slug: entry.id.replace(/\.mdx?$/, ''),
+});
+
+// Group by month
+const byMonth = new Map<string, any[]>();
+for (const entry of allArticles) {
+  const d = entry.data.date;
+  const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  const label = d.toLocaleDateString('sr-Latn', { year: 'numeric', month: 'long' });
+  if (!byMonth.has(key)) byMonth.set(key, []);
+  byMonth.get(key)!.push({ ...toCard(entry), _label: label });
+}
+
+const months = Array.from(byMonth.entries()).map(([key, articles]) => ({
+  key,
+  label: articles[0]._label,
+  articles,
+}));
+---
+<Layout title="Arhiva — Tekmax" description="Kompletna arhiva Tekmax članaka po mesecima.">
+  <section class="container-page py-10">
+    <h1 class="text-hero font-extrabold">Arhiva</h1>
+    <p class="mt-4 text-body-lg text-ink-secondary">
+      Kompletna arhiva svih Tekmax članaka — grupisana po mesecima.
+    </p>
+
+    {months.length === 0 && (
+      <p class="mt-10 text-ink-tertiary">Nema članaka u arhivi.</p>
+    )}
+
+    {months.map((month) => (
+      <div class="mt-12">
+        <div class="flex items-baseline gap-4 border-b border-line-subtle pb-3">
+          <h2 class="text-h2 font-extrabold capitalize">{month.label}</h2>
+          <span class="text-body-sm text-ink-tertiary">
+            {month.articles.length} {month.articles.length === 1 ? 'članak' : month.articles.length < 5 ? 'članka' : 'članaka'}
+          </span>
+        </div>
+        <ul class="mt-4 divide-y divide-line-subtle">
+          {month.articles.map((article: any) => (
+            <li>
+              <a
+                href={`/vesti/${article.slug}`}
+                class="flex items-start gap-3 py-3 transition-colors hover:text-accent sm:gap-4"
+              >
+                <span class="w-16 shrink-0 text-caption text-ink-tertiary sm:w-24">
+                  {article.date}
+                </span>
+                <span class="inline-block w-20 shrink-0 rounded bg-accent/10 px-1.5 py-0.5 text-center text-[10px] font-semibold uppercase tracking-wide text-accent sm:w-24">
+                  {article.category}
+                </span>
+                <span class="flex-1 font-medium">{article.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <div class="mt-12 rounded-xl border border-accent/30 bg-accent/5 p-6 text-center">
+      <p class="text-body text-ink-secondary">
+        Staru arhivu (pre 2026.) čuvamo na <a href="/rss.xml" class="text-accent link-hover">RSS feed-u</a> za backup svrhe.
+      </p>
+    </div>
+  </section>
+</Layout>

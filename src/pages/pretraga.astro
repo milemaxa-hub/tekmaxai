@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SearchBox from '../components/SearchBox.astro';
+---
+
+<Layout title="Pretraga" description="Pretraga svih Tekmax članaka — fuzzy match, dijakritika se ignoriše, greške u kucanju su dozvoljene do 2 karaktera.">
+  <section class="container-page max-w-4xl py-12 sm:py-16">
+    <header class="mb-8">
+      <h1 class="text-h2 font-extrabold sm:text-h1">Pretraga</h1>
+    </header>
+
+    <SearchBox variant="full" autoFocus placeholder="Unesi pojam: nvidia, macbok, cipor…" />
+
+    {/* Saveti za pretragu — ispod search bara */}
+    <details class="mt-8 rounded-lg border border-line-subtle bg-bg-secondary p-4">
+      <summary class="cursor-pointer text-body-sm font-semibold text-ink-primary">
+        Saveti za pretragu
+      </summary>
+      <ul class="mt-3 space-y-2 text-body-sm text-ink-secondary">
+        <li>• Traži celim rečima. Primer: <code class="text-accent">nvidia gpu</code>, <code class="text-accent">apple silicon</code></li>
+        <li>• Dijakritika se ignoriše. Kucaj <code class="text-accent">dj</code> umesto <code class="text-accent">đ</code>, <code class="text-accent">c</code> umesto <code class="text-accent">č / ć / č</code>, <code class="text-accent">s</code> umesto <code class="text-accent">š</code>, <code class="text-accent">z</code> umesto <code class="text-accent">ž</code></li>
+        <li>• Greške u kucanju su OK do 2 karaktera. Primer: <code class="text-accent">macbok</code> → MacBook, <code class="text-accent">cipor</code> → čipovi, <code class="text-accent">nema</code> → nema</li>
+        <li>• Manje je više. Ako nema rezultata, probaj kraći ili opštiji termin. Umesto <code class="text-accent">RTX 5090 super benchmark cena</code> probaj <code class="text-accent">rtx</code> ili <code class="text-accent">gpu</code></li>
+        <li>• Filter po kategoriji: rezultati iz <em>npr.</em> AI ili Mobilni se pojavljuju brže ako koristiš tačno ime kategorije kao termin</li>
+        <li>• Pretraga pamti: tvojih poslednjih 5 pretraga se čuva u browseru i pojavi se u padajućem meniju kad klikneš search box</li>
+        <li>• Brzi fokus na search: <kbd class="rounded border border-line-subtle bg-bg-tertiary px-1.5 font-mono text-caption">⌘K</kbd> ili <kbd class="rounded border border-line-subtle bg-bg-tertiary px-1.5 font-mono text-caption">Ctrl+K</kbd> bilo gde na sajtu</li>
+        <li>• Enter ili klik na rezultat u padajućem meniju vodi direktno na članak</li>
+      </ul>
+    </details>
+  </section>
+</Layout>

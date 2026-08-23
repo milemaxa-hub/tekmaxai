@@ -1,0 +1,47 @@
+---
+import Logo from '../components/brand/Logo.astro';
+import MoreMenu from './MoreMenu.astro';
+import SearchBox from './SearchBox.astro';
+
+const navItems = [
+  { label: 'Najnovije', href: '/najnovije' },
+  { label: 'AI', href: '/kategorija/ai' },
+  { label: 'Tehnologije', href: '/kategorija/tehnologije' },
+  { label: 'Mobilni', href: '/kategorija/mobilni' },
+  { label: 'Gedžeti', href: '/kategorija/gedzeti' },
+  { label: 'Biznis', href: '/kategorija/biznis' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-line-subtle bg-bg-primary/80 backdrop-blur-md">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <Logo size="md" />
+
+    <nav class="hidden items-center gap-6 md:flex">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="text-body-sm font-medium text-ink-secondary link-hover"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <div class="hidden items-center sm:flex">
+        <SearchBox variant="compact" />
+      </div>
+      <a
+        href="/pretraga"
+        class="text-ink-secondary transition-colors hover:text-accent sm:hidden"
+        aria-label="Pretraga"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </a>
+      <MoreMenu />
+    </div>
+  </div>
+</header>

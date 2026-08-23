@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  href?: string;
+}
+
+const { title, href = '#' } = Astro.props;
+---
+
+<div class="mb-6 flex items-end justify-between border-b border-line-default pb-3">
+  <h2 class="text-h2 font-extrabold tracking-tight">
+    {title}
+  </h2>
+  <a href={href} class="text-body-sm font-medium text-accent hover:underline">
+    Vidi sve →
+  </a>
+</div>

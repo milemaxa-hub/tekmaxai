@@ -1,0 +1,50 @@
+---
+import CategoryPill from './CategoryPill.astro';
+
+interface Props {
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  date: string;
+  image?: string;
+  slug: string;
+  size?: 'default' | 'large';
+}
+
+const { title, excerpt, category, author, date, image, slug, size = 'default' } = Astro.props;
+---
+
+<a
+  href={`/vesti/${slug}`}
+  class={`group block overflow-hidden rounded-lg border border-line-subtle bg-bg-secondary transition-all duration-200 hover:-translate-y-0.5 hover:border-accent ${size === 'large' ? 'h-full' : ''}`}
+>
+  {image && (
+    <div class={`relative w-full overflow-hidden ${size === 'large' ? 'aspect-[16/10]' : 'aspect-[16/9]'}`}>
+      <img
+        src={image}
+        alt={title}
+        class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+      <div class="absolute left-3 top-3">
+        <CategoryPill category={category} />
+      </div>
+    </div>
+  )}
+  <div class="p-5">
+    <h3 class={`font-bold leading-snug group-hover:text-accent transition-colors ${size === 'large' ? 'text-h2' : 'text-h3'}`}>
+      {title}
+    </h3>
+    {size === 'large' && (
+      <p class="mt-3 text-body text-ink-secondary line-clamp-3">
+        {excerpt}
+      </p>
+    )}
+    <div class="mt-4 flex items-center gap-2 text-caption text-ink-tertiary">
+      <span class="font-medium text-ink-secondary">{author}</span>
+      <span>·</span>
+      <time>{date}</time>
+    </div>
+  </div>
+</a>

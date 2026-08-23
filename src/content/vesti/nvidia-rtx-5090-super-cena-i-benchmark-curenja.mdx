@@ -1,0 +1,65 @@
+---
+title: "RTX 5090 Super procurela na benchmarku — 38% brža od 4090 u Blenderu"
+excerpt: "Na kineskom Chiphell forumu osvanuli su test rezultati RTX 5090 Super koji navodno potvrđuju 21.760 CUDA jezgra i 32 GB GDDR7. Ako je istina, ovo je najjači consumer GPU ikada napravljen — ali i najskuplji po GB VRAM-a."
+category: "Tehnologije"
+author: "Mile"
+date: 2026-06-18
+image: "/images/nvidia-rtx5090.jpg"
+draft: false
+description: "RTX 5090 Super procurela na benchmarku — 21.760 CUDA jezgra, 32 GB GDDR7, 38% brža od 4090 u Blenderu. Cena 2.499 dolara. Da li vredi?"
+tags: ["NVIDIA", "RTX 5090", "Blackwell", "GPU", "gaming", "video produkcija", "Blender"]
+---
+
+Glasine o tome da NVIDIA priprema pojačanu verziju RTX 5090 kruže već nekoliko meseci, ali do sada nije bilo ničega što bi ih potkrepilo. U utorak je, međutim, na kineskom forumu Chiphell osvanula objava sa rezultatima testiranja koja je, kako autor tvrdi, rađena na finalnoj kartici, a ne na inženjerskom uzorku. Rezultati, ako su verodostojni, u Blenderu pokazuju osetnu prednost u odnosu na RTX 4090.
+
+Ako su objavljeni podaci tačni, radi se o najmoćnijoj potrošačkoj grafičkoj kartici koja je ikada napravljena, sa **21.760 CUDA jezgara** i **32 GB GDDR7** memorije. Uz to, po ceni po gigabajtu VRAM-a, ujedno i o najskupljoj.
+
+## Prema procurelim podacima, kartica ima 21.760 CUDA jezgara i 32 GB GDDR7 memorije
+
+| Parametar | RTX 4090 | RTX 5090 Super |
+|---|---|---|
+| CUDA jezgra | 16.384 | **21.760** |
+| VRAM | 24 GB GDDR6X | **32 GB GDDR7** |
+| Propusnost memorije | 1.008 GB/s | **1.792 GB/s** |
+| TDP | 320W | **450W** |
+| Cena (navodna) | $1.599 | **$2.499** |
+
+Kartica tako troši **130 vati više** od RTX 4090, što je otprilike koliko i cela jedna prosečna konzola za igre. Napajanje od 850 vati više neće biti dovoljno, pa treba računati na model od 1.000 vati, po mogućnosti sa Titanium sertifikatom.
+
+## U Blenderu je nova kartica bila 38 do 43 odsto brža od RTX 4090
+
+Render testovi u Blenderu (Cycles i OptiX):
+
+| Test | RTX 4090 | RTX 5090 Super | Razlika |
+|---|---|---|---|
+| BMW scene (Cycles) | 14.2s | 10.3s | **+38%** |
+| Classroom scene | 38.7s | 27.1s | **+43%** |
+| Monster scene | 41.2s | 28.9s | **+43%** |
+| Junkshop scene (OptiX) | 23.4s | 16.8s | **+39%** |
+
+Rezultati se uklapaju u ono što se od Blackwell arhitekture očekivalo, a 32 GB memorije daje prostora i real-time 3D radu i AI inferenciji.
+
+## Za video produkciju to znači 8K montažu bez proxy-ja i veće lokalne AI modele
+
+Za video producente i 3D umetnike to konkretno znači 8K montažu u realnom vremenu bez proxy fajlova, lokalnu inferenciju većih jezičkih modela (70B parametara u 4-bitnoj kvantizaciji staje u 32 GB), ubrzanje DaVinci Neural Engine alata poput Magic Mask-a, Voice Isolation-a i SpeedWarp-a, kao i generisanje Stable Diffusion XL slike od 1024×1024 piksela za oko 1,2 sekunde.
+
+Onima koji te poslove danas obavljaju preko cloud servisa, ušteda na troškovima infrastrukture može da vrati uloženo u karticu za 12 do 18 meseci.
+
+## Krajem avgusta kartica stiže na tržište po ceni od 2.499 dolara
+
+Prema listama koje su procurele od retailera, RTX 5090 Super bi na police trebalo da stigne krajem avgusta 2026. godine, sa sledećim cenama:
+
+| Model | VRAM | MSRP |
+|---|---|---|
+| RTX 5080 | 16 GB GDDR7 | $999 |
+| RTX 5090 | 24 GB GDDR7 | $1.799 |
+| **RTX 5090 Super** | **32 GB GDDR7** | **$2.499** |
+| RTX 5090 Ti | navodno otkazan | — |
+
+U Srbiji će realna cena Super verzije, zbog uvoza, PDV-a i distribucije, iznositi **2.800 do 3.200 evra**.
+
+## Za većinu korisnika standardni RTX 5090 ostaje racionalniji izbor
+
+Onima kojima treba čista snaga za AI inferenciju ili 3D rendering, Super verzija je logičan izbor. Ali ako 24 GB VRAM-a završava posao, standardni RTX 5090 od 1.799 dolara nudi znatno bolji odnos cene i performansi — razlika od 8 GB memorije i oko 30 odsto brzine teško opravdava 39 odsto višu cenu.
+
+Najsigurnije je, ipak, sačekati izlazak kartice pa onda odlučiti. Istorija GPU lansiranja pokazuje da su prve serije obično i najskuplje i najproblematičnije.

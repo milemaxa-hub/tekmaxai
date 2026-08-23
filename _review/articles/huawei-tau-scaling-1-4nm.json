@@ -1,0 +1,25 @@
+{
+  "slug": "huawei-tau-scaling-1-4nm",
+  "file": "huawei-tau-scaling-1-4nm.md",
+  "status": "published",
+  "comments": [],
+  "createdAt": "2026-08-14T23:04:29.799Z",
+  "publishedAt": "2026-06-20T00:00:00",
+  "meta": {
+    "title": "Huawei bez EUV mašina tvrdi da stiže do 1.4 nm klase do 2031. Da li je to realno?",
+    "excerpt": "Huawei je u utorak predstavio \\\"Tau Scaling\\\" — strategiju koja zaobilazi ASML-ove EUV mašine i tvrdi da će do 2031. dostići gustinu tranzistora ekvivalentnu 1.4 nm klasi. Zvuči previše dobro. Ulazimo u detalje.",
+    "category": "Tehnologije",
+    "author": "Mile",
+    "image": "/images/huawei-1-4nm.jpg",
+    "description": "Huawei je objavio Tau Scaling — strategiju koja do 2031. navodno donosi gustinu tranzistora 1.4 nm klase bez EUV litografije. Da li je marketing ili realnost? Srpska analiza.",
+    "tags": [
+      "Huawei",
+      "poluvodiči",
+      "TSMC",
+      "Kina",
+      "Kirin",
+      "ASML"
+    ],
+    "date": "2026-06-20"
+  }
+}

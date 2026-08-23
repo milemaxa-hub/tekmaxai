@@ -1,0 +1,170 @@
+---
+/**
+ * Tekmax Logo — 4 varijante (dark/light × latin/cyrillic)
+ *
+ * Props:
+ *   variant: 'auto' | 'dark' | 'light'     default 'auto'
+ *   size:    'sm' | 'md' | 'lg'            default 'md'
+ *   href:    link URL                       default '/'
+ */
+
+type LogoVariant = 'auto' | 'dark' | 'light';
+type LogoSize    = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: LogoVariant;
+  size?: LogoSize;
+  href?: string;
+  class?: string;
+}
+
+const {
+  variant = 'auto',
+  size    = 'md',
+  href    = '/',
+  class: className = '',
+} = Astro.props;
+
+// Unique ID za SVG <linearGradient> (svaka instanca drugačiji, da nema kolizije)
+const uid = Math.random().toString(36).slice(2, 9);
+
+const sizeMap: Record<LogoSize, { tSize: number; txtSize: string; gap: string }> = {
+  sm: { tSize: 28, txtSize: 'text-lg',  gap: 'gap-1.5' },
+  md: { tSize: 36, txtSize: 'text-xl',  gap: 'gap-2'   },
+  lg: { tSize: 52, txtSize: 'text-3xl', gap: 'gap-2.5' },
+};
+const s = sizeMap[size];
+
+// Forced variant data-atribut na samom <a> (za CSS override)
+const variantAttr = variant === 'auto' ? null : variant;
+---
+
+<a
+  href={href}
+  class:list={[
+    'logo-root inline-flex items-center font-extrabold tracking-tight select-none',
+    s.gap,
+    className,
+  ]}
+  data-variant={variantAttr}
+  aria-label="Tekmax — početna"
+>
+  <svg
+    class="logo-t shrink-0"
+    width={s.tSize}
+    height={s.tSize}
+    viewBox="0 0 100 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id={`grad-t-${uid}`} x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#00d4ff" />
+        <stop offset="1" stop-color="#0066ff" />
+      </linearGradient>
+    </defs>
+
+    <g class="t-latin">
+      <path
+        d="M 10 18 L 90 18 L 90 32 L 60 32 L 60 82 L 40 82 L 40 32 L 10 32 Z"
+        fill={`url(#grad-t-${uid})`}
+      />
+    </g>
+    <g class="t-cyrillic">
+      <path
+        d="M 8 18 L 92 18 L 92 30 L 60 30 L 60 82 L 40 82 L 40 30 L 8 30 Z"
+        fill={`url(#grad-t-${uid})`}
+      />
+    </g>
+  </svg>
+
+  <span class:list={['logo-text leading-none', s.txtSize]}>
+    <span class="logo-text-latin">ekmax</span>
+    <span class="logo-text-cyrillic">екмакс</span>
+  </span>
+</a>
+
+<style>
+  /* === BASE (dark default) === */
+  .logo-root {
+    color: #f5f5f7;
+  }
+
+  /* T monogram i tekst — light/dark režim */
+  :global([data-theme="dark"]) .logo-root { color: #f5f5f7; }
+  :global([data-theme="light"]) .logo-root { color: #0a0a0b; }
+
+  /* Na light bg: T monogram postaje crn umesto cyan gradijent */
+  :global([data-theme="light"]) .logo-t .t-latin path,
+  :global([data-theme="light"]) .logo-t .t-cyrillic path {
+    fill: #0a0a0b;
+  }
+
+  /* Forced variant na samom <a> (overriduje global) */
+  .logo-root[data-variant="light"] { color: #0a0a0b; }
+  .logo-root[data-variant="light"] .logo-t .t-latin path,
+  .logo-root[data-variant="light"] .logo-t .t-cyrillic path {
+    fill: #0a0a0b;
+  }
+  .logo-root[data-variant="dark"] { color: #f5f5f7; }
+  .logo-root[data-variant="dark"] .logo-t .t-latin path,
+  .logo-root[data-variant="dark"] .logo-t .t-cyrillic path {
+    fill: url(#grad-t-fallback); /* fallback - zapravo svaka instanca ima svoj uid */
+  }
+
+  /* === SCRIPT: ćirilica/latinica (samo latinica po defaultu) === */
+  .t-cyrillic,
+  .logo-text-cyrillic {
+    display: none;
+  }
+
+  :global([data-script="cyrillic"]) .logo-root .t-latin,
+  :global([data-script="cyrillic"]) .logo-root .logo-text-latin {
+    display: none;
+  }
+  :global([data-script="cyrillic"]) .logo-root .t-cyrillic,
+  :global([data-script="cyrillic"]) .logo-root .logo-text-cyrillic {
+    display: block;
+  }
+  :global([data-script="cyrillic"]) .logo-root .logo-text-cyrillic {
+    display: inline;
+  }
+</style>
+
+<script>
+  /**
+   * MANUAL SCRIPT TOGGLE (ćirilica/latinica)
+   * - Ako korisnik izabere ručno, čuva u localStorage
+   * - "auto" prati sistemski jezik (browser accept-language)
+   */
+  const STORAGE_KEY = 'tekmax:script';
+
+  function detectScriptFromBrowser(): 'latin' | 'cyrillic' {
+    const langs = navigator.languages || [navigator.language || 'sr-Latn'];
+    for (const l of langs) {
+      const lower = l.toLowerCase();
+      if (lower.includes('cyrl') || lower.includes('sr-cyrl')) return 'cyrillic';
+    }
+    return 'latin';
+  }
+
+  function applyScript(mode: 'auto' | 'latin' | 'cyrillic') {
+    const root = document.documentElement;
+    if (mode === 'auto') {
+      root.setAttribute('data-script', detectScriptFromBrowser());
+    } else {
+      root.setAttribute('data-script', mode);
+    }
+  }
+
+  // Init
+  const saved = localStorage.getItem(STORAGE_KEY) as 'auto' | 'latin' | 'cyrillic' | null;
+  applyScript(saved || 'auto');
+
+  // Expose global toggle API
+  (window as any).tekmaxSetScript = (mode: 'auto' | 'latin' | 'cyrillic') => {
+    localStorage.setItem(STORAGE_KEY, mode);
+    applyScript(mode);
+  };
+</script>

@@ -1,0 +1,91 @@
+---
+import CategoryPill from './CategoryPill.astro';
+import Card from './Card.astro';
+
+interface Article {
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  date: string;
+  image?: string;
+  slug: string;
+}
+
+interface Props {
+  main: Article;
+  secondary: Article[];
+}
+
+const { main, secondary } = Astro.props;
+---
+
+<section class="container-page py-10 lg:py-14">
+  <div class="grid gap-6 lg:grid-cols-3">
+    <a
+      href={`/vesti/${main.slug}`}
+      class="group relative col-span-1 flex flex-col overflow-hidden rounded-xl border border-line-subtle bg-bg-secondary transition-all duration-200 hover:border-accent lg:col-span-2 lg:row-span-2"
+    >
+      {main.image && (
+        <div class="relative h-[280px] w-full overflow-hidden sm:h-[340px] lg:h-[720px]">
+          <img
+            src={main.image}
+            alt={main.title}
+            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/20 to-transparent"></div>
+          <div class="absolute left-5 top-5">
+            <CategoryPill category={main.category} />
+          </div>
+        </div>
+      )}
+      <div class="flex flex-1 flex-col justify-end p-5 lg:p-6">
+        <h1 class="text-3xl font-extrabold leading-tight tracking-tight lg:text-5xl">
+          {main.title}
+        </h1>
+        <p class="mt-4 max-w-2xl text-body-lg text-ink-secondary line-clamp-3">
+          {main.excerpt}
+        </p>
+        <div class="mt-5 flex items-center gap-2 text-body-sm text-ink-tertiary">
+          <span class="font-semibold text-ink-secondary">{main.author}</span>
+          <span>·</span>
+          <time>{main.date}</time>
+        </div>
+      </div>
+    </a>
+
+    {secondary.slice(0, 2).map((article) => (
+      <a
+        href={`/vesti/${article.slug}`}
+        class="group flex flex-col overflow-hidden rounded-xl border border-line-subtle bg-bg-secondary transition-all duration-200 hover:border-accent"
+      >
+        {article.image && (
+          <div class="relative aspect-[4/3] w-full overflow-hidden">
+            <img
+              src={article.image}
+              alt={article.title}
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/10 to-transparent"></div>
+            <div class="absolute left-4 top-4">
+              <CategoryPill category={article.category} />
+            </div>
+          </div>
+        )}
+        <div class="flex flex-1 flex-col p-6">
+          <h3 class="text-h2 font-bold leading-tight group-hover:text-accent transition-colors line-clamp-3">
+            {article.title}
+          </h3>
+          <p class="mt-3 text-body-md text-ink-secondary line-clamp-2">
+            {article.excerpt}
+          </p>
+          <div class="mt-auto pt-4 flex items-center gap-2 text-body-sm text-ink-tertiary">
+            <span class="font-semibold text-ink-secondary">{article.author}</span>
+            <span>·</span>
+            <time>{article.date}</time>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

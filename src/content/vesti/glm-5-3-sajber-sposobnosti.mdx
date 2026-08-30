@@ -10,11 +10,11 @@ tags: ["GLM", "Z.ai", "AI bezbednost", "Kina", "sajber", "open source"]
 draft: true
 ---
 
-Kada je kineski Z.ai početkom leta predstavio GLM-5.2, kompanija je nagovestila da je prava priča tek pred nama. Sredinom avgusta ta najava dobila je konkretan oblik — i to na mestu koje niko nije očekivao da će biti u prvom planu.
+Kada je kineski Z.ai početkom leta predstavio GLM-5.2, kompanija je nagovestila da je prava priča tek pred nama. Sredinom avgusta ta najava dobila je konkretan oblik - i to na mestu koje niko nije očekivao da će biti u prvom planu.
 
 ## Skok bez ijednog novog parametra
 
-GLM-5.3, objavljen 14. avgusta, nije novi model u tehničkom smislu. Z.ai, nekadašnji Zhipu AI i kompanija poznata po seriji GLM modela otvorenog koda, nije dirao osnovu: model i dalje broji oko 743 milijarde parametara, isto kao GLM-5.2. Sva poboljšanja, tvrdi kompanija, dolaze isključivo iz post-treninga — više okruženja, raznovrsniji zadaci i dodatna računska snaga uložena u učenje potkrepljivanjem.
+GLM-5.3, objavljen 14. avgusta, nije novi model u tehničkom smislu. Z.ai, nekadašnji Zhipu AI i kompanija poznata po seriji GLM modela otvorenog koda, nije dirao osnovu: model i dalje broji oko 743 milijarde parametara, isto kao GLM-5.2. Sva poboljšanja, tvrdi kompanija, dolaze isključivo iz post-treninga - više okruženja, raznovrsniji zadaci i dodatna računska snaga uložena u učenje potkrepljivanjem.
 
 "Skaliranje post-treninga je jedino što smo uradili za GLM-5.3", stoji u najavi na blogu Z.ai[^2]. Rezultat je najvidljiviji u programiranju. Na Terminal-Bench 3.0 model je skočio sa 4,6 na 28,3 poena, na DeepSWE v1.1 sa 46,2 na 66,9, a na AutomationBench-u sa 26,2 na 48,2.
 
@@ -22,7 +22,7 @@ Međutim, GLM-5.3 nije lider ni u jednom od tih testova. GPT-5.6 Sol na Terminal
 
 ## Sajber sposobnosti koje su pretekle očekivanja
 
-Posebno je zanimljivo šta se dogodilo u domenu sajber bezbednosti. Kompanija otvoreno priznaje da su se te sposobnosti razvile brže nego što je planirala — "kako smo skalirali post-trening, sajber sposobnost je rasla brže nego što smo očekivali", navodi se u istoj najavi[^2].
+Posebno je zanimljivo šta se dogodilo u domenu sajber bezbednosti. Kompanija otvoreno priznaje da su se te sposobnosti razvile brže nego što je planirala - "kako smo skalirali post-trening, sajber sposobnost je rasla brže nego što smo očekivali", navodi se u istoj najavi[^2].
 
 Brojke to potvrđuju. Na CyberGym testu, koji meri otkrivanje i validaciju ranjivosti, GLM-5.3 dostiže 84,5 odsto, što ga stavlja rame uz rame sa GPT-5.6 Sol (83,6 odsto) i Mythos 5 (83,8 odsto). Na ExploitBench-u je skočio sa 24,4 na 54,4 odsto, mada tu i dalje zaostaje za GPT-5.6 Sol (76,5 odsto) i Mythos 5 (78 odsto).
 
@@ -32,15 +32,15 @@ I onda dolazi detalj koji je najviše odjeknuo. Lou, koji u Z.ai radi sa program
 
 ## Poverljivi pristup i pozadina od četiri milijarde
 
-Drugim rečima, Z.ai se suočava sa istom dilemom kao i zatvorene vodeće laboratorije: što je model bolji u autonomnom inženjerstvu, to je potencijalno bolji i u autonomnom istraživanju bezbednosti — a samim tim i kao ofanzivni operator. Kompanija navodi da je sa bezbednosnim timovima u Kini pronašla 2.436 ranjivosti u 269 projekata, od čega 1.097 kritičnih ili visokog rizika; 53 je javno objavljeno, dok je 2.383 pod embargom[^2].
+Drugim rečima, Z.ai se suočava sa istom dilemom kao i zatvorene vodeće laboratorije: što je model bolji u autonomnom inženjerstvu, to je potencijalno bolji i u autonomnom istraživanju bezbednosti - a samim tim i kao ofanzivni operator. Kompanija navodi da je sa bezbednosnim timovima u Kini pronašla 2.436 ranjivosti u 269 projekata, od čega 1.097 kritičnih ili visokog rizika; 53 je javno objavljeno, dok je 2.383 pod embargom[^2].
 
-Upravo zbog toga Z.ai uvodi kontrole oko naprednijih funkcija — takozvani "poverljivi pristup" za osetljive sposobnosti, prenosi Reuters[^4]. GLM-5.3 je za sada dostupan samo kroz GLM Coding Plan i ZCode okruženje, dok API pristup i otvoreni model stižu tek posle bezbednosne evaluacije, otprilike dve nedelje od lansiranja, piše SiliconANGLE[^3].
+Upravo zbog toga Z.ai uvodi kontrole oko naprednijih funkcija - takozvani "poverljivi pristup" za osetljive sposobnosti, prenosi Reuters[^4]. GLM-5.3 je za sada dostupan samo kroz GLM Coding Plan i ZCode okruženje, dok API pristup i otvoreni model stižu tek posle bezbednosne evaluacije, otprilike dve nedelje od lansiranja, piše SiliconANGLE[^3].
 
 Oprez ima i finansijsku pozadinu. Reuters je u julu pisao da je Z.ai kroz prodaju akcija u Hong Kongu prikupio oko 31,4 milijarde hongkonških dolara, odnosno blizu četiri milijarde američkih[^4]. Cene novog plana kreću se od 12,60 dolara mesečno za Lite paket do 117,60 za Max, uz timske pakete od 88 i 188 dolara po korisniku[^3].
 
-GLM-5.3 je tako neobičan slučaj: model koji nije porastao ni za jedan parametar, a ipak je napravio najveći skok upravo u sposobnostima koje nose najviše rizika. Ako se tvrdnja o Cursor-u pokaže tačnom, biće to prvi put da jedan kineski model javno demonstrira svoju vrednost na tuđem proizvodu — pre nego što je iko stigao da proceni kako će se ta vrednost koristiti.
+GLM-5.3 je tako neobičan slučaj: model koji nije porastao ni za jedan parametar, a ipak je napravio najveći skok upravo u sposobnostima koje nose najviše rizika. Ako se tvrdnja o Cursor-u pokaže tačnom, biće to prvi put da jedan kineski model javno demonstrira svoju vrednost na tuđem proizvodu - pre nego što je iko stigao da proceni kako će se ta vrednost koristiti.
 
-[^1]: [VentureBeat — GLM-5.3 is here with advanced cyber capabilities, 14. avgust 2026](https://venturebeat.com/technology/glm-5-3-is-here-with-advanced-cyber-capabilities-and-reportedly-already-found-a-serious-vulnerability-in-cursor)
-[^2]: [Z.ai blog — GLM-5.3 najava](https://z.ai/blog/glm-5.3)
-[^3]: [SiliconANGLE — Z.ai debuts GLM-5.3, 14. avgust 2026](https://siliconangle.com/2026/08/14/z-ai-debuts-glm-5-3-long-horizon-coding-cybersecurity-upgrades/)
-[^4]: [Reuters — Zhipu AI HK share sale, jul 2026](https://www.reuters.com/)
+[^1]: [VentureBeat - GLM-5.3 is here with advanced cyber capabilities, 14. avgust 2026](https://venturebeat.com/technology/glm-5-3-is-here-with-advanced-cyber-capabilities-and-reportedly-already-found-a-serious-vulnerability-in-cursor)
+[^2]: [Z.ai blog - GLM-5.3 najava](https://z.ai/blog/glm-5.3)
+[^3]: [SiliconANGLE - Z.ai debuts GLM-5.3, 14. avgust 2026](https://siliconangle.com/2026/08/14/z-ai-debuts-glm-5-3-long-horizon-coding-cybersecurity-upgrades/)
+[^4]: [Reuters - Zhipu AI HK share sale, jul 2026](https://www.reuters.com/)

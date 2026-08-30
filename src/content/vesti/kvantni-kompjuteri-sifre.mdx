@@ -1,0 +1,70 @@
+---
+title: "Kvantni kompjuteri: dokle se stiglo i da li će razbiti sve šifre"
+excerpt: "Google-ov čip Willow obavio je u pet minuta proračun koji bi najbržem superkompjuteru trajao 10 septiliona godina. Da li to znači da su klasične šifre osuđene i da li bezbednost interneta pada u vodu?"
+category: "Nauka"
+author: "Mile"
+date: 2026-08-28T14:30:00
+image: "/images/kvantni-kompjuteri-sifre.jpg"
+description: "Kvantni kompjuteri 2026: Willow, IBM Nighthawk, Zuchongzhi 3.0. Procene eksperata 28-49% šanse za kriptografski relevantnu mašinu za 10 godina. NIST standardi i migracija."
+tags: ["kvantni-kompjuteri", "kriptografija", "PQC", "Google-Willow", "IBM", "NIST", "bezbednost"]
+draft: false
+---
+
+U decembru 2024. Google je objavio rezultate svog kvantnog čipa Willow: obavio je standardni benchmark proračun za manje od pet minuta, a jedan od najbržih svetskih superkompjutera bi za isti posao trebalo 10 septiliona godina - broj koji višestruko prevazilazi starost svemira. Vest je odjeknula širom sveta, a sa njom i pitanje koje se nameće svaki put kad kvantno računarstvo napreduje: da li će ove mašine razbiti sve šifre i srušiti bezbednost interneta?
+
+Odgovor nije ni jednostavan ni crno-bel. Kvantni kompjuteri jesu stigli do impresivnih prekretnica, ali i dalje su eksperimentalne mašine. Istovremeno, cela industrija - od vlada do Gugla i Majkrosofta - već godinama radi na tome da šifrovanje preživi kvantnu eru. Evo gde tačno stojimo.
+
+## Dokle se stiglo: od 105 kubita do ispod praga greške
+
+Osnovna jedinica kvantnog računara je kubit, koji - za razliku od klasičnog bita - može istovremeno biti u više stanja zahvaljujući superpoziciji i preplitanju. Problem je u tome što su kubiti izuzetno osetljivi na okolinu: najmanja buka ih pokvari, pa su decenijama kvantni sistemi pravili više grešaka što je više kubita imali.
+
+Willow je to promenio. Čip sa 105 kubita postao je prvi sistem koji je pokazao ono što struka zove "ispod praga" - kako se povećava broj kubita, greške se eksponencijalno smanjuju umesto da rastu. Time je rešen problem kojim se fizičari bave skoro 30 godina, od uvođenja kvantne korekcije grešaka 1995. godine[^1]. Google je rezultate objavio u časopisu Nature i nazvao ih najubedljivijim prototipom skalabilnog logičkog kubita do sada.
+
+Do 2026. trka se ubrzala. IBM je 2025. predstavio čip Loon sa novom arhitekturom koja povezuje kubite i van najbližih suseda, a ove godine razvija sistem Nighthawk - tri modula po 120 kubita, dizajnirana da izvršavaju kola sa 7.500 operacija do kraja 2026. godine[^2]. Kina je u martu 2025. objavila rezultate procesora Zuchongzhi 3.0 (Univerzitet nauke i tehnologije u Hefeju), takođe sa 105 kubita, tvrdeći da je na benchmark testu milion puta brži od Guglovog Willow-a[^3]. Microsoft je pak otišao u drugom smeru - sa Majorana 1 čipom iz februara 2025. pokušava da izgradi kubite na topološkim kvazičesticama, što bi u teoriji dalo stabilniji hardver.
+
+Globalne vlade su u kvantna istraživanja do aprila 2025. uložile oko 10 milijardi dolara[^4]. Ipak, važno je razumeti šta današnji "kvantni uspesi" zapravo jesu: demonstracije kvantne prednosti na specijalizovanim, veštačkim zadacima (poput slučajnog uzorkovanja kola), a ne rešavanje korisnih problema iz stvarnog sveta. Naučni mejlstoni, ali još uvek ne praktična primera.
+
+## Kada stižu ozbiljne aplikacije
+
+IBM-ova javna mapa puta predviđa da će do 2029. imati sisteme sposobne za kvantno računarstvo otporno na greške u velikoj razmeri[^2]. Google na svojoj mapi puta cilja sličan horizont: logički kubiti u periodu 2026–2029, pa komercijalno relevantne aplikacije posle toga.
+
+Eksperti su oprezniji. Global Risk Institute svake godine anketira vodeće stručnjake iz industrije i akademije; izveštaj iz marta 2026, zasnovan na odgovorima 26 eksperata, procenjuje verovatnoću da će se u narednih 10 godina pojaviti kriptografski relevantan kvantni kompjuter na između 28 i 49 odsto - najviše u sedmogodišnjoj istoriji izveštaja[^5]. Samo za godinu dana optimistična procena je skočila sa 34 na 49 odsto. Na horizontu od 20 godina, 92 odsto anketiranih daje verovatnoću od 50 odsto i više.
+
+Raspon mišljenja o tačnom trenutku dolaska opasne mašine i dalje je širok - od ranih 2030-ih do sredine 2040-ih. Ali nijedna velika organizacija danas ne zauzima stav "sačekaćemo da vidimo".
+
+## Zašto kvantni kompjuteri prete šiframa
+
+Pretnja nije nova. Još 1994. matematičar Peter Šor je pokazao da bi dovoljno moćan kvantni kompjuter mogao da razbije RSA i ECC - dva algoritma na kojima počiva najveći deo današnjeg šifrovanja, od bankovnih transakcija do HTTPS saobraćaja. Ono što klasičnim računarima treba milenijumima, kvantnom bi, u teoriji, moglo da bude dostupno u razumnom vremenu.
+
+Zato je najveći rizik danas takozvani "harvest now, decrypt later" - napadači već sada presreću i čuvaju šifrovane podatke koji moraju ostati tajni decenijama (diplomatska prepiska, medicinski dosijei, finansijski podaci, državne tajne), pa će ih otključati čim kvantni kompjuter postane dovoljno moćan. Cloud Security Alliance je u maju 2026. objavio posebno istraživanje o ovoj pretnji i pozvao preduzeća da krenu sa migracijom odmah, jer je inventar kriptografije i procena rizika posao koji se meri godinama[^6].
+
+## Šta se već radi: standardi i rokovi
+
+Najvažnija vest je da zamena već postoji. NIST, američki institut za standarde, finalizovao je 2024. tri post-kvantna algoritma: ML-KEM za razmenu ključeva, ML-DSA i SLH-DSA za digitalne potpise[^7]. Oni su dizajnirani da budu otporni i na klasične i na kvantne napade, a već su ugrađeni u najveće svetske proizvode.
+
+Rokovi su postavljeni na više nivoa. Američki NIST nalaže da se RSA-2048 i ECC-256 u federalnim sistemima prestanu koristiti do 2030, a potpuno zabrane do 2035. godine[^8]. NSA-in okvir CNSA 2.0 traži da nove nabavke u nacionalnim bezbednosnim sistemima podrže kvantno-otpornu kriptografiju od 1. januara 2027[^9]. Evropska unija je kroz svoj koordinirani plan obavezala članice da objave nacionalne strategije do kraja 2026, prebace kritičnu infrastrukturu do 2030, a ostale sisteme do 2035[^10]. G7 je u januaru 2026. izdao posebnu mapu puta za finansijski sektor, sa migracijom kritičnih sistema predviđenom za 2030–2032[^11].
+
+Tehnološke kompanije idu ispred regulatornih rokova. Google je u martu 2026. skratio sopstveni rok za potpunu migraciju na post-kvantnu kriptografiju na 2029. godinu, uz obrazloženje da su napredak hardvera i procene resursa za razbijanje ECC-a brži nego što se očekivalo[^12]. Cloudflare je najavio isti cilj - 2029. - i kaže da je već preko 65 odsto ljudskog saobraćaja na njegovoj mreži zaštićeno post-kvantnim šifrovanjem[^13]. Microsoft cilja 2033, a kvantno-otporne algoritme je ugradio u SymCrypt, jezgro kriptografske biblioteke Windowsa i Azure-a[^14]. Apple je još početkom 2024. uveo PQ3 protokol u iMessage, a AWS nudi post-kvantne opcije u KMS i TLS bibliotekama.
+
+## Da li smo u opasnosti
+
+Trenutno - nismo. Kriptografski relevantan kvantni kompjuter ne postoji, i klasično šifrovanje je i dalje bezbedno u realnom vremenu. Ono što jeste ugroženo jesu podaci sa dugim rokom tajnosti, jer "harvest now, decrypt later" radi već danas.
+
+Bezbednost interneta neće "pasti u vodu" preko noći - prelazak na nove algoritme je postepen i osmišljen tako da tokom prelaznog perioda klasični i post-kvantni sistemi rade zajedno. Pravi problem je druge prirode: migracija ogromne, decenijama građene kripto-infrastrukture traje pet do deset godina, a procene o dolasku opasne mašine se skraćuju iz godine u godinu. Formulu koju stručnjaci koriste - vreme koje podaci moraju ostati tajni plus vreme potrebno za migraciju mora biti manje od vremena do pojave opasnog kvantnog računara - sve više organizacija već sada ne može da zadovolji.
+
+Zato se kvantna trka ne vodi samo u laboratorijama. Ona se istovremeno vodi i u standardima, zakonima i data centrima - a glavni zaključak za 2026. je jednostavan: više niko ne čeka.
+
+[^1]: [Google - Meet Willow, our state-of-the-art quantum chip](https://blog.google/innovation-and-ai/technology/research/google-willow-quantum-chip/)
+[^2]: [IBM - Quantum 2026 Technology Atlas](https://www.ibm.com/roadmaps/quantum/2026/)
+[^3]: [Physical Review Letters - Zuchongzhi 3.0, 105-qubit processor](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.134.090601)
+[^4]: [Wikipedia - Quantum computing](https://en.wikipedia.org/wiki/Quantum_computing)
+[^5]: [Global Risk Institute - Quantum Threat Timeline Report 2025](https://globalriskinstitute.org/publication/quantum-threat-timeline-report-2025b/)
+[^6]: [Cloud Security Alliance - Harvest Now, Decrypt Later: Enterprise PQC Migration Gap, maj 2026](https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/05/CSA_research_note_pqc_harvest_now_decrypt_later_enterprise_20260531-csa-styled.pdf)
+[^7]: [NIST - Post-Quantum Cryptography, FIPS 203/204/205](https://csrc.nist.gov/pubs/fips/203/final)
+[^8]: [NIST IR 8547 - Transition to Post-Quantum Cryptography](https://csrc.nist.gov/pubs/ir/8547/ipd)
+[^9]: [NSA - CNSA 2.0 FAQ](https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF)
+[^10]: [Evropska komisija - Coordinated Implementation Roadmap for PQC transition](https://digital-strategy.ec.europa.eu/en/library/coordinated-implementation-roadmap-transition-post-quantum-cryptography)
+[^11]: [G7 Cyber Expert Group - Quantum Roadmap za finansijski sektor](https://home.treasury.gov/system/files/136/G7-CEG-Quantum-Roadmap.pdf)
+[^12]: [The Quantum Insider - Google skraćuje rok za kvantno-bezbedno šifrovanje na 2029, mart 2026](https://thequantuminsider.com/2026/03/25/google-shortens-timeline-for-quantum-safe-encryption-transition/)
+[^13]: [Cloudflare - Post-quantum roadmap](https://blog.cloudflare.com/post-quantum-roadmap/)
+[^14]: [Microsoft - Quantum Safe Program](https://blogs.microsoft.com/on-the-issues/2025/08/20/post-quantum-resilience-building-secure-foundations/)

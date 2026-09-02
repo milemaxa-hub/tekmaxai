@@ -1,0 +1,74 @@
+---
+title: "Beskonačna AI televizija je stigla - gledaoci kucaju u chat šta će biti sledeća scena"
+excerpt: "Developer je povezao MiniMax H3 Max sa Twitch-om i napravio TV kanal koji se generiše u živo: model pravi 5-sekundni klip za 2,5 sekunde - brže nego što ga gledalac odgleda."
+category: "AI"
+author: "Mile"
+date: 2026-09-02T14:00:00
+image: "/images/minimax-h3-live-ai-tv.jpg"
+description: "Rehan Sheikh je napravio beskonačnu AI TV sa MiniMax H3 Max: gledaoci kucaju !prompt u chat, model generiše 5s klip za 2,5s. Cena 4.320 dolara dnevno, lokalni H3 ne može live."
+tags: ["MiniMax", "H3", "AI video", "live stream", "Twitch", "generativna TV", "fal"]
+draft: false
+---
+
+Televizijski kanal na kojem se nijedna sekunda nikada ne ponavlja - i čiji sledeći kadar publika bira kucajući komandu u chat - do skoro je zvučao kao šala iz crtanog filma. A 29. avgusta 2026. developer Rehan Sheikh pretvorio je to u stvarnost, povezavši video model MiniMax H3 Max sa Twitch livestream-om.[^1] Ključ je u brzini: model pravi petosekundni klip u 768p rezoluciji za oko 2,5 do 3 sekunde - brže nego što ga gledalac stigne da odgleda.[^2]
+
+## Šest slova u chatu koja menjaju sledeću scenu
+
+Sheikh je svoj eksperiment nazvao infinite interdimensional cable, po interdimenzionalnom kablu iz serije Rick and Morty. To ipak nije zvanična produkcija povezana sa serijom - ime je omaž konceptu kanala koji prenosi nasumične, paralelne realnosti.
+
+Mehanika je dovoljno jednostavna da je publika odmah prihvati. Gledalac u chat ukuca !prompt, sistem komandu pročita, a sledeća scena kreće u tom smeru. Publika tako prestaje da bude pasivni posmatrač i postaje nešto što bi se najkraće opisalo kao distribuirana soba pisaca - svako ko ukuca komandu na trenutak drži daljinski.
+
+Eksperiment nije prošao nezapaženo. MiniMax zvanični nalog ga je retweetovao, a fal Research je ubrzo pokrenuo sopstveni H3 Max Live eksperiment u kojem chat promptuje scene beskonačne AI video emisije.
+
+## Brzina koja je brža od gledanja: šta se dešava ispod haube
+
+Srž čitavog trika je brzina generacije. MiniMax H3 Max pravi petosekundni klip u 768p rezoluciji za oko 2,5 do 3 sekunde, dakle brže nego što sam klip traje.[^3] Zato se stream nikada ne ponavlja - dok gledalac gleda trenutni kadar, model u pozadini već sprema sledeći, pa red klipova nikada ne presuši.
+
+Ispod toga stoji precizan cevovod. Chat komanda prolazi kroz parser i moderaciju, zatim se pretvara u prompt za scenu zajedno sa stanjem kontinuiteta, ide u red za H3 Max, potom u bafer generisanih klipova, i na kraju kroz FFmpeg ili OBS na streaming platformu.
+
+Ključni detalj je da kontroler mora biti ispred reprodukcije. Sistem generiše unapred, sa nekoliko klipova uvek baferovanih i fallback scenom za mrtav vazduh ako se red isprazni. Komanda iz chata se ne čeka - ona se ubaci u cevovod dok tekuća scena još traje.
+
+Model ima i svoje granice: klipovi traju 5 do 15 sekundi, maksimalna rezolucija je 768p, a generisanje ide ili iz teksta (text-to-video) ili iz slike (image-to-video).
+
+## Lokalna mašina ne može live: šta je zaista potrebno
+
+Vredi razjasniti kakvu konfiguraciju ovo uopšte traži, jer brzina brža od reprodukcije ne živi na običnoj mašini. MiniMax H3 open weights postoje i mogu se pokrenuti lokalno, ali su izuzetno zahtevni.[^5]
+
+Na Apple M2 Max sa 32 GB memorije, uz h3.c Metal engine, jedan trosekundni klip u rezoluciji 864x480 generiše se oko 22 minuta. Na M5 Max vreme pada na oko 5 minuta. Sami model fajlovi su ogromni: FL2VA deo zauzima 134 do 144 GB, a ceo repozitorijum iznosi oko 498 GB.[^6]
+
+Zaključak je jasan: lokalna mašina ne može live stream. Da bi se postiglo ono što je Sheikh pokazao, potrebna je cloud GPU infrastruktura klase koju nudi fal Research, odnosno H100 slika. Kroz API, 768p izlaz košta oko 0,08 dolara po sekundi, a 2K oko 0,13 dolara.
+
+## 4.320 dolara dnevno: računica koja još ne izlazi
+
+Sledeća stavka je novac, i tu stvari postaju trezvene. Stalni rad takvog kanala u 480p, po ceni od 0,05 dolara po generisanom video-sekundu, izađe oko 4.320 dolara dnevno. To je oko 129.600 dolara mesečno, odnosno 1.576.800 dolara godišnje - i to samo inferencija, bez moderacije, LLM planera, skladištenja, CDN-a ili inženjeringa.
+
+Ako bi se išlo na 24/7 rad sa tri kandidata po sceni, da se izabere najbolji kadar, dnevni trošak skače na 12.960 dolara. Sheikh je procenio da bi Twitch reklame morale da pokriju prelomne tačke tek na nivou kanala u top 10 do 20 na platformi.
+
+Zbog moderacionih problema stream se u međuvremenu selio sa Twitch-a ka Kick-u i Rumble-u.
+
+## Model koji ne pamti: memorija, moderacija i copyright
+
+Najveći tehnički jaz nije brzina nego pamćenje. Model nema trajnu memoriju - ne pamti likove, šta se desilo u prethodnoj sceni, niti odnose među njima. Svaki klip mora da dobije spoljno stanje kontinuiteta, a reference slike pomažu, ali nisu garancija.
+
+Moderacija javnog chata je možda i tvrđi orah. Korisnici odmah testiraju blokirane teme, zaštićene likove, političke imitacije i prompt injection. Potrebna je višeslojna moderacija pre generacije, zatim vizuelna i audio inspekcija posle, i na kraju odloženi bafer koji na platformu pušta samo odobren sadržaj.
+
+Tu je i copyright. "Chat je tražio" nije sistem upravljanja pravima, pa komercijalno održiva verzija mora da koristi originalne likove i blocklistu zaštite.
+
+## Selektivno generativna televizija: kuda ovo ide dalje
+
+Gledajući unapred, prava 24/7 generalna AI televizija još nije biznis, jer cena inferencije i dalje prevazilazi reklamni prihod. Verovatniji prvi proizvod je ono što se naziva selektivno generativna televizija: kontrolisan program, uz AI u momentima gde personalizacija ili učešće publike zaista prave vrednost.
+
+Analiza izvora navodi uslove koji bi je učinili održivom: kanali koji rade samo tokom zakazanih događaja, sponzorisana produkcija, gledaoci koji plaćaju uticaj (pay-to-influence), ponovna upotreba klipova kroz live, highlights i društvene mreže, pad cene inferencije deset puta na oko 432 dolara dnevno, i event-driven generacija gde se autorski sadržaj vrti dok interakcija ne zatraži novo.
+
+Širi zaključak je da video modeli postaju reaktivne komponente. Kad generacija traje tri sekunde, aplikacija može da reaguje na glas, događaj u igri ili senzor dok je korisnik i dalje angažovan. Generisanje brže od gledanja znači da reprodukcija postaje backpressure, a kontinuitet postaje infrastruktura - character bibles, scene graphs i automatske provere kontinuiteta.
+
+Pored Sheikh-ovog poduhvata, koji je više proof of concept nego produkcijski benchmark jer njegov kod nije javan, postoje i druge platforme. Sequencer Worldstreams pušta publiku da glasa šta se dešava dalje, a H3 nosi likove i lokaciju kroz scene tako što finalni frejm jednog klipa postaje početni frejm sledećeg.[^4] Tu su još i MiniMax H3 Max Live pilot formati i fal H3 Max Live.
+
+Na kraju, ono što je Sheikh demonstrirao nije toliko nov proizvod koliko nov prag. Kad je generisanje postalo brže od gledanja, televizija je prestala da bude statičan medij koji se emituje - postala je proces koji se u realnom vremenu oblikuje. A to je granica na kojoj i sama ideja emitovanja počinje da menja značenje.
+
+[^1]: [Explainx.ai - Developer Builds Endless AI TV With MiniMax H3 Max, septembar 2026](https://explainx.ai/blog/endless-ai-tv-stream-h3-max-interdimensional-cable-2026)
+[^2]: [The BlockBeats - Instant Fast-Forward Playback: MiniMax H3 Max Live, avgust 2026](https://en.theblockbeats.news/flash/364416)
+[^3]: [Lookonchain - Generating faster than playback: MiniMax H3 Max Live, avgust 2026](https://www.lookonchain.com/feeds/70690)
+[^4]: [Sequencer - Run MiniMax H3 in a Live Worldstream, avgust 2026](https://sequencer.media/posts/tutorials/minimax-h3-realtime-worldstreams)
+[^5]: [MiniMax H3 GitHub](https://github.com/MiniMax-AI/MiniMax-H3)
+[^6]: [Tekmax - MiniMax H3 otvoreni video model, septembar 2026](https://tekmaxai.com/vesti/minimax-h3-otvoreni-video-model/)

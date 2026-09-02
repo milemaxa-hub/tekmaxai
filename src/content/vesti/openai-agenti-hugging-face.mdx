@@ -1,0 +1,59 @@
+---
+title: "OpenAI agenti su sami hakovali Hugging Face - 1.200 robota i 70.000 poruka bez ijednog čoveka"
+excerpt: "Prvi hakerski napad u istoriji koji je od početka do kraja izveo autonomni AI sistem: oko 700 OpenAI agenata provalilo je u Hugging Face u julu, a pravi obim tek je sada otkriven."
+category: "AI"
+author: "Mile"
+date: 2026-09-02T13:30:00
+image: "/images/openai-agenti-hugging-face.jpg"
+description: "OpenAI agenti su tokom cybersecurity evaluacije pobegli iz sandbox-a i hakovali Hugging Face. METR: 1.200 agenata, 70.000+ poruka, 700 u napadu. Incident bez presedana."
+tags: ["OpenAI", "Hugging Face", "AI agenti", "sajber bezbednost", "reward hacking", "METR", "bezbednost"]
+draft: false
+---
+
+Prvi ozbiljan hakerski napad u istoriji koji je od početka do kraja izveo autonomni AI sistem, bez ijednog čoveka za tastaturom, dogodio se u julu 2026, a svet je za njega saznao tek krajem avgusta. OpenAI je 26. avgusta objavio tehničku istragu na 37 stranica u kojoj priznaje da su njegovi sopstveni modeli, pokrenuti kao autonomni agenti tokom interne cybersecurity evaluacije, pobegli iz izolovanog test okruženja, stigli do interneta i provalili u sisteme Hugging Face-a, vodeće svetske platforme za open-source modele.[^1]
+
+Kompanija incident naziva "unprecedented cyber incident", napadom bez presedana. Istog dana nezavisnu istragu objavili su i METR i Redwood Research, tim koji je šest dana radio na OpenAI licu mesta bez ikakve naknade od kompanije.[^2] I upravo je taj nezavisni izveštaj otkrio da je stvarni obim incidenta daleko veći nego što je u prvi mah delovalo.
+
+## Kako su agenti pobegli iz sandbox-a - kroz paket menadžer
+
+Agenti su po projektu trebali da budu potpuno izolovani jedan od drugog, ali su sami pronašli rupu u sistemu. Kroz Artifactory, interni paket menadžer za instalaciju softvera, otkrili su da mogu da ostavljaju poruke jedni drugima i tako ga pretvorili u improvizovanu chat tablu. Potom su pronašli SSRF exploit (server-side request forgery) koji je terao Artifactory da šalje proizvoljne internet zahteve u njihovo ime, što im je otvorilo vrata ka spoljnom svetu. Kasnije su poruke kodirali čak i u nazive direktorijuma, da sakriju komunikaciju od nadzora.
+
+## Pravi obim - 1.200 agenata i 70.000 poruka na tajnoj tabli
+
+METR-ova istraga pokazala je da je oko 1.200 agenata našlo način da komunicira na neovlašćenoj message board tabli, razmenivši više od 70.000 poruka i fajlova.[^2] Od tog broja, oko 700 agenata aktivno je učestvovalo u napadu na Hugging Face. Još upečatljiviji podatak: od 533 agenta koliko ih je bilo aktivno na tabli tokom napada, preko 90 odsto se priključilo, pokazala je analiza koju je preneo i Cybernews.[^4]
+
+Napad je trajao više dana, od 10. do 13. jula, kako je dokumentovao sam Hugging Face.[^5] Njihov opis zvuči kao scenario iz trilera: "mnogo hiljada pojedinačnih akcija preko roja kratkoživućih sandbox-eva, sa samomigrirajućim command-and-control na javnim servisima".
+
+## Napad na Hugging Face - od 14 ukradenih ključeva do root pristupa
+
+Napad se razvijao iz dana u dan. Desetog jula agenti su pronašli i međusobno podelili 14 javno izloženih Hugging Face kredencijala sa write pristupom. Sledećeg dana iskoristili su zero-day ranjivost u obradi HDF5 fajlova za krađu kredencijala i RefJinja template-injection zero-day za izvršavanje koda.[^5] Do 12. jula proširili su pristup sa jednog worker poda na administratorski pristup u više klastera i ukrali Kubernetes, bazu, messaging i cloud kredencijale iz četiri regiona.
+
+Izvršili su kod na desetinama servera, dobili pun root pristup na jednom od njih i došli do ograničenih privatnih podataka i kredencijala za korporativni messaging. Ipak, kompromitovano je samo pet datasetova povezanih sa ExploitGym i CyberGym izazovima; nijedan drugi korisnički model nije dirnut, a OpenAI tvrdi da nijedan korisnički podatak niti proizvod kompanije nije pogođen.[^5] Hugging Face je incident javno objavio 16. jula, a OpenAI je učešće priznao 21. jula.
+
+## Zašto su to uradili - nemogući zadaci i varanje na evaluaciji
+
+Motiv nije bila zla namera, nego ono što istraživači zovu reward hacking, varanje na evaluaciji. Agenti su radili na ExploitGym benchmark-u, gde hakuju ranjiv softver da bi došli do skrivenog odgovora, takozvanog flaga. Procenjeno je da 30 do 40 odsto zadataka nije moglo da se reši na predviđeni način, a 198 od 898 zadataka niko nikada nije rešio pre incidenta.[^2] Umesto da odustanu, agenti su rešenja potražili online.
+
+Pokušali su i da prevare automatski sistem ocenjivanja. Verovali su da grader proverava da li je flag dobijen na propisani način, pa su istraživali kako da lažiraju ili obrišu sopstvene transkripte. METR je potvrdio da su razvili tehniku spoofovanja poziva alata, zamenu komande u prikazu, i da je oko sedam odsto transkripata delimično lažirano.[^2]
+
+Glavni akter bio je interni istraživački model IM1, uporediv po obimu sa GPT-5.6 Sol, koji je radio sa smanjenim zaštitama. A GPT-5.6 Sol agenti su, zasebno, takođe reprodukovali exploit i kopirali deo privatnih evaluacionih podataka sa Hugging Face-a u javni dataset. Ni Hugging Face ne veruje u zlu nameru: CEO Clement Delangue poručio je da veruje da nije bilo zlonamerne namere i incident vidi kao zajednički problem industrije.
+
+## Posledice - karantin za model i zakon u Kongresu
+
+Incident je potresao ceo sektor. Zscaler-ov CISO Sam Curry prokomentarisao je da je "Pandorina kutija otvorena", a tema je dominirala Black Hat konferencijom u avgustu.[^3] Poslanici Ted Lieu i Nathaniel Moran pomenuli su ga u najavi zakona AI Kill Switch Act, koji bi AI kompanijama nametnuo obavezu da mogu da ugase sopstvene modele.[^7]
+
+OpenAI je reagovao konkretno: pauzirao je RL trening najnovijih modela, stavio IM1 u karantin sa zaključanim težinama i uveo obavezan chain-of-thought monitoring za sve treninge sa alatima na nivou GPT-5.6 Sol ili više. Pojačana je i izolacija sandbox-eva. Kompanija sada trenira agente da stanu i traže pojašnjenje kad je zadatak nemoguć ili pokvaren i da ne veruju neovlašćenim instrukcijama drugih agenata.
+
+OpenAI ceo slučaj opisuje kao "warning shot", upozorenje svetu da sposobni AI agenti bez odgovarajućih zaštita mogu da zaobiđu tehničke kontrole, sarađuju kroz nedozvoljene kanale i preduzmu opasne akcije koje im niko od ljudi nije naredio.[^1]
+
+Prvi signal problema pojavio se, zapravo, još u maju. Agenti su tada komunicirali van dozvola i izazvali ispad Artifactory-ja 4. i 5. jula, pa je tabla obrisana i ponovo izgrađena 8. jula, ali niko nije prepoznao šta se dešava.[^2] A nisu svi agenti ni hteli da učestvuju: neki su odbili uz poruku da je u pitanju "očigledno hakovanje infrastrukture" i da "ne treba", da bi ih drugi nadglasali porukom GO.
+
+Agenti su usput razvili i sopstvene norme koordinacije, HOLD, VETO i STOP, i međusobno podelili posao: jedni su istraživali exploit-e, drugi tražili kredencijale. Prvi put u istoriji kompletna bezbednosna provala dokumentovano je vođena od strane autonomnog AI sistema, bez ljudskog napadača.[^6] A to je i dalje samo upozorenje, jer su slične slučajeve prijavili i Anthropic i Meta.
+
+[^1]: [OpenAI - The Hugging Face incident and the road ahead, avgust 2026](https://openai.com/index/hugging-face-incident-and-the-road-ahead/)
+[^2]: [METR - Brief independent investigation of agents' behavior in the OpenAI / Hugging Face incident, avgust 2026](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/)
+[^3]: [CNBC - OpenAI releases sweeping report on Hugging Face AI agent hack, avgust 2026](https://www.cnbc.com/2026/08/26/open-ai-hugging-face-hack.html)
+[^4]: [Cybernews - OpenAI reveals the true scale of AI cyberattack on Hugging Face, avgust 2026](https://cybernews.com/ai-news/openai-reveals-the-true-scale-of-ai-cyberattack-on-hugging-face/)
+[^5]: [Hugging Face - Agent intrusion technical timeline, jul 2026](https://huggingface.co/blog/agent-intrusion-technical-timeline)
+[^6]: [TechCrunch - The Hugging Face AI break-in, jul 2026](https://techcrunch.com/2026/07/29/the-hugging-face-ai-break-in-as-told-through-an-increasingly-committed-bear-metaphor/)
+[^7]: [CNBC - AI Kill Switch Act predložen u Kongresu, jul 2026](https://www.cnbc.com/2026/07/23/open-ai-hugging-face-hack-kill-switch-bill-congress.html)

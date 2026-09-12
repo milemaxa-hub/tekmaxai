@@ -1,0 +1,26 @@
+{
+  "slug": "minimax-h3-otvoreni-video-model",
+  "file": "minimax-h3-otvoreni-video-model.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-02T04:02:29.122Z",
+  "publishedAt": "2026-09-01T10:00:00T00:00:00",
+  "meta": {
+    "title": "MiniMax H3: najjači otvoreni AI video model, ali zabranjen u EU i Americi",
+    "excerpt": "Prvi otvoreni model na vrhu rang liste AI video modela: MiniMax H3 pravi klipove sa zvukom do 2K rezolucije, ali njegove težine ne smeju da se koriste u EU, SAD, Britaniji i Južnoj Koreji.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/minimax-h3-otvoreni-video-model.jpg",
+    "description": "MiniMax H3 je prvi otvoreni model na vrhu AI video rang lista - video sa zvukom do 15 sekundi, od 0,13 dolara po sekundi. Licenca ga ne dozvoljava u EU, UK, SAD i Južnoj Koreji.",
+    "tags": [
+      "MiniMax",
+      "H3",
+      "AI video",
+      "Hailuo",
+      "open weights",
+      "Kina",
+      "licenca"
+    ],
+    "date": "2026-09-01T10:00:00"
+  }
+}

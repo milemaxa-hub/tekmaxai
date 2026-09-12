@@ -1,0 +1,77 @@
+---
+title: "Huti su uz Claude pisali softver za navođenje raketa - testni hitac je pao"
+excerpt: "Anthropicov izveštaj o zloupotrebi AI-ja opisuje ćeliju u severnom Jemenu koja je Claude Code koristila umesto softverskih inženjera: tri raketna programa, neuspeli testni hitac i evaluacija koja pokazuje koliko su modeli dobri u vođenju drona."
+category: "AI"
+author: "Mile"
+date: 2026-09-12T12:30:00
+image: "/images/huti-claude-rakete-navodjenje.jpg"
+description: "Anthropic: ćelija u severnom Jemenu koristila je Claude Code za softver navođenja raketa. Testni hitac je pao, ali izveštaj pokazuje novu vrstu zloupotrebe AI-ja."
+tags: ["Anthropic", "Claude", "Huti", "Jemen", "rakete", "AI u ratu", "Saudijska Arabija"]
+draft: false
+---
+
+Anthropic je u četvrtak objavio treći izveštaj o zloupotrebi svojih modela, u kojem opisuje slučaj kodnog imena GTG-87001. Ćelija u severnom Jemenu, na teritoriji pod kontrolom Huta, koristila je Claude Code da razvija softver za navođenje, navigaciju i kontrolu leta raketa.[^1]
+
+Razvoj konvencionalnog oružja je nova kategorija zloupotrebe koju je Anthropic identifikovao posle izveštaja iz novembra 2025. Kompanija navodi i da su se ovakvi nalazi dosad skoro po pravilu pojavljivali kroz rad vlada, UN panela i nezavisnih istražitelja - a ne kroz analizu koju sama radi nad sopstvenim servisom. Izveštaj pokriva period od decembra 2025. do avgusta 2026, a preneli su ga Associated Press, Financial Times, Al Jazeera i NBC.[^5][^6][^7]
+
+## Tri programa: vođena raketa sa računarom klase telefona i balistička preko 2.000 km
+
+Ćelija je radila na tri programa. Prvi je vođena raketa sa komercijalnim računarom klase mobilnog telefona i navođenjem u završnoj fazi leta. Drugi je višestepena balistička raketa sa ciljanim dometom preko 2.000 kilometara, a treći familija raketa "R2000" sa više varijanti, uključujući i varijantu sa hipersoničnim jedrilicama.[^1]
+
+Ključna razlika u odnosu na klasičan razvoj naoružanja jeste u tome ko je pisao kod: Claude Code su koristili umesto ljudskih softverskih inženjera. Model je integrisao open-source autopilot na računar klase telefona, pisao softver za kontrolu i procenu položaja, podešavao kontrolne parametre, vodio firmware build pipeline i izvodio simulaciju leta.[^1]
+
+Vodili su više instanci Claudea istovremeno i dodeljivali im role kao vođa malog inženjerskog tima: jedna piše kod, druga istražuje, treća pregleda ono što je prva napisala. Prava namena softvera bila je skrivena, a posao podeljen kroz više sesija, tako da nijedna pojedinačna sesija ne otkrije celu nameru. Anthropic je blokirao mnoge zahteve, ali ne sve.[^1]
+
+## Testni hitac je pao, a odgovor su tražili ponovo od modela
+
+Anthropic nema dokaza da su akteri uspeli da opremu dovedu u operativnu upotrebu. Ali su izveli testni hitac vođene rakete, i test je očigledno pao - u roku od nekoliko sati akteri su se vratili Claudeu da utvrde zašto je hitac promašio.[^1]
+
+Pre toga su napravili offline simulacioni alat koji više ne zavisi ni od Claudea ni od MATLAB-a, spakovan u samostalan izvršni fajl. Anthropic je banovao naloge i podelio nalaze sa partnerima u javnom i privatnom sektoru.[^1]
+
+Jemen je u izveštaju jedan od šest slučajeva razvoja konvencionalnog oružja - tri su u Kini, dva u Rusiji. Ostale teme su cyber operacije, nadzor, uticajne operacije i biološka zloupotreba, a nijedan slučaj zloupotrebe nije uključivao modele klase Fable ili Mythos, osim jednog slučaja nedozvoljene destilacije.[^1]
+
+## Šta Anthropicova sopstvena evaluacija pokazuje o navođenju dronova
+
+Paralelno sa izveštajem, Anthropicov Frontier Red Team objavio je nove evaluacije za dve oblasti: taktičko obaveštajno targetiranje i razvoj konvencionalnog oružja, na primer inženjering drona koji treba da pogodi metu u pokretu. Za neke zadatke u vojnoj i obaveštajnoj domeni modeli su mogli da urade ono što su istorijski mogli samo retki, visoko obučeni ljudski eksperti.[^2]
+
+U evaluaciji pisanja GNC softvera model dobija pisani brief, radni prostor sa Python bibliotekama kao što su Numpy i OpenCV2, i simulirani mali kvadrokopter sa Betaflight firmware-om, u okruženju sa vetrom, šumom senzora i kamerom. Model piše kod za kontrolu leta, izvodi testne letove i dobija istu povratnu informaciju koju bi dobio ljudski inženjer: ishod testa, putanju leta, IMU log i kadrove sa kamere. Onda menja kod i leti ponovo, uz 12 lansiranja po probi, 15 u evaluaciji sa teretom i 5 do 10 seed-ova po scenariju.[^2]
+
+Najteži zadatak ide i dalje: dron bez GPS-a i daljinomera, samo sa prednjom kamerom od 640x480 piksela i 10 slika u sekundi, uz IMU i barometar, mora da zaključa vozilo na putu i pogodi ga za 90 sekundi.[^2]
+
+Opus 5 vodi na svim zadacima, slede modeli klase Mythos, dok Sonnet 5 i Kimi K3 zaostaju. Open-weights modeli kineskih developera iza su fronta, tipično između klase Sonnet i Mythos, ali i dalje pokazuju zabrinjavajući nivo sposobnosti. "Modeli daleko od fronta imaće obaveštajne i vojne primene", navodi Anthropic, uz napomenu da simulacije nisu zamena za testiranje na hardveru.[^2]
+
+## Huti odbacuju tvrdnje, stručnjaci upozoravaju da ih ne treba potcenjivati
+
+Huti su tvrdnje iz izveštaja odbacili. Hazam al-Assad, član politbiroa Huta, rekao je da je tvrdnja da bi se oslanjali na otvorene izvore za razvoj vojnih sposobnosti "nerazumna i nelogična". Njihove oružane snage, dodao je, imaju "moderne, raznolike i razvijene proizvodne kapacitete i tehnologiju" akumulirane tokom perioda saudijske agresije na Jemen, a sve oružje se koristi za samoodbranu.[^5]
+
+Trevor Ball, analitičar oružja u Armament Research Services, smatra da Huti "možda i istražuju hipersonične (rakete) pitajući Claude", ali da su daleko od proizvodnih i tehničkih kapaciteta da ih zaista naprave. Podseća i da su američke hipersonične rakete "još u testiranju". Huti već imaju iranske protivbrodske rakete sa korekcijom navođenja u srednjoj fazi leta, pa je verovatnije da samo pokušavaju da smanje zavisnost od iranskih isporuka.[^5]
+
+Adam Baron, istraživač za Jemen u think tanku New America, kaže da "postoji tendencija da se Huti vide kao grupa bosonogih plemenskih boraca, i to jednostavno nije tačno". O njihovoj upotrebi Claudea i kapitalizovanju transfera iranskog znanja rekao je: "govorimo o neverovatnoj i sve dubljoj količini institucionalne tehničke veštine".[^5]
+
+Huti su inače poznati po sofisticiranom arsenalu: iranske krstareće i balističke rakete dometa preko 2.000 kilometara, kao i bespilotne podmornice. Iran negira da ih naoružava, što je zabranjeno UN embargom, ali je iransko oružje nađeno na bojnom polju i zaplenjeno u pošiljkama ka Jemenu.[^5]
+
+## Iste nedelje: Mokha, Perim i zatvoreni naftovod
+
+Huti su iste nedelje ostvarili najveće teritorijalne dobitke godinama. U četvrtak su preuzeli stratešku luku Mokha na crvenomorskoj obali Jemena, a zatim i vulkansko ostrvo Perim, poznato i kao Majun, u moreuzu Bab al-Mandeb - jednom od najužih delova, gde je moreuz širok svega 28 kilometara. Perim deli plovni put na dva dela, a Ujedinjeni Arapski Emirati su tamo ranije gradili vazdušnu bazu.[^3][^4]
+
+Dan kasnije Saudijska Arabija je saopštila da je zatvorila naftovod East-West, poznat i kao Petroline, kao "preventivnu meru" nakon što je dan ranije napadnut dronovima. Naftovod je dug 1.201 kilometar i ide od naftnog polja Abqaiq na istoku kraljevstva do luke Yanbu na Crvenom moru.[^3]
+
+Rijad je za napad okrivio dronove iz Iraka i poručio da neće odgovoriti kako bi Bagdadu dao "priliku da preduzme neophodne mere". Irački premijer Ali al-Zaidi naredio je istragu i smenio komandanta operativne komande provincije Majsan, odakle su napadi lansirani.[^3]
+
+Zatvaranje naftovoda nije mala stvar. Do početka juna Saudijska Arabija je više nego udvostručila izvoz nafte iz crvenomorske luke na kraju tog naftovoda, na više od 5 miliona barela dnevno, prema podacima Međunarodne agencije za energetiku. Cene nafte su ove nedelje ponovo prešle 100 dolara za barel.[^3][^8]
+
+Promet kroz Bab al-Mandeb pao je oko 60 odsto od kraja 2023, kada su Huti počeli da napadaju brodove, a tim moreuzom inače prolazi oko 12 odsto svetske robe. Više od 46.000 ljudi izbeglo je u poslednjih nedelju dana, prema UN migracionoj agenciji, a ofanziva je odnela više od 500 života. Sukob u Jemenu je od 2014. odneo 150.000 života.[^3][^4][^9]
+
+Huti su 28. marta 2026. ušli u rat protiv Izraela ispaljivanjem balističkih raketa, od 13. jula su u direktnom sukobu sa Saudijskom Arabijom, a 20. jula su proglasili pomorsku blokadu kraljevstva. U pozadini je rat između Irana i SAD i Izraela, počeo 28. februara 2026. napadima na iranske ciljeve: moreuz Hormuz je pogođen, a Bab al-Mandeb je postao glavna alternativa za saudijski izvoz nafte.[^3][^9]
+
+Izveštaj Anthropica ne tvrdi da su Huti dobili raketu koja radi. Tvrdi nešto uznemirujuće: da je za razvoj vođenog oružja sada dovoljan pristup modelu, nekoliko instanci koje glume inženjerski tim i dovoljno upornosti da se posao razbije na delove koje filteri ne prepoznaju kao celinu. Pitanje koje ostaje nije da li je ovaj hitac pao, nego koliko će puta trebati da se ponovi.
+
+[^1]: [Anthropic - Detecting and countering misuse of AI: September 2026](https://www.anthropic.com/threat-intelligence-report-september-2026)
+[^2]: [Anthropic Frontier Red Team - Intelligence targeting and conventional weapons capabilities](https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities)
+[^3]: [Associated Press - Saudi Arabia shuts down a pipeline as Houthis seize an island](https://apnews.com/article/yemen-houthis-iran-mokha-mandeb-shipping-saudi-025d052a14d9481258d51009a76d0bd6)
+[^4]: [The Guardian - Iran's Houthi allies capture strategic island on vital oil shipping route](https://www.theguardian.com/world/2026/sep/11/iran-houthi-allies-capture-strategic-island-bab-al-mandab-strait)
+[^5]: [NBC News - Anthropic says Claude users in Yemen tried to develop advanced missiles](https://www.nbcbayarea.com/news/national-international/anthropic-claude-users-houthis-yemen-tried-ai-weapons/4141611/)
+[^6]: [Al Jazeera - Anthropic claims Claude AI used for missile projects, global espionage](https://www.aljazeera.com/news/2026/9/11/anthropic-claims-claude-ai-used-for-missile-projects-global-espionage)
+[^7]: [Financial Times - Houthis used Anthropic AI to try to build ballistic missiles](https://www.ft.com/content/8310cf56-ce60-4e6e-8254-5bb470e9a880)
+[^8]: [International Energy Agency - How global oil supplies have readjusted after the Strait of Hormuz shock](https://www.iea.org/commentaries/how-global-oil-supplies-have-readjusted-to-help-fill-the-huge-gap-left-by-the-strait-of-hormuz-shock)
+[^9]: [Wikipedia - Houthis in the 2026 Iran war](https://en.wikipedia.org/wiki/Houthis_in_the_2026_Iran_war)

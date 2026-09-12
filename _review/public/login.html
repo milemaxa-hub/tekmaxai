@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prijava — Tekmax Review</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #141414;
+      --line: #2a2a2a;
+      --ink: #f5f5f5;
+      --ink2: #a0a0a0;
+      --accent: #00d4ff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, "Inter", "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
+    }
+    h1 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+    p.sub { color: var(--ink2); font-size: 0.875rem; margin-top: 6px; }
+    label { display: block; font-size: 0.8125rem; font-weight: 600; color: var(--ink2); margin-top: 20px; margin-bottom: 6px; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 0.9375rem;
+    }
+    input:focus { outline: none; border-color: var(--accent); }
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 13px;
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover { background: #00b8e0; }
+    .err {
+      margin-top: 16px;
+      color: #ff6b9d;
+      font-size: 0.8125rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Tekmax Review</h1>
+    <p class="sub">Prijavi se za pristup panelu</p>
+    <form id="f">
+      <label for="u">Username</label>
+      <input id="u" name="username" autocomplete="username" required>
+      <label for="p">Password</label>
+      <input id="p" name="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Prijavi se</button>
+      <div class="err" id="err">Pogrešan username ili password.</div>
+    </form>
+  </div>
+  <script>
+    document.getElementById('f').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('err');
+      err.style.display = 'none';
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: document.getElementById('u').value,
+          password: document.getElementById('p').value,
+        }),
+      });
+      if (res.ok) {
+        window.location.href = '/';
+      } else {
+        err.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

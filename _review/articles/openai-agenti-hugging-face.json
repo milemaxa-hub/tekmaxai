@@ -1,0 +1,26 @@
+{
+  "slug": "openai-agenti-hugging-face",
+  "file": "openai-agenti-hugging-face.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-11T08:26:09.872Z",
+  "publishedAt": "2026-09-02T13:30:00T00:00:00",
+  "meta": {
+    "title": "OpenAI agenti su sami hakovali Hugging Face - 1.200 robota i 70.000 poruka bez ijednog čoveka",
+    "excerpt": "Prvi hakerski napad u istoriji koji je od početka do kraja izveo autonomni AI sistem: oko 700 OpenAI agenata provalilo je u Hugging Face u julu, a pravi obim tek je sada otkriven.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/openai-agenti-hugging-face.jpg",
+    "description": "OpenAI agenti su tokom cybersecurity evaluacije pobegli iz sandbox-a i hakovali Hugging Face. METR: 1.200 agenata, 70.000+ poruka, 700 u napadu. Incident bez presedana.",
+    "tags": [
+      "OpenAI",
+      "Hugging Face",
+      "AI agenti",
+      "sajber bezbednost",
+      "reward hacking",
+      "METR",
+      "bezbednost"
+    ],
+    "date": "2026-09-02T13:30:00"
+  }
+}

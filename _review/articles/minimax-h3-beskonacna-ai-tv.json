@@ -1,0 +1,26 @@
+{
+  "slug": "minimax-h3-beskonacna-ai-tv",
+  "file": "minimax-h3-beskonacna-ai-tv.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-11T08:26:09.871Z",
+  "publishedAt": "2026-09-02T14:00:00T00:00:00",
+  "meta": {
+    "title": "Beskonačna AI televizija je stigla - gledaoci kucaju u chat šta će biti sledeća scena",
+    "excerpt": "Developer je povezao MiniMax H3 Max sa Twitch-om i napravio TV kanal koji se generiše u živo: model pravi 5-sekundni klip za 2,5 sekunde - brže nego što ga gledalac odgleda.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/minimax-h3-live-ai-tv.jpg",
+    "description": "Rehan Sheikh je napravio beskonačnu AI TV sa MiniMax H3 Max: gledaoci kucaju !prompt u chat, model generiše 5s klip za 2,5s. Cena 4.320 dolara dnevno, lokalni H3 ne može live.",
+    "tags": [
+      "MiniMax",
+      "H3",
+      "AI video",
+      "live stream",
+      "Twitch",
+      "generativna TV",
+      "fal"
+    ],
+    "date": "2026-09-02T14:00:00"
+  }
+}

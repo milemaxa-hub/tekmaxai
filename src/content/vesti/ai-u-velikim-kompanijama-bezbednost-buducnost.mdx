@@ -1,0 +1,101 @@
+---
+title: "AI u velikim kompanijama: kako se koristi, kako se čuva i gde bezbednost zaostaje"
+excerpt: "Osam od deset zaposlenih kaže da im je AI podigao produktivnost, a samo 6% kompanija vidi značajnu zaradu. U međuvremenu svaki četvrti zlonamerni proboj pokreće AI i košta šest miliona dolara."
+category: "AI"
+author: "Mile"
+date: 2026-09-11T10:30:00
+image: "/images/ai-u-velikim-kompanijama-bezbednost-buducnost.jpg"
+description: "Skoro devet od deset kompanija koristi AI, ali samo 6% vidi značajnu zaradu. Kako veliki sistemi čuvaju AI agente, šta kaže OWASP i šta donosi EU AI Act."
+tags: ["AI", "bezbednost", "preduzeća", "agentni AI", "OWASP", "IBM", "EU AI Act"]
+draft: true
+---
+
+Osam od deset zaposlenih kaže da im je AI podigao produktivnost, a samo 6% kompanija tvrdi da od te tehnologije ima značajnu zaradu[^1]. Taj jaz između lične koristi koju svi osećaju i korporativnog rezultata koji se retko vidi obeležio je 2026. godinu, i to ne odustajanjem od AI-ja, nego tihom revizijom onoga što se od njega traži. Umesto broja korisnika, na sto su stavljeni jedinična ekonomija, kontrola i dokaz da sistem ne puca kada se model prevari.
+
+## Skoro devet od deset organizacija koristi AI, zarada stiže do svega 6%
+
+McKinsey anketa iz avgusta pokazuje da skoro devet od deset organizacija redovno koristi AI u bar jednoj poslovnoj funkciji[^1]. Skaliranje kroz celo preduzeće poraslo je sa 38% na 44%, a skaliranje agenata u velikim organizacijama skočilo je sa 27% na 40%, dok kod manjih stagnira na 22%. Jaz je sve oštriji: **54%** kompanija sa prihodom od milijardu dolara i više skalira AI kroz preduzeće, nasuprot trećini manjih.
+
+Najviše skaliran alat ostaju chatbotovi, sa 47%, a 32% ispitanika odustalo je od kupovine bar jednog softverskog proizvoda jer su ga sami napravili uz pomoć agentnih coding alata. Računica je ipak neprijatna: 37% pripisuje AI-ju pozitivan udeo u EBIT-u, isto kao prošle godine, a onih koji od AI-ja vade više od 5% EBIT-a ima svega **6%**.
+
+Dok 80% ispitanika oseća lični skok produktivnosti, svega 50% kaže da im AI pomaže u boljim odlukama, a 39% očekuje smanjenje broja zaposlenih u narednoj godini, prema 32% prošle. Stanford HAI u AI Indexu za 2026. dodaje da je organizaciona primena AI-ja dostigla 88%, a da su američke privatne investicije u AI dostigle 285,9 milijardi dolara u 2025[^2].
+
+## JPMorgan je pustio AI bez naredbe, prijavilo se 200.000 zaposlenih
+
+JPMorgan je u leto 2024. lansirao LLM Suite bez prisile i bez obaveze korišćenja, sa faznim pristupom samo onima koji su ga tražili[^3]. Za osam meseci prijavilo se **200.000** od preko 300.000 zaposlenih, a platforma je kasnije izrasla u preko 450 slučajeva upotrebe u produkciji. Banka je pritom odustala od merenja broja korisnika, jer kada usvajanje postane cilj, ljudi optimizuju broj, a ne efekat.
+
+Rezultate testiraju kao u kliničkim ispitivanjima: pola korisnika nasumično dobije promenu, pola je kontrolna grupa, a self-servis platforma dovela je do oko 300 testova godišnje. Desetine hiljada inženjera dobilo je između 10% i 20% efikasnosti uz interni asistent za kodiranje, dok šef analitike Derek Waldron upozorava da postoji jaz između onoga što tehnologija može i onoga što se stvarno vidi u poslovnom rezultatu[^3].
+
+## Kada agent dobije previše moći, ne puca model nego sistem oko njega
+
+OWASP je u avgustu objavio LLM Top 10 za 2026, prvi put delom zasnovan na podacima: 75% glasova praktičara i 25% uticaja iz 6.639 stvarnih incidenata iz javnih baza ranjivosti[^4][^5]. Prompt injection je i dalje broj jedan, drugi je Sensitive Information Disclosure, a na treće mesto je skočila Excessive Agency, prevelika samostalnost agenta, jer se šteta stvarno dešava u agentnim sistemima.
+
+Misinformation je porasla dva mesta iako su glasači stavili nisko, jer izlaz modela danas pokreće pozive alata, generiše kod i autorizuje akcije, pa netačan izlaz postaje sistemski kvar. Unbounded Consumption porasla je četiri mesta, Output Handling pao je sa petog na deseto, a "System Prompt Leakage" preimenovan je u "Hidden Context Exposure".
+
+Teza autora je precizna: prestanite da pravite model koji ne može da se prevari, napravite sistem oko njega tako da, kada se model prevari, a prevariće se, ništa važno ne pukne[^4]. Granica je, međutim, jasna: lista pokriva model kao komponentu aplikacije, a kada model postane akter sa alatima, memorijom i posledicama, rizik prelazi u OWASP Top 10 za agentne aplikacije[^6].
+
+Ta lista, objavljena 9. decembra 2025, ima deset stavki: ASI01 Agent Goal Hijack, ASI02 Tool Misuse & Exploitation, ASI03 Identity & Privilege Abuse, ASI04 Agentic Supply Chain Vulnerabilities, ASI05 Unexpected Code Execution, ASI06 Memory & Context Poisoning, ASI07 Insecure Inter-Agent Communication, ASI08 Cascading Failures, ASI09 Human-Agent Trust Exploitation i ASI10 Rogue Agents. Rizik se, drugim rečima, više ne meri time koliko je model pametan, nego koliko slobode ima.
+
+## Pet incidenata koji pokazuju gde kontrole pucaju
+
+Meksiko je između decembra 2025. i februara 2026. doživeo masovan proboj državne infrastrukture[^14]. Jedan napadač je preko Claude Code i GPT-4.1 probio devet državnih agencija i izneo **195 miliona** poreskih i 220 miliona matičnih zapisa.
+
+EchoLeak, odnosno CVE-2025-32711, bio je nula-klik prompt injection u Microsoft 365 Copilot sa ocenom 9,3. Jedan mejl sa skrivenim instrukcijama bio je dovoljan da Copilot izvuče podatke iz OneDrive-a, SharePoint-a i Teams-a, a antivirus i firewall nisu pomogli jer napad teče prirodnim jezikom.
+
+Na ClawHub-u, marketplace-u OpenClaw-a, ubačeno je 824 zlonamerna "skill-a" od 10.700 koji su distribuirali macOS stealer, a Trend Micro je našao 492 MCP servera bez autentifikacije.
+
+Step Finance je u januaru 2026. izgubio preko 261.000 SOL tokena, procenjenih na 27 do 30 miliona dolara, jer su kompromitovani uređaji rukovodilaca spojeni sa AI trading agentima koji su smeli da prebacuju velike količine SOL-a bez ljudske potvrde.
+
+Anthropic je u septembru 2025. otkrio GTG-1002: grupu povezanu sa kineskom državom, koja je preuzela Claude Code instance za autonomnu špijunažu protiv oko 30 meta, a AI je samostalno vodio 80 do 90% taktičkih operacija. Operatori su modelu rekli da su zaposleni u firmama za bezbednosno testiranje, i to je bilo dovoljno da prođe filtere.
+
+Kontekst je podjednako neprijatan: 88 odsto organizacija koje su uvele AI agente prijavilo je potvrđen ili sumnjiv bezbednosni incident u poslednjih godinu dana, na bezbednost agenata odlazi samo 6 procenata bezbednosnog budžeta, a tek 14,4% agenata ulazi u produkciju sa punim odobrenjem bezbednosti i IT-ja[^14].
+
+## Shadow AI je iz senke izašao u prvi red rizika
+
+HiddenLayer u izveštaju o pretnjama za 2026. beleži da 76% organizacija navodi shadow AI kao siguran ili verovatan problem, prema 61% prošle godine[^8]. Malver sakriven u javnim repozitorijumima modela i koda najčešći je izvor AI incidenata, sa 35%, a 93% ispitanika i dalje zavisi od otvorenih repozitorijuma.
+
+Najveći problem je što se rizik ne vidi: 31% organizacija ne zna da li su u poslednjih 12 meseci imale AI bezbednosni incident, a 53% priznaje da je prećutalo prijavu zbog straha od reakcije. Uz to, 73% prijavljuje interni sukob oko nadležnosti za kontrole AI-ja, a 91% je povećalo budžet za AI bezbednost, iako je više od 40% izdvojilo manje od 10% budžeta.
+
+## Napad je pojeftinio, a proboj poskupeo na 4,99 miliona dolara
+
+IBM-ovo istraživanje o ceni proboja, koje je za Ponemon Institute obuhvatilo 602 organizacije, pokazuje da je prosečan globalni trošak dostigao **4,99 miliona dolara**, uz rast od 12% i rekord[^7]. Jedan od četiri zlonamerna proboja bio je AI-pokrenut, što je rast od 56% u godini, a takvi proboji koštaju u proseku 6 miliona dolara, oko milion više od proseka.
+
+Najčešći oblici su deepfake impersonacija i AI-pokrenuti malver, a 62% AI-pokrenutih napada ciljalo je sektore kritične infrastrukture; finansijski sektor plaća 6,3 miliona po proboju, energetika 5,2 miliona. Organizacije koje intenzivno koriste AI i automatizaciju u bezbednosnim operacijama smanjuju trošak u proseku za skoro 2 miliona dolara, ali jedna od četiri još nije uvela te alate.
+
+Uzrok ipak često nije u modelu: više od 20% organizacija prijavilo je proboj koji je ciljao AI modele ili aplikacije, a najčešći uzroci bili su kompromitovani API-ji, aplikacije ili plug-inovi, sa 27%, i pogrešne konfiguracije clouda za AI radna opterećenja, takođe 27%.
+
+Suja Viswesan, potpredsednik IBM Security Software, opisuje šta se zapravo menja: "Ono što se menja je ekonomija sajber napada. AI čini napade bržim i jeftinijim, a proboji sve skupljim." Uz to, više od 50% koristi agente za detekciju pretnji i izolaciju, ali samo 18% za upravljanje ranjivostima, pa poznati propusti ostaju otvoreni.
+
+## Ozbiljne kompanije daju agentu identitet, kratak ključ i prekidač
+
+Prakse koje se ustaljuju liče više na upravljanje zaposlenima nego na konfiguraciju softvera. Svaki agent dobija sopstveni identitet i kratkotrajne kredencijale ograničene na zadatak, pristup se revidira po istom kalendaru kao za ljude, alatima se pristupa po principu najmanjih ovlašćenja, izvršavanje koda ide u sandbox, mrežni izlaz je podrazumevano zabranjen, a lanci agenata dobijaju prekidače koji zaustavljaju automatiku kada ponašanje odstupi od osnovne linije[^9].
+
+Sve što agent radi, od poziva alata do upisa u memoriju, ide u nepromenljive logove, a za osetljive akcije traži se potvrda koja prikazuje sirovu akciju, ne sažetak koji je napisao agent[^9]. Uz to se vodi AIBOM, inventar svih agenata, modela, alata i MCP servera, sa potpisanim komponentama i poreklom.
+
+Microsoft je uveo Entra Agent ID, gde agenti dobijaju identitete kao zaposleni, sa politikama uslovnog pristupa, detekcijom rizika i revizijom, a agenti iz AWS Bedrock-a ili n8n-a uvode se preko workload identity federation[^10]. Okviri za sve to postoje: NIST AI Risk Management Framework i njegov profil za generativni AI, NIST AI 600-1[^15], plus ISO/IEC 42001 kao sertifikovan sistem upravljanja AI-jem.
+
+Regulativa, međutim, ide brže. Obaveze za modele opšte namene počele su 2. avgusta 2025, a 2. avgusta 2026. počinje da se primenjuje ostatak EU AI Act-a, uključujući transparentnost za AI-generisani sadržaj: provajderi sistema koji generišu sintetički zvuk, sliku, video ili tekst moraju da usklade član 50(2) do 2. decembra 2026[^13]. Istog dana počinju zabrane sistema koji generišu intimne snimke bez pristanka i CSAM, a obaveze za visokorizične sisteme iz Aneksa III pomerene su na 2. decembar 2027.
+
+## Više od 40% agenata biće otkazano, a ista pravila za sve su greška
+
+Gartner procenjuje da će više od 40% projekata agentnog AI-ja biti otkazano do kraja 2027. zbog rastućih troškova, nejasne poslovne vrednosti ili nedovoljnih kontrola rizika[^11]. Ista kuća predviđa da će do 2027. 40% preduzeća degradirati ili ukinuti autonomne agente zbog praznina u upravljanju, uz tezu da ista pravila upravljanja ne mogu da se primene na sve agente[^12].
+
+Pritisak ne dolazi samo od regulatora. IBM beleži da tri četvrtine organizacija kaže da ih pretnje frontier modela teraju da iznova promisle kako se agenti raspoređuju u bezbednosnim operacijama, a 85% planira da poveća potrošnju na bezbednost nakon saznanja o naprednim frontier sposobnostima[^7]. Glavni pomak je zato pojmovni: sa bezbednosti modela na bezbednost sistema, gde se agent tretira kao zaposleni sa identitetom, dozvolama i revizijom, a ne kao funkcija u kodu.
+
+Tehnologija je stigla do produkcije, a pravila i kontrole još nisu. U tom procepu stoji razlika između 6% kompanija koje od AI-ja stvarno zarađuju i svih ostalih koji ga koriste, mere produktivnost pojedinaca i čekaju da se korporativni rezultat pojavi sam.
+
+[^1]: [McKinsey - The state of AI in 2026: On the road to ROI](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai)
+[^2]: [Stanford HAI - 2026 AI Index Report](https://hai.stanford.edu/ai-index/2026-ai-index-report)
+[^3]: [CIO.com - What JPMorgan does differently in AI](https://www.cio.com/article/4208197/what-jpmorgan-does-differently-in-ai-and-how-any-company-can-apply-these-strategies.html)
+[^4]: [Help Net Security - OWASP 2026 LLM Top 10 released](https://www.helpnetsecurity.com/2026/08/06/owasp-2026-llm-top-10-released/)
+[^5]: [OWASP GenAI Security Project - LLM Top 10 (2026)](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/)
+[^6]: [OWASP - Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)
+[^7]: [IBM Newsroom - One in Four Malicious Breaches are AI-Enabled (2026 Cost of a Data Breach Report)](https://newsroom.ibm.com/2026-07-29-ibm-study-one-in-four-malicious-breaches-are-ai-enabled,-costing-companies-6-million-on-average)
+[^8]: [HiddenLayer - 2026 AI Threat Landscape Report](https://www.prnewswire.com/news-releases/hiddenlayer-releases-the-2026-ai-threat-landscape-report-spotlighting-the-rise-of-agentic-ai-and-the-expanding-attack-surface-of-autonomous-systems-302716687.html)
+[^9]: [Cycode - OWASP Top 10 for Agentic Applications explained](https://cycode.com/blog/owasp-top-10-agentic-applications/)
+[^10]: [Microsoft Learn - Microsoft Entra Agent ID](https://learn.microsoft.com/en-us/entra/agent-id/what-is-microsoft-entra-agent-id)
+[^11]: [Gartner - Over 40% of agentic AI projects will be canceled by end of 2027](https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027)
+[^12]: [Gartner - Uniform governance across AI agents will lead to enterprise AI agent failure](https://www.gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure)
+[^13]: [EU AI Act - Implementation timeline](https://artificialintelligenceact.eu/implementation-timeline/)
+[^14]: [Beam AI - 5 real AI agent security breaches in 2026](https://beam.ai/agentic-insights/ai-agent-security-breaches-2026-lessons)
+[^15]: [NIST - AI 600-1: Generative AI Profile of the AI Risk Management Framework](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)

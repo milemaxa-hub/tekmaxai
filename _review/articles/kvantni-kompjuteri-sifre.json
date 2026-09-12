@@ -1,0 +1,26 @@
+{
+  "slug": "kvantni-kompjuteri-sifre",
+  "file": "kvantni-kompjuteri-sifre.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-02T04:02:29.121Z",
+  "publishedAt": "2026-08-28T14:30:00T00:00:00",
+  "meta": {
+    "title": "Kvantni kompjuteri: dokle se stiglo i da li će razbiti sve šifre",
+    "excerpt": "Google-ov čip Willow obavio je u pet minuta proračun koji bi najbržem superkompjuteru trajao 10 septiliona godina. Da li to znači da su klasične šifre osuđene i da li bezbednost interneta pada u vodu?",
+    "category": "Nauka",
+    "author": "Mile",
+    "image": "/images/kvantni-kompjuteri-sifre.jpg",
+    "description": "Kvantni kompjuteri 2026: Willow, IBM Nighthawk, Zuchongzhi 3.0. Procene eksperata 28-49% šanse za kriptografski relevantnu mašinu za 10 godina. NIST standardi i migracija.",
+    "tags": [
+      "kvantni-kompjuteri",
+      "kriptografija",
+      "PQC",
+      "Google-Willow",
+      "IBM",
+      "NIST",
+      "bezbednost"
+    ],
+    "date": "2026-08-28T14:30:00"
+  }
+}

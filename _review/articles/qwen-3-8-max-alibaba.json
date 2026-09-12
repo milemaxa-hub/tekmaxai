@@ -11,7 +11,7 @@
     "category": "AI",
     "author": "Mile",
     "image": "/images/qwen-3-8-max-alibaba.jpg",
-    "description": "Qwen 3.8 Max: 2,4 triliona parametara, 1M tokena konteksta, multimodalni. Cena $2/$6 po milion tokena — 60% jeftiniji izlaz od Kimi K3. Benchmark: Terminal-Bench 86,6, ispred Claude Fable 5, iza GPT-5.6 Sol.",
+    "description": "Qwen 3.8 Max: 2,4 triliona parametara, 1M tokena konteksta, multimodalni. Cena $2/$6 po milion tokena - 60% jeftiniji izlaz od Kimi K3. Benchmark: Terminal-Bench 86,6, ispred Claude Fable 5, iza GPT-5.6 Sol.",
     "tags": [
       "Qwen",
       "Alibaba",

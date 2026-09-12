@@ -1,8 +1,18 @@
 {
   "slug": "humanoidni-roboti-cena-kucne-sposobnosti",
   "file": "humanoidni-roboti-cena-kucne-sposobnosti.mdx",
-  "status": "review",
-  "comments": [],
+  "status": "approved",
+  "comments": [
+    {
+      "id": 1787501577099,
+      "author": "mile",
+      "type": "general",
+      "text": "dobro je objavi",
+      "parentId": null,
+      "status": "new",
+      "createdAt": "2026-08-23T16:12:57.099Z"
+    }
+  ],
   "createdAt": "2026-08-22T16:52:54.856Z",
   "publishedAt": "2026-08-22T12:00:00T00:00:00",
   "meta": {

@@ -1,0 +1,26 @@
+{
+  "slug": "singapur-bioloski-data-centar",
+  "file": "singapur-bioloski-data-centar.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-02T04:02:29.124Z",
+  "publishedAt": "2026-09-02T10:00:00T00:00:00",
+  "meta": {
+    "title": "Singapur pokrenuo prvi biološki data centar - 16 miliona živih neurona umesto silicijuma",
+    "excerpt": "Prototip prvog biološkog data centra u Singapuru radi na 16 miliona živih ljudskih neurona - a svaka CL1 jedinica troši samo 30 vati, kao obična sijalica.",
+    "category": "Tehnologije",
+    "author": "Mile",
+    "image": "/images/singapur-bioloski-data-centar.jpg",
+    "description": "Singapur je pokazao prototip prvog biološkog data centra: 20 CL1 jedinica sa 16 miliona živih ljudskih neurona. Svaka jedinica troši 30 vati, a neuroni se prave od krvi žive osobe.",
+    "tags": [
+      "Singapur",
+      "biološki računari",
+      "Cortical Labs",
+      "neuroni",
+      "data centri",
+      "biotehnologija",
+      "AI"
+    ],
+    "date": "2026-09-02T10:00:00"
+  }
+}

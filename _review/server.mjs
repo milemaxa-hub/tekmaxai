@@ -9,6 +9,7 @@ import { readFileSync, writeFileSync, existsSync, statSync, readdirSync, mkdirSy
 import { join, dirname, extname, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REVIEW = join(ROOT, '_review');
@@ -17,6 +18,10 @@ const PUBLIC = join(REVIEW, 'public');
 const INDEX_FILE = join(REVIEW, 'index.json');
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4322;
 const TOKEN = process.env.REVIEW_TOKEN || '';
+const PANEL_USER = process.env.PANEL_USER || '';
+const PANEL_PASS = process.env.PANEL_PASS || '';
+const SESSIONS = new Map();
+const SESSION_TTL = 1000 * 60 * 60 * 24 * 7; // 7 dana
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -82,11 +87,28 @@ const STATIC_EXT = new Set(['.css', '.js', '.svg', '.png', '.jpg', '.jpeg', '.we
 function isPublicStatic(pathname) {
   return STATIC_EXT.has(extname(pathname).toLowerCase());
 }
+function parseCookies(header) {
+  const out = {};
+  for (const part of header.split(';')) {
+    const idx = part.indexOf('=');
+    if (idx < 0) continue;
+    out[part.slice(0, idx).trim()] = decodeURIComponent(part.slice(idx + 1).trim());
+  }
+  return out;
+}
 function authOk(url, req) {
-  if (!TOKEN) return true; // bez REVIEW_TOKEN u env — stari ponašanje
-  if (url.searchParams.get('token') === TOKEN) return true;
-  const h = req.headers['authorization'] || '';
-  return h === `Bearer ${TOKEN}`;
+  if (!TOKEN && !PANEL_USER) return true; // bez auth u env — stari ponašanje
+  if (TOKEN && url.searchParams.get('token') === TOKEN) return true;
+  if (TOKEN) {
+    const h = req.headers['authorization'] || '';
+    if (h === `Bearer ${TOKEN}`) return true;
+  }
+  if (PANEL_USER) {
+    const cookies = parseCookies(req.headers['cookie'] || '');
+    const sid = cookies['panel_session'];
+    if (sid && SESSIONS.has(sid) && SESSIONS.get(sid) > Date.now()) return true;
+  }
+  return false;
 }
 
 function readBody(req) {
@@ -105,7 +127,7 @@ const server = createServer(async (req, res) => {
   const pathname = decodeURIComponent(url.pathname);
 
   // Sve osim čistih statičkih resursa (.css/.js/.svg/slike) traži token
-  if (!isPublicStatic(pathname) && !authOk(url, req)) {
+  if (pathname !== '/login' && pathname !== '/api/login' && !isPublicStatic(pathname) && !authOk(url, req)) {
     res.writeHead(403, { 'Content-Type': 'application/json; charset=utf-8' });
     res.end(JSON.stringify({ error: 'forbidden' }));
     return;
@@ -228,6 +250,27 @@ const server = createServer(async (req, res) => {
         if (a.newCommentCount > 0) fresh.push(a);
       }
       return sendJSON(res, 200, { count: fresh.length, articles: fresh.map((a) => ({ slug: a.slug, title: a.title, n: a.newCommentCount })) });
+    }
+
+    // login
+    if (pathname === '/login' && req.method === 'GET') {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(readFileSync(join(PUBLIC, 'login.html'), 'utf8'));
+      return;
+    }
+    if (pathname === '/api/login' && req.method === 'POST') {
+      const body = await readBody(req);
+      if (PANEL_USER && body.username === PANEL_USER && body.password === PANEL_PASS) {
+        const sid = randomUUID();
+        SESSIONS.set(sid, Date.now() + SESSION_TTL);
+        res.writeHead(200, {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Set-Cookie': `panel_session=${sid}; HttpOnly; SameSite=Lax; Path=/; Max-Age=${SESSION_TTL / 1000}`,
+        });
+        res.end(JSON.stringify({ ok: true }));
+        return;
+      }
+      return sendJSON(res, 401, { error: 'pogrešan username ili password' });
     }
 
     // statika

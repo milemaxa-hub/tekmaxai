@@ -1,0 +1,64 @@
+---
+title: "MiniMax H3: najjači otvoreni AI video model, ali zabranjen u EU i Americi"
+excerpt: "Prvi otvoreni model na vrhu rang liste AI video modela: MiniMax H3 pravi klipove sa zvukom do 2K rezolucije, ali njegove težine ne smeju da se koriste u EU, SAD, Britaniji i Južnoj Koreji."
+category: "AI"
+author: "Mile"
+date: 2026-09-01T10:00:00
+image: "/images/minimax-h3-otvoreni-video-model.jpg"
+description: "MiniMax H3 je prvi otvoreni model na vrhu AI video rang lista - video sa zvukom do 15 sekundi, od 0,13 dolara po sekundi. Licenca ga ne dozvoljava u EU, UK, SAD i Južnoj Koreji."
+tags: ["MiniMax", "H3", "AI video", "Hailuo", "open weights", "Kina", "licenca"]
+draft: false
+---
+
+Početkom avgusta 2026. na vrh rang liste AI video modela popeo se prvi otvoreni model u istoriji tog merenja.[^1] Njegove težine su slobodne za preuzimanje, ali ne smeju da se koriste u Evropskoj uniji, Velikoj Britaniji, Južnoj Koreji i Sjedinjenim Državama.[^2] Model se zove MiniMax H3, sekund 2K videa kod njega košta **0,13 dolara**, a ko god se nalazi van ta četiri regiona može da ga preuzme, pokrene i koristi lokalno, bez prijave i bez naloga u oblaku.
+
+## Šta je MiniMax H3
+
+MiniMax H3 je multimodalni sistem koji kao ulaz prima tekst, slike, video i audio, a kao izlaz vraća video sa stereo zvukom u istom prolazu.[^3] To je suštinska razlika u odnosu na većinu konkurenata, kod kojih se zvuk generiše naknadno ili uopšte ne postoji. Klip može da traje do 15 sekundi u rezoluciji do 2K, pri 24 sličice u sekundi i 32 kiloherca stereo zvuka, uz podršku za 11 jezika.
+
+U srcu je gusti single-stream Transformer sa 33 milijarde parametara. Tekst enkoder je ceo Qwen3-VL-32B, Alibabin otvoreni model pod Apache 2.0 licencom. Vizuelni VAE sabija prostor 16 puta i vreme četiri puta, a audio VAE pretvara zvuk u stereo tokene na 40 herca.
+
+Sistem čine tri modula. H3-Context-IR je hostovani sloj koji razume i priprema promptove, a oko 100 hiljada tokena ulaza svodi na oko 4 hiljade. H3-Base je otvoreni model koji radi u 768p rezoluciji. H3-Regenerate-2K je hostovani API za regeneraciju u punom 2K. Režimi rada pokrivaju tekst-u-video, prvi i poslednji kadar, kao i referentni mod koji prima do 9 slika, 3 video klipa i 3 audio klipa, ukupno do 12 fajlova.
+
+## Zašto je dobar
+
+Zajednica je reagovala brzo. Na Hugging Face H3 beleži oko 2,3 miliona preuzimanja mesečno, uz 61 dorađenu verziju i 49 kvantizovanih izdanja.[^4] Na rang listi Artificial Analysis H3 je prvi u editovanju videa, drugi u tekstu-u-video i treći u slici-u-video, a ELO ocenom je u društvu Google Gemini Omni Flash i ByteDance Dreamina Seedance 2.0.[^5] Ključna rečenica glasi: on je jedini otvoreni model u toj grupi. Iste nedelje ByteDance je izbacio zatvoreni Seedance 2.5, koji pravi klipove od 30 sekundi, a Black Forest FLUX 3 stiže samo preko API-ja.
+
+Nedelju dana posle objave težina, Salvatore Sanfilippo, autor Redis-a, objavio je h3.c, Metal pokretač koji pokreće H3 na Apple Silicon Mac računarima.[^6] Projekat je za kratko vreme preskočio 2.500 zvezdica na GitHubu, a na M2 Max sa 32 gigabajta RAM-a render od tri sekunde traje oko 22 minuta uz čitanje sa SSD diska. To znači da najsavremeniji otvoreni video model radi i na običnom laptopu, ne samo u data centru.
+
+Cena je treći stub priče. API naplaćuje 0,13 dolara po sekundi za 2K i 0,08 dolara za 768p. Ulazni audio je besplatan, slika košta 0,04 dolara, a HD video 0,13 dolara po sekundi. Context-IR se naplaćuje 0,90 dolara po milion tokena na ulazu i 3,60 dolara na izlazu. MiniMax tvrdi da 2K ponuda iznosi manje od trećine cene dominantnih modela na toj rezoluciji.
+
+## Licenca - gde sme, gde ne sme
+
+Ovo je najvažniji deo priče, jer MiniMax H3 Community License od 2. avgusta 2026. uvodi razliku kakva kod velikih otvorenih modela dosad nije viđena. Težine su besplatne za komercijalnu i nekomercijalnu upotrebu u takozvanoj Applicable Territory, što je ceo svet minus Excluded Territories. Isključene teritorije su Evropska unija, Velika Britanija, Južna Koreja i Sjedinjene Države.
+
+Šta to znači u praksi. U Srbiji, Kini i ostatku sveta model je legalan za lokalno pokretanje bez ikakve prijave. U EU, Britaniji, Južnoj Koreji i SAD otvorene težine nisu dozvoljene bez zasebne licence, a korisnici iz ta četiri regiona moraju da podnesu zahtev kroz obrazac.[^7] MiniMax objašnjava da ovo nije politika isključenja nego regulativa: EU AI Act je krenuo sa primenom, Velika Britanija i Južna Koreja imaju nejasna pravila za sadržaj generisan veštačkom inteligencijom, a u SAD su aktivni sudski sporovi oko autorskih prava za generativni video.[^8] Kompanija tvrdi da kod otvorenih težina ne može da kontroliše usklađenost posle objave, dok kod API-ja može.
+
+Zato je API dostupan globalno, sa zaštitnim merama, a otvorene težine su privremeno ograničene u četiri regiona. MiniMax je to formulisao rečenicom da trenutno ograničenje znači još ne, ne zauvek.
+
+Uz teritorijalno ograničenje idu i dodatni uslovi. Kompanije sa prihodom preko 20 miliona dolara godišnje moraju da traže pismeno odobrenje. Komercijalni proizvodi moraju vidljivo da prikažu ime MiniMax H3. Zabranjeno je koristiti H3 ili njegove izlaze za poboljšanje drugog AI modela, što u praksi znači zabranu destilacije. Zabranjena je šteta maloletnicima, mešanje u izbore, vojna upotreba i lažno predstavljanje bez pristanka. Izlazi moraju biti označeni kao mašinski generisani, a licenca se vodi po zakonu Hong Konga.
+
+Kritika nije izostala. Tim iza deeplearning.ai primećuje da i u ovom paranoičnom periodu razvoja AI-ja nema smisla ograničavati težine po zemljama van zakonskih okvira, i zaključuje da je model samo minimalno otvoren.[^9]
+
+## Kako su Kinezi uspeli
+
+Iza H3 stoji MiniMax, kineska kompanija osnovana 2021. u Šangaju, koja je pre H3 izbacila modele Hailuo 01 i Hailuo 02. Izdavač licence je singapursko pravno lice Nanonoble Pte. Ltd. Cilj koji je kompanija iznela u razgovoru za South China Morning Post jeste da otvorenim težinama i agresivnom cenom razbije dominaciju zatvorenih modela, što je direktan dvoboj sa ByteDance-om.[^10]
+
+Dizajnerska filozofija je jednostavna: jedan model za sve zadatke i modalitete. Nema zasebnih eksperata za tekst-u-sliku, tekst-u-video, editovanje, glas ili muziku. MiniMax kaže da je jezik most ka generalizaciji, pa se reference i editovanje opisuju prirodnim jezikom umesto fiksnim podešavanjima. Obuka ide na realnim, prirodnim podacima, bez sintetičkih, što je retko kod video modela jer su dobri video transkripti teško dostupni. Upravo to deeplearning.ai vidi kao ključ uspeha.
+
+Zanimljiv je i odnos prema otvorenom ekosistemu. Umesto da pravi sopstveni tekstualni enkoder, MiniMax je uzeo ceo Alibabin Qwen3-VL-32B - kineske laboratorije doslovno grade jedna na drugoj. Inženjerska efikasnost je ono što sve drži u razumnoj ceni: H3-VAE kompresija daje četiri puta veću efektivnu dužinu sekvence, što seče troškove treninga i inferencije i omogućava nativni 2K. Od 33 milijarde parametara, oko 13 milijardi je u AdaLN granama koje se mogu unapred izračunati i keširati, pa se ne učitavaju tokom inferencije. Zato model staje u 32 gigabajta RAM-a na laptopu. Tu su i sparse attention i odvojeni treninzi za razumevanje i generisanje, koji daju oko 30 posto veću propusnost treninga.
+
+Strategija je na kraju klasična za kineske laboratorije: Base model je otvoren, ali Context-IR sistem koji razume promptove i 2K regeneracija ostaju hostovani API. Otvoren model privlači zajednicu, a API donosi prihod, tačno po receptu koji je proslavio DeepSeek.
+
+MiniMax H3 je do sada najbolji dokaz da se vrh AI videa više ne pravi samo u Silicijumskoj dolini. Ograničenje po zemljama deluje neobično, ali je u svojoj logici pragmatično: MiniMax otvara težine tamo gde ga regulativa ne sprečava, a naplaćuje API tamo gde ga sprečava. Za čitaoca u Srbiji to ima konkretnu posledicu, jer ovaj model može legalno da koristi lokalno, što kod američkih konkurenata najčešće nije slučaj.
+
+[^1]: [The Decoder - China's MiniMax H3 is the first open model to top an AI video ranking](https://the-decoder.com/chinas-minimax-h3-is-the-first-open-model-to-top-an-ai-video-ranking/)
+[^2]: [MiniMax H3 Community License](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE)
+[^3]: [MiniMax blog - H3: An Open Model Breaking the Boundaries Between Tasks and Modalities](https://www.minimax.io/blog/minimax-h3)
+[^4]: [MiniMax H3 na Hugging Face](https://huggingface.co/MiniMaxAI/MiniMax-H3)
+[^5]: [Artificial Analysis - Video leaderboard](https://artificialanalysis.ai/video/leaderboard/text-to-video)
+[^6]: [antirez/h3.c - MiniMax H3 inference engine za Mac](https://github.com/antirez/h3.c)
+[^7]: [MiniMax H3 - obrazac za licencu](https://platform.minimax.io/h3-license)
+[^8]: [MiniMax - Q&A o licenci](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/docs/QA-about-License.md)
+[^9]: [deeplearning.ai The Batch - Minimax's State-of-the-Art Video Model Is Only Minimally Open](https://www.deeplearning.ai/the-batch/minimaxs-state-of-the-art-video-model-is-only-minimally-open)
+[^10]: [SCMP - Video AI: MiniMax challenges ByteDance with low price, open weights](https://www.scmp.com/tech/article/3362540/video-ai-minimax-challenges-bytedance-low-price-open-weights-new-h3-model)

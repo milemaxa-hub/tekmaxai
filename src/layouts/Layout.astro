@@ -92,6 +92,9 @@ const ogImageURL = new URL(image, Astro.site ?? 'https://latest-editorial-role-o
         } catch (_) {}
       })();
     </script>
+    <!-- Cloudflare Web Analytics -->
+    <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "fb3c7641e0a0403d88fe24651b2be43f"}'></script>
+    <!-- End Cloudflare Web Analytics -->
   </head>
   <body class="min-h-screen bg-bg-primary text-ink-primary">
     <Header />

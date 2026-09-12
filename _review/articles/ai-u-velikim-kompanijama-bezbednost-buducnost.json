@@ -1,0 +1,26 @@
+{
+  "slug": "ai-u-velikim-kompanijama-bezbednost-buducnost",
+  "file": "ai-u-velikim-kompanijama-bezbednost-buducnost.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-11T08:26:09.860Z",
+  "publishedAt": "2026-09-11T10:30:00T00:00:00",
+  "meta": {
+    "title": "AI u velikim kompanijama: kako se koristi, kako se čuva i gde bezbednost zaostaje",
+    "excerpt": "Osam od deset zaposlenih kaže da im je AI podigao produktivnost, a samo 6% kompanija vidi značajnu zaradu. U međuvremenu svaki četvrti zlonamerni proboj pokreće AI i košta šest miliona dolara.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/ai-u-velikim-kompanijama-bezbednost-buducnost.jpg",
+    "description": "Skoro devet od deset kompanija koristi AI, ali samo 6% vidi značajnu zaradu. Kako veliki sistemi čuvaju AI agente, šta kaže OWASP i šta donosi EU AI Act.",
+    "tags": [
+      "AI",
+      "bezbednost",
+      "preduzeća",
+      "agentni AI",
+      "OWASP",
+      "IBM",
+      "EU AI Act"
+    ],
+    "date": "2026-09-11T10:30:00"
+  }
+}

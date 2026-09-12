@@ -1,0 +1,26 @@
+{
+  "slug": "ai-treniranje-profesionalnih-sportista",
+  "file": "ai-treniranje-profesionalnih-sportista.mdx",
+  "status": "review",
+  "comments": [],
+  "createdAt": "2026-09-11T08:26:09.860Z",
+  "publishedAt": "2026-09-03T09:00:00T00:00:00",
+  "meta": {
+    "title": "Od 660 podataka u sekundi do 7.176 kornera: kako AI menja trening sportista",
+    "excerpt": "AI više nije samo alat za skauting - prsluci šalju 660 podataka u sekundi, modeli predviđaju povrede pre nego što se dogode, a TacticAI je analizirao 7.176 Liverpulovih kornera.",
+    "category": "AI",
+    "author": "Mile",
+    "image": "/images/ai-treniranje-profesionalnih-sportista.jpg",
+    "description": "AI menja trening vrhunskih sportista: prsluci sa 660 podataka u sekundi, predikcija povreda u Liverpulu i Napoliju, TacticAI i FIFA ofsajd tehnologija.",
+    "tags": [
+      "AI",
+      "sport",
+      "fudbal",
+      "Google DeepMind",
+      "wearables",
+      "treniranje",
+      "FIFA"
+    ],
+    "date": "2026-09-03T09:00:00"
+  }
+}

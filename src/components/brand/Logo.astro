@@ -53,13 +53,13 @@ const variantAttr = variant === 'auto' ? null : variant;
     class="logo-t shrink-0"
     width={s.tSize}
     height={s.tSize}
-    viewBox="0 0 100 100"
+    viewBox="0 0 64 64"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
   >
     <defs>
-      <linearGradient id={`grad-t-${uid}`} x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <linearGradient id={`grad-t-${uid}`} x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="#00d4ff" />
         <stop offset="1" stop-color="#0066ff" />
       </linearGradient>
@@ -67,21 +67,23 @@ const variantAttr = variant === 'auto' ? null : variant;
 
     <g class="t-latin">
       <path
-        d="M 10 18 L 90 18 L 90 32 L 60 32 L 60 82 L 40 82 L 40 32 L 10 32 Z"
+        d="M 12 18 L 52 18 L 52 26 L 36 26 L 36 50 L 28 50 L 28 26 L 12 26 Z"
         fill={`url(#grad-t-${uid})`}
       />
     </g>
     <g class="t-cyrillic">
       <path
-        d="M 8 18 L 92 18 L 92 30 L 60 30 L 60 82 L 40 82 L 40 30 L 8 30 Z"
+        d="M 12 18 L 52 18 L 52 26 L 36 26 L 36 50 L 28 50 L 28 26 L 12 26 Z"
         fill={`url(#grad-t-${uid})`}
       />
     </g>
   </svg>
 
-  <span class:list={['logo-text leading-none', s.txtSize]}>
-    <span class="logo-text-latin">ekmax</span>
-    <span class="logo-text-cyrillic">екмакс</span>
+  <span class:list={['logo-text uppercase leading-none', s.txtSize]}>
+    {/* T monogram je već prvo slovo - wordmark zato ide BEZ T (Mile, 14.09.2026):
+        "prvo plavo T, pa onda ide bez T". Ne duplirati T. */}
+    <span class="logo-text-latin">ekmax<i>ai</i></span>
+    <span class="logo-text-cyrillic">екмакс<i>аи</i></span>
   </span>
 </a>
 
@@ -89,6 +91,24 @@ const variantAttr = variant === 'auto' ? null : variant;
   /* === BASE (dark default) === */
   .logo-root {
     color: #f5f5f7;
+  }
+
+  /* Wordmark kao na quote-karticama (Mile, 14.09.2026): TEKMAX + AI u cyan akcentu,
+     uppercase, široko slovo, težina 800 */
+  .logo-text {
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    margin-right: -0.2em; /* kompenzacija razmaka koji letter-spacing dodaje posle zadnjeg slova */
+  }
+  .logo-text i {
+    font-style: normal;
+    color: #00d4ff;
+  }
+  :global([data-theme="light"]) .logo-root .logo-text i {
+    color: #0066ff;
+  }
+  .logo-root[data-variant="light"] .logo-text i {
+    color: #0066ff;
   }
 
   /* T monogram i tekst — light/dark režim */
